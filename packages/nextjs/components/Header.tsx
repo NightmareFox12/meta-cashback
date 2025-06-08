@@ -3,12 +3,12 @@
 import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { Button } from "./shad/ui/button";
 import { hardhat } from "viem/chains";
 import { Bars3Icon, BugAntIcon, HomeIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
-import { Button } from "./shad/ui/button";
 
 type HeaderMenuLink = {
   label: string;
@@ -21,7 +21,6 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Home",
     href: "/",
     icon: <HomeIcon className="h-4 w-4" />,
-
   },
 
   {
@@ -32,13 +31,13 @@ export const menuLinks: HeaderMenuLink[] = [
 ];
 
 export const HeaderMenuLinks = () => {
-  const pathname = usePathname();
-  const router = useRouter()
+  // const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <>
       {menuLinks.map(({ label, href, icon }) => {
-        const isActive = pathname === href;
+        // const isActive = pathname === href;
         return (
           <li key={href}>
             <Button onClick={() => router.push(href)}>

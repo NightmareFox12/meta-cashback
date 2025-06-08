@@ -1,17 +1,29 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { NextPage } from "next";
-import { useAccount } from "wagmi";
+import { useAccount, useBalance } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Address } from "~~/components/scaffold-eth";
+import { Address, Balance } from "~~/components/scaffold-eth";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~~/components/shad/ui/card";
+import { useWatchBalance } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
+  const { data } = useWatchBalance({ address: connectedAddress });
 
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-10">
+      {/* <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
           <h1 className="text-center">
             <span className="block text-2xl mb-2">Welcome to</span>
@@ -67,7 +79,26 @@ const Home: NextPage = () => {
             
           </div>
         </div>
-      </div>
+      </div> */}
+      <section className="flex justify-center items-center w-full mx-auto mt-4 px-3">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>
+              My balance
+              {/* <Balance address={connectedAddress}/> */}
+              {/* <Image src={"/favicon.png"} alt="maracary" width={50} height={50} /> */}
+            </CardTitle>
+            <CardDescription>
+              {data?.value.toString()} {data?.symbol.toString()}
+            </CardDescription>
+            {/* <CardAction>Card Action</CardAction> */}
+          </CardHeader>
+          <CardContent></CardContent>
+          <CardFooter>
+            <p>Card Footer</p>
+          </CardFooter>
+        </Card>
+      </section>
     </>
   );
 };

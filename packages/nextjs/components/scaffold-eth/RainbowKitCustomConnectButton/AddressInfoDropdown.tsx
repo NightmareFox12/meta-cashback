@@ -100,12 +100,7 @@ export const AddressInfoDropdown = ({
             <Button variant="ghost" className="w-full">
               <div className="flex flex-1 items-center justify-start gap-2">
                 <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-                <a
-                  target="_blank"
-                  href={blockExplorerAddressLink}
-                  rel="noopener noreferrer"
-                  className="block"
-                >
+                <a target="_blank" href={blockExplorerAddressLink} rel="noopener noreferrer" className="block">
                   View on Block Explorer
                 </a>
               </div>
