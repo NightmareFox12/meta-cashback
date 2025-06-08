@@ -18,7 +18,7 @@ type AppHeaderMenuLink = {
   icon?: React.ReactNode;
 };
 
-const menuLinks: AppHeaderMenuLink[] = [
+export const menuLinks: AppHeaderMenuLink[] = [
   {
     label: "Home",
     href: "/",
@@ -26,7 +26,7 @@ const menuLinks: AppHeaderMenuLink[] = [
   },
   {
     label: "History",
-    href: "/",
+    href: "/history",
     icon: <ClockFading className="h-4 w-4" />,
   },
   {

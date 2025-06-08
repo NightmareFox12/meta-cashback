@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { menuLinks } from "./Header";
+import { menuLinks } from "./AppHeader";
 import {
   Sidebar,
   SidebarContent,
@@ -32,12 +32,7 @@ const AppSidebar: NextPage = () => {
 
               return (
                 <SidebarMenuItem key={href} className="px-2">
-                  <SidebarMenuButton
-                    className={`${
-                      isActive ? "bg-secondary" : ""
-                    } hover:bg-secondary p-2`}
-                    asChild
-                  >
+                  <SidebarMenuButton className={`${isActive ? "bg-secondary" : ""} hover:bg-secondary p-2`} asChild>
                     <Link href={href}>
                       {icon}
                       <span>{label}</span>

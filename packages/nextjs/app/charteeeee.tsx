@@ -8,6 +8,8 @@ export const description = "A stacked bar chart with a legend";
 export const iframeHeight = "600px";
 export const containerClassName = "[&>div]:w-full [&>div]:max-w-md flex items-center justify-center min-h-svh";
 
+export function ChartTooltipIndicatorLine() {
+  
 const chartData = [
   { date: "2024-07-15", running: 450, swimming: 300 },
   { date: "2024-07-16", running: 380, swimming: 420 },
@@ -28,7 +30,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ChartTooltipIndicatorLine() {
+
   return (
     <Card>
       <CardHeader>
