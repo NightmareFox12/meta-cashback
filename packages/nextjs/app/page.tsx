@@ -15,8 +15,6 @@ const Home: NextPage = () => {
     args: [address],
   });
 
-  console.log(userBalance);
-
   return (
     <main className="flex pt-5 mx-4">
       <section className="flex justify-center items-center w-full mx-auto mt-4 px-3">
