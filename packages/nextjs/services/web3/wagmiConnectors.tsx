@@ -2,8 +2,7 @@ import { connectorsForWallets } from "@rainbow-me/rainbowkit";
 import {
   // coinbaseWallet,
   // ledgerWallet,
-  metaMaskWallet,
-  // rainbowWallet,
+  metaMaskWallet, // rainbowWallet,
   // safeWallet,
   // walletConnectWallet,
 } from "@rainbow-me/rainbowkit/wallets";
