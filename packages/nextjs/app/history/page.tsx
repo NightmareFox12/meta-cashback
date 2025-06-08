@@ -66,16 +66,3 @@ const History: NextPage = () => {
 };
 
 export default History;
-
-// historyEvent.slice(0, 100).map((x, y: number) => {
-//   const allData: IParsedTransfer[] = [
-//     {
-//       address: x?.address ?? "0x",
-//       from: x.args.from,
-//       to: x.args.to,
-//       value: x.args.value,
-//     },
-//   ];
-//   return <HistoryTable key={y} columns={columns} data={allData} />;
-// })
-// )}

@@ -54,16 +54,6 @@ const columns: ColumnDef<ItransferEventParsed>[] = [
     cell: ({ row }) => <div className="capitalize">{row.getValue("to")}</div>,
   },
   {
-    accessorKey: "value",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const value = BigInt(row.getValue("value"));
-      const formatValue = formatUnits(value, 6);
-
-      return <div className="text-right font-medium">{formatValue}</div>;
-    },
-  },
-  {
     accessorKey: "blockHash",
     header: ({ column }) => {
       return (
@@ -74,6 +64,16 @@ const columns: ColumnDef<ItransferEventParsed>[] = [
       );
     },
     cell: ({ row }) => <div>{row.getValue("blockHash")}</div>,
+  },
+  {
+    accessorKey: "value",
+    header: () => <div className="text-center">Amount</div>,
+    cell: ({ row }) => {
+      const value = BigInt(row.getValue("value"));
+      const formatValue = formatUnits(value, 6);
+
+      return <div className="text-center font-medium">{formatValue} USDC</div>;
+    },
   },
 ];
 
