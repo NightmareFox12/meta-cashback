@@ -2,7 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ChartTooltipIndicatorLine } from "./charteeeee";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import type { NextPage } from "next";
+import { formatEther } from "viem";
 import { useAccount, useBalance } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address, Balance } from "~~/components/scaffold-eth";
@@ -22,7 +25,7 @@ const Home: NextPage = () => {
   const { data } = useWatchBalance({ address: connectedAddress });
 
   return (
-    <>
+    <main className="flex pt-5 mx-4">
       {/* <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
           <h1 className="text-center">
@@ -83,23 +86,20 @@ const Home: NextPage = () => {
       <section className="flex justify-center items-center w-full mx-auto mt-4 px-3">
         <Card className="w-full">
           <CardHeader>
-            <CardTitle>
-              My balance
-              {/* <Balance address={connectedAddress}/> */}
-              {/* <Image src={"/favicon.png"} alt="maracary" width={50} height={50} /> */}
-            </CardTitle>
-            <CardDescription>
-              {data?.value.toString()} {data?.symbol.toString()}
-            </CardDescription>
-            {/* <CardAction>Card Action</CardAction> */}
+            <CardTitle className="text-2xl text-center font-bold">My balance</CardTitle>
+            <CardDescription className="text-center text-lg *:text-primary"></CardDescription>
+            <p className="text-lg text-center font-semibold">
+              {formatEther(data?.value ?? 0n).substring(0, 6)} {data?.symbol.toString()}
+            </p>
           </CardHeader>
           <CardContent></CardContent>
-          <CardFooter>
-            <p>Card Footer</p>
+          <CardFooter className="flex justify-between items-center">
+            <p>Ganain de la semana: 15 USDC</p>
           </CardFooter>
         </Card>
       </section>
-    </>
+      <ChartTooltipIndicatorLine />
+    </main>
   );
 };
 

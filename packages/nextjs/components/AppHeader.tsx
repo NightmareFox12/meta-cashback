@@ -6,9 +6,9 @@ import { FaucetButton, RainbowKitCustomConnectButton } from "./scaffold-eth";
 import { Button } from "./shad/ui/button";
 import { useSidebar } from "./shad/ui/sidebar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
+import { Bug, ClockFading, House, PanelRight } from "lucide-react";
 import { NextPage } from "next";
 import { hardhat } from "viem/chains";
-import { Bars3Icon, BugAntIcon, HomeIcon } from "@heroicons/react/24/outline";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth";
 import { useIsMobile } from "~~/hooks/shad/use-mobile";
 
@@ -22,13 +22,17 @@ const menuLinks: AppHeaderMenuLink[] = [
   {
     label: "Home",
     href: "/",
-    icon: <HomeIcon className="h-4 w-4" />,
+    icon: <House className="h-4 w-4" />,
   },
-
+  {
+    label: "History",
+    href: "/",
+    icon: <ClockFading className="h-4 w-4" />,
+  },
   {
     label: "Debug Contracts",
     href: "/debug",
-    icon: <BugAntIcon className="h-4 w-4" />,
+    icon: <Bug className="h-4 w-4" />,
   },
 ];
 
@@ -52,9 +56,7 @@ const HeaderMenuLinks = () => {
 
         return (
           <Link key={href} href={href}>
-            <Button variant={isActive ? "default" : "outline"}
-            className={isActive ? "bg-secondary" : ""}
-            >
+            <Button variant={isActive ? "default" : "outline"} className={isActive ? "bg-secondary" : ""}>
               {icon}
               <span>{label}</span>
             </Button>
@@ -76,7 +78,7 @@ const AppHeader: NextPage = () => {
     <header className="border-b p-4 flex justify-between bg-base-100">
       {isMobile ? (
         <Button onClick={toggleSidebar} className="bg-secondary">
-          <Bars3Icon className="h-1/2" />
+          <PanelRight className="h-1/2" />
         </Button>
       ) : (
         <HeaderMenuLinks />
