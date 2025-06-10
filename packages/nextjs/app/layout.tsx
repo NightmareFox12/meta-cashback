@@ -4,7 +4,7 @@ import { ThemeProvider } from "~~/components/ThemeProvider";
 import "~~/styles/globals.css";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
-export const metadata = getMetadata({ title: "Scaffold-ETH 2 App", description: "Built with 🏗 Scaffold-ETH 2" });
+export const metadata = getMetadata({ title: "Meta-Cashback", description: "Earn USDC cashback with MetaMask Card and boost rewards through staking or DeFi locks—maximize your spending power" });
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   return (
