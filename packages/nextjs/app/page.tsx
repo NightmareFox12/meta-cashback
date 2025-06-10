@@ -17,7 +17,8 @@ const Home: NextPage = () => {
     args: [address],
   });
 
-return (
+
+  return (
     <main className="flex pt-5 mx-4">
       <section className="flex justify-center items-center w-full mx-auto mt-4 px-3">
         <Card className="w-full max-w-md bg-primary">
@@ -28,12 +29,12 @@ return (
             <CardTitle className="text-2xl font-bold ">My Balance</CardTitle>
           </CardHeader>
 
-<CardContent className="text-center">
-  <div className="bg-secondary rounded-2xl p-2 border border-secondary flex items-center justify-center space-x-2">
-    <Image src={"/usdc.png"} alt="usdc icon" width={20} height={20} />
-    <p className="text-4xl font-bold">${formatUnits(userBalance ?? 0n, 6)}</p>
-  </div>
-</CardContent>
+          <CardContent className="text-center">
+            <div className="bg-secondary rounded-2xl p-2 border border-secondary flex items-center justify-center space-x-2">
+              <Image src={"/usdc.png"} alt="usdc icon" width={20} height={20} />
+              <p className="text-4xl font-bold">${formatUnits(userBalance ?? 0n, 6)}</p>
+            </div>
+          </CardContent>
 
 
           <CardFooter className="pt-0">

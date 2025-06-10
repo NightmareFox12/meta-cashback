@@ -30,6 +30,11 @@ export const menuLinks: AppHeaderMenuLink[] = [
     icon: <ClockFading className="h-4 w-4" />,
   },
   {
+    label: "About",
+    href: "/about",
+    icon: <PanelRight className="h-4 w-4" />, 
+  },
+  {
     label: "Debug Contracts",
     href: "/debug",
     icon: <Bug className="h-4 w-4" />,
