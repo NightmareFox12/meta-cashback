@@ -1,81 +1,85 @@
-# 🏗 Scaffold-ETH 2
+# MetaCashback
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+## 🏆 Overview
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+MetaCashback is a revolutionary system that allows users to earn cashback in USDC for their purchases with the MetaMask Card. Users can increase their cashback percentage by participating in staking or locking funds in DeFi protocols.
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+> 💡 **The more a user interacts with DeFi, the greater the rewards they receive.**
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+## 🚀 User Flow
 
-![Index Page Tab](https://github.com/user-attachments/assets/36c4c019-e5ab-4df3-b24c-fd93d1e35421)
-![Debug Page Tab](https://github.com/user-attachments/assets/76130c87-ec73-4d26-bfca-a81d0131dccd)
+1. **Purchase with MetaMask Card** — The user pays with the card at any merchant.
+2. **Base Cashback** — Receives an initial refund in USDC (example: 1%).
+3. **Cashback Increase via Staking** — If the user locks USDC in a DeFi pool, their cashback can rise to 2%, 3%, or more, depending on the amount locked.
+4. **Automatic Conversion with LI.FI SDK** — The system uses LI.FI to move rewards across chains and ensure efficient liquidity.
+5. **Automated Wallet Payment** — Accumulated rewards are credited directly to the user's MetaMask wallet.
 
-## Requirements
+## 🎯 Cashback Levels
 
-Before you begin, you need to install the following tools:
+Cashback increases according to the user's participation in DeFi:
 
-- [Node (>= v20.18.3)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+| Level | Amount Locked | Cashback | Benefits |
+|-------|--------------|----------|----------|
+| 🔰 **Explorer** | $0 - $100 | 1% | Basic cashback |
+| 🚀 **Pioneer** | $100 - $500 | 2% | Access to perks |
+| 🔥 **Legendary** | $500 - $1000 | 3% | Exclusive bonuses |
+| 👑 **Elite** | $1000+ | 4% | Premium benefits |
 
-## Quickstart
+## 💰 Reward & Yield Options
 
-To get started with Scaffold-ETH 2, follow the steps below:
+Maximize cashback with flexible withdrawal options and DeFi strategies designed to optimize earnings.
 
-1. Install dependencies if it was skipped in CLI:
+### ⏳ Bonuses for Locked Funds
 
-```
-cd my-dapp-example
-yarn install
-```
+Users can increase their rewards by maintaining their funds locked for specified periods:
 
-2. Run a local network in the first terminal:
+- **1-month lock** → Additional 0.5% cashback bonus
+- **3-month lock** → Additional 1% cashback bonus
+- **6-month lock** → Additional 1.5% cashback bonus + access to exclusive perks
 
-```
-yarn chain
-```
+> 💡 **The longer the commitment, the greater the benefits.**
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/hardhat/hardhat.config.ts`.
+### 🔄 Cashback Withdrawal Options
 
-3. On a second terminal, deploy the test contract:
+Users can choose how to receive their rewards based on their preferences:
 
-```
-yarn deploy
-```
+- **💸 Directly in USDC** — Instant withdrawal to their MetaMask wallet.
+- **🔄 Converted to another token** — Automatic swaps using the LI.FI SDK across chains.
+- **📈 Reinvested in DeFi** — Option to reinvest cashback directly into yield pools.
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
+### 🏦 Savings Mode: Passive Yield
 
-4. On a third terminal, start your NextJS app:
+A smart option for users who want to maximize their rewards effortlessly:
 
-```
-yarn start
-```
+- **Cashback Auto-Invested in DeFi Vaults** — Allocates refunds to a vault that generates interest on USDC.
+- **Passive Yield Generation** — Leverages low-risk DeFi strategies to earn extra returns without active management.
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+## 🛠️ Technical Implementation
 
-Run smart contract test with `yarn hardhat:test`
+MetaCashback integrates with:
 
-- Edit your smart contracts in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
+- **MetaMask Card** for payment processing
+- **LI.FI SDK** for cross-chain transfers and swaps
+- **DeFi protocols** for staking and yield generation
+
+## 📋 Requirements
+
+- MetaMask wallet
+- MetaMask Card
+- USDC for staking (optional, but recommended for higher rewards)
+
+## 🔗 Links
+
+## 📄 License
+
+## 👥 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 
-## Documentation
-
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
-
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
