@@ -56,8 +56,6 @@ const History: NextPage = () => {
 
   return (
     <main className="pt-5">
-      <h1 className="text-center text-2xl font-bold">Transaction History</h1>
-
       <section className="mt-5 mx-2">
         {historyEvent === undefined ? <Skeleton /> : <HistoryTable data={historyEvent.slice(0, 100)} />}
       </section>
