@@ -43,11 +43,10 @@ const HeaderMenuLinks = () => {
     <div className="flex gap-2">
       <Link href="/" passHref className="flex items-center gap-2 mr-2 shrink-0">
         <div className="flex relative w-10 h-10">
-          <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
+          <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.png" />
         </div>
         <div className="flex flex-col">
-          <span className="font-bold leading-tight">Scaffold-ETH</span>
-          <span className="text-xs">Ethereum dev stack</span>
+          <span className="font-bold leading-tight">Meta-Cashback</span>
         </div>
       </Link>
 
