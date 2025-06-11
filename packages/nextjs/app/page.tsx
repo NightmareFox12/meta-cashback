@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { UserChart } from "./UserChart";
 import { Crown, Flame, Rocket, Shield, TrendingUp, Wallet } from "lucide-react";
-import type { NextPage } from "next";
+import { NextPage } from "next";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
