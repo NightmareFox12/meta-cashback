@@ -6,6 +6,7 @@ import { Crown, Flame, Rocket, Shield, TrendingUp, Wallet } from "lucide-react";
 import { NextPage } from "next";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
+import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
@@ -92,6 +93,9 @@ const Home: NextPage = () => {
               </div>
             </div>
           </CardFooter>
+          <div className="px-6 mx-auto">
+            <Button className="bg-secondary hover:bg-secondary/50">Withdraw Earnings</Button>
+          </div>
         </Card>
       </section>
       {/* Role Card Section */}

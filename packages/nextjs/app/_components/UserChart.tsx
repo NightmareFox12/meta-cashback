@@ -8,17 +8,17 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 export const description = "Earnings Bar";
 
 const chartData = [
-  { month: "Monday", desktop: 305 },
-  { month: "Tuesday", desktop: 237 },
-  { month: "Wednesday", desktop: 73 },
-  { month: "Thursday", desktop: 209 },
-  { month: "Friday", desktop: 214 },
-  { month: "Saturday", desktop: 13 },
-  { month: "Sunday", desktop: 214 },
+  { month: "Monday", earning: 305 },
+  { month: "Tuesday", earning: 237 },
+  { month: "Wednesday", earning: 73 },
+  { month: "Thursday", earning: 209 },
+  { month: "Friday", earning: 214 },
+  { month: "Saturday", earning: 13 },
+  { month: "Sunday", earning: 214 },
 ];
 
 const chartConfig = {
-  desktop: {
+  earning: {
     label: "Earning",
     color: "var(--chart-1)",
   },
@@ -26,7 +26,7 @@ const chartConfig = {
 
 export function UserChart() {
   return (
-    <Card className="bg-primary max-w-md">
+    <Card className="bg-primary max-w-lg">
       <CardHeader>
         <CardTitle>Earning Chart</CardTitle>
         <CardDescription>Last Week</CardDescription>
@@ -40,7 +40,7 @@ export function UserChart() {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={value => value.slice(0, 3)}
+              // tickFormatter={value => value + "USDc"}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
             <Bar dataKey="earning" fill="var(--color-desktop)" radius={8} />

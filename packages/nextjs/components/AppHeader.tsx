@@ -87,18 +87,6 @@ const AppHeader: NextPage = () => {
       )}
 
       <div className="flex justify-center gap-2">
-        {/* <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button onClick={toggleSidebar}>tu cuenta</Button>
-            </TooltipTrigger>
-
-            <TooltipContent>
-              <p>Add to library</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider> */}
-
         <RainbowKitCustomConnectButton />
         {isLocalNetwork && <FaucetButton />}
       </div>
