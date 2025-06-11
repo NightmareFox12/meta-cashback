@@ -197,11 +197,23 @@ const LandingPage: NextPage = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <div className="flex relative w-10 h-10">
-                <Image alt="Meta-Cashback-logo" src="/favicon.png" className="cursor-pointer" fill />
+                <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.png" />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                 MetaCashback
               </span>
+            </div>
+
+            <div className="flex space-x-6 text-sm text-gray-400">
+              <a href="#" className="hover:text-white transition-colors">
+                Terms
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Privacy
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Support
+              </a>
             </div>
           </div>
 
