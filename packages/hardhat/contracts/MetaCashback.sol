@@ -1,7 +1,7 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-// import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /**
  * @author Echizen500
@@ -9,35 +9,40 @@ pragma solidity >=0.8.0;
  */
 
 contract MetaCashback {
-    struct Stake {
-        uint256 amount;
-        uint256 timestamp;
+    IERC20 public stakingToken;
+    mapping(address => uint256) public stakes;
+    mapping(address => uint256) public timestamps;
+    uint256 public rewardRate = 10;
+
+    constructor(address _tokenAddress) {
+        require(_tokenAddress != address(0), "Invalid token address");
+        stakingToken = IERC20(_tokenAddress);
     }
 
-    mapping(address => Stake) public stakes;
-    uint256 public rewardRate = 10; 
+    function stakeTokens(uint256 _amount) external {
+        require(_amount > 0, "Deposit amount must be greater than zero");
+        require(stakingToken.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
 
-    function stakeTokens() external payable {
-        require(msg.value > 0, "Debe depositar una cantidad positiva");
-
-        stakes[msg.sender] = Stake(msg.value, block.timestamp);
+        stakes[msg.sender] += _amount;
+        timestamps[msg.sender] = block.timestamp;
     }
 
     function calculateReward(address staker) public view returns (uint256) {
-        Stake memory userStake = stakes[staker];
-        require(userStake.amount > 0, "No hay tokens en staking");
+        require(stakes[staker] > 0, "No tokens staked");
 
-        uint256 timeStaked = block.timestamp - userStake.timestamp;
-        return (userStake.amount * rewardRate * timeStaked) / (365 days * 100);
+        uint256 timeStaked = block.timestamp - timestamps[staker];
+        return (stakes[staker] * rewardRate * timeStaked) / (365 days * 100);
     }
 
     function withdrawStake() external {
-        Stake memory userStake = stakes[msg.sender];
-        require(userStake.amount > 0, "No tienes tokens en staking");
+        require(stakes[msg.sender] > 0, "No tokens available for withdrawal");
 
         uint256 reward = calculateReward(msg.sender);
-        payable(msg.sender).transfer(userStake.amount + reward);
+        uint256 totalAmount = stakes[msg.sender] + reward;
 
-        delete stakes[msg.sender];
+        require(stakingToken.transfer(msg.sender, totalAmount), "Token transfer failed");
+
+        stakes[msg.sender] = 0;
+        timestamps[msg.sender] = 0;
     }
 }
