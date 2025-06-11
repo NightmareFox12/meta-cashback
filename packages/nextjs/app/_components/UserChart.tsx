@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, XAxis, Cell } from "recharts"
+import { TrendingUp } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, Cell, XAxis } from "recharts";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "~~/components/shad/ui/chart";
 
-export const description = "Earnings Bar"
+export const description = "Earnings Bar";
 
 const chartData = [
   { month: "Monday", earning: 30 },
@@ -15,7 +15,7 @@ const chartData = [
   { month: "Friday", earning: 20 },
   { month: "Saturday", earning: 13 },
   { month: "Sunday", earning: 6 },
-]
+];
 
 const chartConfig = {
   monday: {
@@ -39,17 +39,17 @@ const chartConfig = {
   sunday: {
     label: "Sunday",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 const colors = [
   "#3b82f6", // Blue
-  "#3b82f6", 
-  "#3b82f6", 
   "#3b82f6",
-  "#3b82f6", 
-  "#3b82f6", 
-  "#3b82f6", 
-]
+  "#3b82f6",
+  "#3b82f6",
+  "#3b82f6",
+  "#3b82f6",
+  "#3b82f6",
+];
 
 export function UserChart() {
   return (
@@ -67,7 +67,7 @@ export function UserChart() {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={value => value.slice(0, 3)}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
             <Bar dataKey="earning" radius={8}>
@@ -85,5 +85,5 @@ export function UserChart() {
         <div className="text-muted-foreground leading-none">Showing total Earning last week</div>
       </CardFooter>
     </Card>
-  )
+  );
 }
