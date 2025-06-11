@@ -23,7 +23,7 @@ const History: NextPage = () => {
     // fromBlock: data?.number ?? 22660937n - 40000n,
     fromBlock: data?.number ?? 22660937n - 10000n,
     watch: true,
-    // filters: { from: address },
+    // filters: { from: "0x40DC31da1209E963d59CAC8221BB542382788738" },
     blockData: true,
     transactionData: true,
     receiptData: true,
@@ -32,7 +32,9 @@ const History: NextPage = () => {
   useEffect(() => {
     if (events === undefined) return;
     const eventData = events as unknown as ItransferEvent[];
+    if (eventData.length === 0 || eventData[0] === undefined) return;
 
+    console.log(eventData);
     const parsedEvents: ItransferEventParsed[] = eventData.map(x => {
       return {
         to: x.args.to ?? "0x",
