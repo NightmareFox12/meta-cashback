@@ -19,7 +19,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, Database, Search } from "lucide-react";
+import { ArrowUpDown, ChevronDown, Database, ExternalLink, Search } from "lucide-react";
 import { NextPage } from "next";
 import { formatUnits } from "viem";
 import { Button } from "~~/components/shad/ui/button";
@@ -46,10 +46,11 @@ const columns: ColumnDef<ItransferEventParsed>[] = [
     cell: ({ row }) => (
       <a
         href={`https://etherscan.io/tx/${row.getValue("transactionHash")}`}
-        className="cursor-pointer underline"
+        className="cursor-pointer underline flex gap-2 items-center"
         target="_BLANK"
       >
         {row.getValue("transactionHash")}
+        <ExternalLink className="w-3 h-3" />
       </a>
     ),
   },

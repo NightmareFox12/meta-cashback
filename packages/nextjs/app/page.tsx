@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { UserChart } from "./UserChart";
+import { UserChart } from "./_components/UserChart";
 import { Crown, Flame, Rocket, Shield, TrendingUp, Wallet } from "lucide-react";
 import { NextPage } from "next";
 import { formatUnits } from "viem";
@@ -129,7 +129,7 @@ const Home: NextPage = () => {
       </section>
 
       {/* User chart  */}
-      <section className="w-4/12 my-4 mx-auto">
+      <section className="flex justify-center items-center w-full mx-auto mt-4 px-3">
         <UserChart />
       </section>
     </main>

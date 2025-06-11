@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { FaucetButton, RainbowKitCustomConnectButton } from "./scaffold-eth";
 import { Button } from "./shad/ui/button";
 import { useSidebar } from "./shad/ui/sidebar";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
-import { Bug, ClockFading, House, PanelRight } from "lucide-react";
+import { Bug, ClockFading, House, InfoIcon, PanelRight } from "lucide-react";
 import { NextPage } from "next";
 import { hardhat } from "viem/chains";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth";
@@ -32,7 +30,7 @@ export const menuLinks: AppHeaderMenuLink[] = [
   {
     label: "About",
     href: "/about",
-    icon: <PanelRight className="h-4 w-4" />, 
+    icon: <InfoIcon className="h-4 w-4" />,
   },
   {
     label: "Debug Contracts",
