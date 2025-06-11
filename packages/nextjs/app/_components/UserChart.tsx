@@ -53,7 +53,7 @@ const colors = [
 
 export function UserChart() {
   return (
-    <Card className="bg-primary max-w-lg">
+    <Card className="bg-primary max-w-lg h-full">
       <CardHeader>
         <CardTitle>Earning Chart</CardTitle>
         <CardDescription>Last Week</CardDescription>
