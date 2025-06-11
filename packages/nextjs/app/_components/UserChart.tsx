@@ -53,7 +53,7 @@ const colors = [
 
 export function UserChart() {
   return (
-    <Card className="bg-primary max-w-lg">
+    <Card className="bg-base min-w-md">
       <CardHeader>
         <CardTitle>Earning Chart</CardTitle>
         <CardDescription>Last Week</CardDescription>
@@ -78,7 +78,7 @@ export function UserChart() {
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
+      <CardFooter className="flex-col items-center gap-2 text-sm">
         <div className="flex gap-2 leading-none font-medium">
           Trending up by 5.2% this week <TrendingUp className="h-4 w-4" />
         </div>
