@@ -83,7 +83,7 @@ const LandingPage: NextPage = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <div className="flex relative w-10 h-10">
-                <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.png" />
+                <Image alt="Meta-cashback-logo" src="/favicon.png" className="cursor-pointer" fill />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                 MetaCashback
@@ -197,7 +197,7 @@ const LandingPage: NextPage = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <div className="flex relative w-10 h-10">
-                <Image alt="Meta-Cashback-logo" className="cursor-pointer" fill src="/icon.png" />
+                <Image alt="Meta-Cashback-logo" src="/favicon.png" className="cursor-pointer" fill />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                 MetaCashback
