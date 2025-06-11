@@ -1,30 +1,14 @@
 "use client";
+
 import Image from "next/image";
-import { useState } from "react";
+import { SwitchTheme } from "./SwitchTheme";
 import { RainbowKitCustomConnectButton } from "./scaffold-eth";
+import { ArrowRight, Crown, DollarSign, RefreshCw, Rocket, Shield, TrendingUp, Vault, Zap } from "lucide-react";
 import { NextPage } from "next";
-import { Card, CardContent } from "~~/components/shad/ui/card";
 import { Button } from "~~/components/shad/ui/button";
-import {
-  Trophy,
-  Zap,
-  Shield,
-  Rocket,
-  Crown,
-  DollarSign,
-  RefreshCw,
-  TrendingUp,
-  Vault,
-  Lock,
-  Sparkles,
-  ArrowRight,
-  Star,
-} from "lucide-react"
+import { Card, CardContent } from "~~/components/shad/ui/card";
 
-
-const LandingPage = () => {
-  const [hoveredTier, setHoveredTier] = useState<string | null>(null)
-
+const LandingPage: NextPage = () => {
   const tiers = [
     {
       name: "Explorer",
@@ -62,7 +46,7 @@ const LandingPage = () => {
       borderColor: "border-purple-200",
       description: "Premium advantages",
     },
-  ]
+  ];
 
   const features = [
     {
@@ -89,17 +73,17 @@ const LandingPage = () => {
       description: "Auto-deposit to yield vaults",
       color: "text-orange-500",
     },
-  ]
+  ];
 
   return (
-    <div className="bg-secondary/50 min-h-screen text-white font-sans">
+    <div className="bg-base-200 min-h-screen font-sans">
       <div className="relative z-10">
         {/* Header */}
         <header className="container mx-auto px-6 py-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <div className="flex relative w-10 h-10">
-                <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.png" />
+                <Image alt="Meta-cashback-logo" src="/favicon.png" className="cursor-pointer" fill />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                 MetaCashback
@@ -112,16 +96,14 @@ const LandingPage = () => {
         {/* Hero Section */}
         <section className="container mx-auto px-6 py-20 text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-6xl md:text-7xl font-bold mb-6">
-              Spend. Lock. Earn.
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 text-base-content">Spend. Lock. Earn.</h1>
+            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-base-content">
               Get cashback in <span className="text-blue-600 font-semibold">USDC</span> with every purchase using{" "}
               <span className="text-orange-500 font-semibold">MetaMask Card</span>
             </p>
             <p className="text-lg mb-12">Multiply your rewards through staking and DeFi strategies</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button className="bg-primary hover:bg-primary/70 text-white px-6 py-3 rounded-lg shadow-lg transition-all duration-300">
+              <Button className="bg-primary hover:bg-primary/70 px-6 py-3 shadow-lg">
                 Learn More <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
@@ -132,20 +114,18 @@ const LandingPage = () => {
         <section className="container mx-auto px-6 py-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
-              Boost Your Cashback 
+              Boost Your Cashback
             </h2>
-            
+
             <p className="text-xl">Choose your tier and maximize your rewards</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {tiers.map((tier, index) => {
-              const Icon = tier.icon
+            {tiers.map(tier => {
+              const Icon = tier.icon;
               return (
                 <Card
                   key={tier.name}
                   className={`${tier.bgColor} ${tier.borderColor} border-2 hover:border-opacity-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl cursor-pointer backdrop-blur-sm bg-opacity-90`}
-                  onMouseEnter={() => setHoveredTier(tier.name)}
-                  onMouseLeave={() => setHoveredTier(null)}
                 >
                   <CardContent className="p-6 text-center">
                     <div
@@ -158,7 +138,7 @@ const LandingPage = () => {
                     <p className="text-sm mb-4">{tier.description}</p>
                   </CardContent>
                 </Card>
-              )
+              );
             })}
           </div>
         </section>
@@ -167,26 +147,26 @@ const LandingPage = () => {
         <section className="container mx-auto px-6 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Withdraw or Grow Your Money
+              Withdraw or Grow Your Money
             </h2>
-            <p className="text-xl text-gray-300">Complete control over your cashback rewards</p>
+            <p className="text-xl">Complete control over your cashback rewards</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {features.map((feature, index) => {
-              const Icon = feature.icon
+              const Icon = feature.icon;
               return (
                 <Card
                   key={index}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
+                  className="bg-base-100 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
                 >
                   <CardContent className="p-6 text-center">
                     <Icon className={`w-12 h-12 mx-auto mb-4 ${feature.color}`} />
-                    <h3 className="text-xl font-semibold mb-2 text-white">{feature.title}</h3>
-                    <p className="text-gray-300 text-sm">{feature.description}</p>
+                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                    <p className=" text-sm">{feature.description}</p>
                   </CardContent>
                 </Card>
-              )
+              );
             })}
           </div>
         </section>
@@ -198,39 +178,30 @@ const LandingPage = () => {
               The future of cashback is in your hands
             </h2>
 
-            <p className="text-xl text-gray-300 mb-12">
+            <p className="text-xl text-base-content/50 mb-12">
               Join thousands of users already earning more with MetaCashback
             </p>
 
             <div className="space-y-4">
               <RainbowKitCustomConnectButton />
-              <p className="text-sm text-gray-400">Connect your MetaMask wallet to get started</p>
+              <p className="text-sm text-base-content/50">Connect your MetaMask wallet to get started</p>
             </div>
           </div>
         </section>
 
+        <div className="fixed z-10 bottom-0 p-4 flex w-full justify-end">
+          <SwitchTheme />
+        </div>
         {/* Footer */}
         <footer className="container mx-auto px-6 py-12 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <div className="flex relative w-10 h-10">
-                <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.png" />
+                <Image alt="Meta-Cashback-logo" src="/favicon.png" className="cursor-pointer" fill />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                 MetaCashback
               </span>
-            </div>
-
-            <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">
-                Terms
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                Privacy
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                Support
-              </a>
             </div>
           </div>
 
@@ -238,8 +209,7 @@ const LandingPage = () => {
         </footer>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LandingPage;
-
