@@ -1,28 +1,55 @@
-"use client";
+"use client"
 
-import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { TrendingUp } from "lucide-react"
+import { Bar, BarChart, CartesianGrid, XAxis, Cell } from "recharts"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "~~/components/shad/ui/chart";
 
-export const description = "Earnings Bar";
+export const description = "Earnings Bar"
 
 const chartData = [
-  { month: "Monday", earning: 305 },
-  { month: "Tuesday", earning: 237 },
-  { month: "Wednesday", earning: 73 },
-  { month: "Thursday", earning: 209 },
-  { month: "Friday", earning: 214 },
+  { month: "Monday", earning: 30 },
+  { month: "Tuesday", earning: 10 },
+  { month: "Wednesday", earning: 5 },
+  { month: "Thursday", earning: 2 },
+  { month: "Friday", earning: 20 },
   { month: "Saturday", earning: 13 },
-  { month: "Sunday", earning: 214 },
-];
+  { month: "Sunday", earning: 6 },
+]
 
 const chartConfig = {
-  earning: {
-    label: "Earning",
-    color: "var(--chart-1)",
+  monday: {
+    label: "Monday",
   },
-} satisfies ChartConfig;
+  tuesday: {
+    label: "Tuesday",
+  },
+  wednesday: {
+    label: "Wednesday",
+  },
+  thursday: {
+    label: "Thursday",
+  },
+  friday: {
+    label: "Friday",
+  },
+  saturday: {
+    label: "Saturday",
+  },
+  sunday: {
+    label: "Sunday",
+  },
+} satisfies ChartConfig
+
+const colors = [
+  "#3b82f6", // Blue
+  "#3b82f6", 
+  "#3b82f6", 
+  "#3b82f6",
+  "#3b82f6", 
+  "#3b82f6", 
+  "#3b82f6", 
+]
 
 export function UserChart() {
   return (
@@ -36,14 +63,18 @@ export function UserChart() {
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="earning"
+              dataKey="month"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              // tickFormatter={value => value + "USDc"}
+              tickFormatter={(value) => value.slice(0, 3)}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            <Bar dataKey="earning" fill="var(--color-desktop)" radius={8} />
+            <Bar dataKey="earning" radius={8}>
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={colors[index]} />
+              ))}
+            </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
@@ -54,5 +85,5 @@ export function UserChart() {
         <div className="text-muted-foreground leading-none">Showing total Earning last week</div>
       </CardFooter>
     </Card>
-  );
+  )
 }

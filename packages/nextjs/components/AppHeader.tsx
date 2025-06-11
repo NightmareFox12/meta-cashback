@@ -49,7 +49,9 @@ const HeaderMenuLinks = () => {
           <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.png" />
         </div>
         <div className="flex flex-col">
-          <span className="font-bold leading-tight">Meta-Cashback</span>
+          <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                MetaCashback
+          </span>
         </div>
       </Link>
 
