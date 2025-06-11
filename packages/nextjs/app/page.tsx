@@ -95,7 +95,7 @@ const Home: NextPage = () => {
       </section>
       {/* Role Card Section */}
       <section className="flex justify-center items-center w-full mx-auto mt-4 px-3">
-        <Card className="w-full max-w-md bg-transparent backdrop-blur-sm border border-secondary/20">
+        <Card className="w-full max-w-md bg-secondary">
           <CardContent className="p-6">
             {roles.map((role, index) => {
               if (role.name === currentUserRole) {
