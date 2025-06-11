@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// import { Checkbox } from "@radix-ui/react-checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -20,7 +19,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, Search, Database } from "lucide-react"
+import { ArrowUpDown, ChevronDown, Database, Search } from "lucide-react";
 import { NextPage } from "next";
 import { formatUnits } from "viem";
 import { Button } from "~~/components/shad/ui/button";
@@ -29,41 +28,30 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~
 import { ItransferEventParsed } from "~~/types/event.entity";
 
 const columns: ColumnDef<ItransferEventParsed>[] = [
-  // {
-  //   id: "address",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
-  //       onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={value => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
   {
     accessorKey: "to",
     header: "To",
     cell: ({ row }) => <div className="capitalize">{row.getValue("to")}</div>,
   },
   {
-    accessorKey: "blockHash",
+    accessorKey: "transactionHash",
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          BlockHast
+          Transaction Hash
           <ArrowUpDown />
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("blockHash")}</div>,
+    cell: ({ row }) => (
+      <a
+        href={`https://etherscan.io/tx/${row.getValue("transactionHash")}`}
+        className="cursor-pointer underline"
+        target="_BLANK"
+      >
+        {row.getValue("transactionHash")}
+      </a>
+    ),
   },
   {
     accessorKey: "value",
@@ -127,34 +115,34 @@ const HistoryTable: NextPage<HistoryTableProps> = ({ data }) => {
             <Input
               placeholder="Filter transactions..."
               value={(table.getColumn("to")?.getFilterValue() as string) ?? ""}
-              onChange={(event) => table.getColumn("to")?.setFilterValue(event.target.value)}
+              onChange={event => table.getColumn("to")?.setFilterValue(event.target.value)}
             />
           </div>
 
-         <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="ml-auto">
-                      Columns <ChevronDown />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    {table
-                      .getAllColumns()
-                      .filter(column => column.getCanHide())
-                      .map(column => {
-                        return (
-                          <DropdownMenuCheckboxItem
-                            key={column.id}
-                            className="capitalize"
-                            checked={column.getIsVisible()}
-                            onCheckedChange={value => column.toggleVisibility(!!value)}
-                          >
-                            {column.id}
-                          </DropdownMenuCheckboxItem>
-                        );
-                      })}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                Columns <ChevronDown />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter(column => column.getCanHide())
+                .map(column => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={value => column.toggleVisibility(!!value)}
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 
@@ -162,29 +150,26 @@ const HistoryTable: NextPage<HistoryTableProps> = ({ data }) => {
       <div className="rounded-xl border border-primary/20 bg-secondary/5 shadow-lg">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map(headerGroup => (
               <TableRow
                 key={headerGroup.id}
                 className="bg-gradient-to-r from-primary/15 to-secondary/15 border-b border-primary/20 hover:bg-primary/20 transition-colors"
               >
-                {headerGroup.headers.map((header) => {
+                {headerGroup.headers.map(header => {
                   return (
                     <TableHead key={header.id} className="font-bold py-4 px-6">
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row, index) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
+              table.getRowModel().rows.map(row => (
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                  {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id} className="py-4 px-6">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
@@ -212,11 +197,6 @@ const HistoryTable: NextPage<HistoryTableProps> = ({ data }) => {
 
       {/* Footer Controls */}
       <div className="flex items-center justify-between pt-6">
-        <div className="text-sm">
-          {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} transaction(s)
-          selected
-        </div>
-
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
@@ -226,18 +206,13 @@ const HistoryTable: NextPage<HistoryTableProps> = ({ data }) => {
           >
             Previous
           </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
+          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
             Next
           </Button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default HistoryTable;

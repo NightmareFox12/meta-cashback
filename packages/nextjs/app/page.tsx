@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { Crown, Flame, Rocket, Shield, TrendingUp, Wallet } from "lucide-react";
 import type { NextPage } from "next";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
-import { Wallet, TrendingUp, Shield, Rocket, Flame, Crown } from "lucide-react"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
     args: [address],
   });
 
-  const currentUserRole = "Explorer Level"; 
+  const currentUserRole = "Explorer Level";
 
   const roles = [
     {
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
       iconBg: "bg-purple-600/20",
       iconColor: "text-purple-300",
     },
-  ]
+  ];
 
   return (
     <main className="flex pt-5 mx-4">
@@ -99,7 +99,7 @@ const Home: NextPage = () => {
           <CardContent className="p-6">
             {roles.map((role, index) => {
               if (role.name === currentUserRole) {
-                const IconComponent = role.icon
+                const IconComponent = role.icon;
                 return (
                   <div key={index} className={`${role.bgColor} rounded-2xl p-6 text-white relative overflow-hidden`}>
                     {/* Background Icon */}
@@ -119,15 +119,15 @@ const Home: NextPage = () => {
                       </div>
                     </div>
                   </div>
-                )
+                );
               }
-              return null
+              return null;
             })}
           </CardContent>
         </Card>
       </section>
     </main>
-  )
-}
+  );
+};
 
 export default Home;

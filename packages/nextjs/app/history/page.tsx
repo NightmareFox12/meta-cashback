@@ -1,18 +1,14 @@
 "use client";
 
-// import { useEffect, useState } from "react";
-// import HistoryTable from "./_components/HistoryTable";
 import { useEffect, useState } from "react";
 import HistoryTable from "./_components/HistoryTable";
 import { NextPage } from "next";
 import { useBlock } from "wagmi";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
-// import { Skeleton } from "~~/components/shad/ui/skeleton";
 import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth";
 import { ItransferEvent, ItransferEventParsed } from "~~/types/event.entity";
 
 const History: NextPage = () => {
-  // const { address } = useAccount();
   const { data } = useBlock();
 
   const [historyEvent, setHistoryEvent] = useState<ItransferEventParsed[] | undefined>(undefined);
@@ -33,10 +29,6 @@ const History: NextPage = () => {
     receiptData: true,
   });
 
-  //PONER TIPADO NECESARIO A LA TABLA Y LUEGO MODO ZEBRA Y CONTINUAR CON LA VIDA
-  //PARA COMPONENTES INSTALAR DE SHADCN USAR npx install ....
-  //RECUERDA EL COMPONENT DROPWMENU NO TIENEN STYLS
-
   useEffect(() => {
     if (events === undefined) return;
     const eventData = events as unknown as ItransferEvent[];
@@ -45,7 +37,7 @@ const History: NextPage = () => {
       return {
         to: x.args.to ?? "0x",
         value: x.args.value ?? 0n,
-        blockHash: x.blockHash ?? "0x",
+        transactionHash: x.transactionHash ?? "0x",
       };
     });
 

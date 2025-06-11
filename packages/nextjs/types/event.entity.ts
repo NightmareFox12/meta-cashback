@@ -5,7 +5,7 @@ export interface ItransferEvent {
     to: `0x${string}`;
     value: bigint;
   };
-  blockHash: `0x${string}`;
+  transactionHash: `0x${string}`;
   eventName: string;
   blockNumber: bigint;
 }
@@ -13,5 +13,5 @@ export interface ItransferEvent {
 export interface ItransferEventParsed {
   to: `0x${string}`;
   value: bigint;
-  blockHash: `0x${string}`;
+  transactionHash: `0x${string}`;
 }
