@@ -42,7 +42,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const colors = [
-  "#3b82f6", // Blue
+  "#3b82f6", 
   "#3b82f6", 
   "#3b82f6", 
   "#3b82f6",
@@ -53,13 +53,13 @@ const colors = [
 
 export function UserChart() {
   return (
-    <Card className="bg-primary max-w-lg">
+    <Card className="bg-primary max-w-lg h-full">
       <CardHeader>
         <CardTitle>Earning Chart</CardTitle>
         <CardDescription>Last Week</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={chartConfig} className="h-42">
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -70,7 +70,7 @@ export function UserChart() {
               tickFormatter={(value) => value.slice(0, 3)}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            <Bar dataKey="earning" radius={8}>
+            <Bar dataKey="earning" radius={12}>
               {chartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={colors[index]} />
               ))}

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { UserChart } from "./_components/UserChart";
+import { PerformanceCalculator } from "./_components/PerformanceCalculator";
 import { Crown, Flame, Rocket, Shield, TrendingUp, Wallet } from "lucide-react";
 import { NextPage } from "next";
 import { formatUnits } from "viem";
@@ -63,9 +64,10 @@ const Home: NextPage = () => {
     },
   ];
 
-  return (
-    <main className="flex pt-5 mx-4 flex-col">
-      <section className="flex justify-center items-center w-full mx-auto mt-4 px-3">
+ return (
+    <main className="flex pt-5 mx-4 flex-col gap-4">
+      <div className="flex flex-row gap-4">
+      <section className="flex justify-center items-center flex-1 mt-4 px-3">
         <Card className="w-full max-w-md bg-primary">
           <CardHeader className="text-center space-y-2">
             <div className="mx-auto w-16 h-16 bg-secondary rounded-full flex items-center justify-center backdrop-blur-sm">
@@ -98,46 +100,64 @@ const Home: NextPage = () => {
           </div>
         </Card>
       </section>
-      {/* Role Card Section */}
-      <section className="flex justify-center items-center w-full mx-auto mt-4 px-3">
-        <Card className="w-full max-w-md bg-secondary">
-          <CardContent className="p-6">
-            {roles.map((role, index) => {
-              if (role.name === currentUserRole) {
-                const IconComponent = role.icon;
-                return (
-                  <div key={index} className={`${role.bgColor} rounded-2xl p-6 text-white relative overflow-hidden`}>
-                    {/* Background Icon */}
-                    <div className="absolute top-4 right-4 opacity-20">
-                      <IconComponent className="w-16 h-16" />
-                    </div>
-                    {/* Content */}
-                    <div className="relative z-10 space-y-4">
-                      <div className={`w-12 h-12 ${role.iconBg} rounded-full flex items-center justify-center mx-auto`}>
-                        <IconComponent className={`w-6 h-6 ${role.iconColor}`} />
-                      </div>
-                      <div className="text-center">
-                        <h3 className="font-bold text-2xl mb-3">{role.name}</h3>
-                        <p className="text-lg opacity-90 mb-2">{role.range}</p>
-                        <p className="text-lg font-semibold mb-2">{role.cashback}</p>
-                        {role.benefit && <p className="text-sm opacity-80">{role.benefit}</p>}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-              return null;
-            })}
-          </CardContent>
-        </Card>
-      </section>
+{/* Role Card Section */}
+<section className="flex justify-center items-center flex-1 mt-4 px-3">
+  {roles.map((role, index) => {
+    if (role.name === currentUserRole) {
+      const IconComponent = role.icon
+      return (
+        <div key={index} className={`${role.bgColor} rounded-2xl p-6 text-white relative overflow-hidden h-full w-full max-w-sm flex flex-col justify-center items-center`}>
+          {/* Background Icon */}
+          <div className="absolute top-4 right-4 opacity-20">
+            <IconComponent className="w-16 h-16" />
+          </div>
+          {/* Content */}
+          <div className="relative z-10 space-y-6 flex flex-col justify-center items-center text-center">
+            <div className={`w-12 h-12 ${role.iconBg} rounded-full flex items-center justify-center mx-auto`}>
+              <IconComponent className={`w-6 h-6 ${role.iconColor}`} />
+            </div>
+            <h3 className="font-bold text-2xl">{role.name}</h3>
+            <p className="text-lg opacity-90">{role.range}</p>
+            <p className="text-lg font-semibold">{role.cashback}</p>
+            {role.benefit && <p className="text-sm opacity-80">{role.benefit}</p>}
+          </div>
+        </div>
+      )
+    }
+    return null
+  })}
+</section>
 
-      {/* User chart  */}
-      <section className="flex justify-center items-center w-full mx-auto mt-4 px-3">
+
+      <section className="flex justify-center items-center flex-1 mt-4 px-3">
         <UserChart />
       </section>
+      </div>
+
+      <div className="flex flex-row gap-4 justify-center">
+        <section className="flex justify-center items-center flex-1 mt-4 px-3 max-w-md">
+          <Card className="w-full bg-secondary h-full">
+            <CardHeader className="text-center space-y-2">
+              <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center backdrop-blur-sm">
+                <TrendingUp className="w-8 h-8" />
+              </div>
+              <CardTitle className="text-2xl font-bold">Progress of Level</CardTitle>
+            </CardHeader>
+            <CardContent className="text-center space-y-10">
+              <div className="bg-primary rounded-2xl p-12 mt-4 border border-primary">
+                <p className="text-lg font-medium mb-2">Next Level: Pioneer</p>
+                <div className="w-full bg-secondary rounded-full h-3 mb-2">
+                  <div className="bg-green-500 h-3 rounded-full" style={{ width: "3%" }}></div>
+                </div>
+                <p className="text-sm opacity-70">You need $100 USDC to level up</p>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+        <PerformanceCalculator />
+      </div>
     </main>
-  );
-};
+  )
+}
 
 export default Home;
