@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { FaucetButton, RainbowKitCustomConnectButton } from "./scaffold-eth";
 import { Button } from "./shad/ui/button";
 import { useSidebar } from "./shad/ui/sidebar";
-import { Bug, ClockFading, House, InfoIcon, PanelRight } from "lucide-react";
+import { Bug, ClockFading, HandCoins, House, InfoIcon, PanelRight } from "lucide-react";
 import { NextPage } from "next";
 import { hardhat } from "viem/chains";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth";
@@ -21,6 +21,11 @@ export const menuLinks: AppHeaderMenuLink[] = [
     label: "Home",
     href: "/",
     icon: <House className="h-4 w-4" />,
+  },
+  {
+    label: "Staking",
+    href: "/staking",
+    icon: <HandCoins className="h-4 w-4" />,
   },
   {
     label: "History",
@@ -46,11 +51,11 @@ const HeaderMenuLinks = () => {
     <div className="flex gap-2">
       <Link href="/" passHref className="flex items-center gap-2 mr-2 shrink-0">
         <div className="flex relative w-10 h-10">
-          <Image alt="SE2 logo" className="cursor-pointer" fill src="/icon.png" />
+          <Image alt="MetaCashback logo" className="cursor-pointer" fill src="/favicon.png" />
         </div>
         <div className="flex flex-col">
           <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                MetaCashback
+            MetaCashback
           </span>
         </div>
       </Link>

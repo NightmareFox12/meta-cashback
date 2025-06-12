@@ -10,9 +10,12 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract MetaCashback {
     IERC20 public stakingToken;
+
+    // states 
     mapping(address => uint256) public stakes;
     mapping(address => uint256) public timestamps;
     uint256 public rewardRate = 10;
+    uint256 minStakingAmount = 5 * 10 ** 6;
 
     constructor(address _tokenAddress) {
         require(_tokenAddress != address(0), "Invalid token address");
@@ -21,7 +24,11 @@ contract MetaCashback {
 
     function stakeTokens(uint256 _amount) external {
         require(_amount > 0, "Deposit amount must be greater than zero");
-        require(stakingToken.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
+        require(_amount >= minStakingAmount && stakingToken.allowance(msg.sender, address(this)) >= minStakingAmount
+        , "The amount of the deposit must be higher than the minimum amount");
+
+        // require(stakingToken.allowance(msg.sender, address(this)) >= minStakingAmount,"");
+        // require(stakingToken.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
 
         stakes[msg.sender] += _amount;
         timestamps[msg.sender] = block.timestamp;

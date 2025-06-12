@@ -3,68 +3,81 @@
 import { useState } from "react";
 import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { ArrowDownLeft, ArrowUpRight, CheckCircle, Clock, Coins, Info, TrendingUp, Wallet } from "lucide-react";
-import { Badge } from "~~/components/shad/ui/badge";
+import { ArrowDownLeft, ArrowUpRight, CheckCircle, Clock, Coins, Info, InfoIcon, TrendingUp } from "lucide-react";
+import { useAccount } from "wagmi";
+// import { Badge } from "~~/components/shad/ui/badge";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { Input } from "~~/components/shad/ui/input";
 import { Label } from "~~/components/shad/ui/label";
-import { Progress } from "~~/components/shad/ui/progress";
+// import { Progress } from "~~/components/shad/ui/progress";
 import { TabsContent } from "~~/components/shad/ui/tabs";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
-const StalkingScreen = () => {
+const StakingScreen = () => {
+  const { address } = useAccount();
+
+  //states
   const [stakeAmount, setStakeAmount] = useState("");
-  const [unstakeAmount, setUnstakeAmount] = useState("");
+  // const [unstakeAmount, setUnstakeAmount] = useState("");
 
   // Mock data
-  const userBalance = 1250.5;
   const stakedAmount = 5000.0;
   const totalRewards = 125.75;
   const apy = 8.5;
-  const lockPeriod = 30; // days
-  const timeRemaining = 15; // days
+  // const lockPeriod = 30; // days
+  // const timeRemaining = 15; // days
+
+  //smart contract
+  // const { data: userBalance } = useScaffoldReadContract({
+  //   contractName: "USDC",
+  //   functionName: "balanceOf",
+  //   args: [address],
+  // });
+
+  const { data: userBalance } = useScaffoldReadContract({
+    contractName: "USDCFake",
+    functionName: "balanceOf",
+    args: [address],
+  });
 
   const handleMaxStake = () => {
-    setStakeAmount(userBalance.toString());
-  };
-
-  const handleMaxUnstake = () => {
-    setUnstakeAmount(stakedAmount.toString());
+    setStakeAmount(userBalance?.toString() ?? "");
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <main className="min-h-screen p-4">
+      <div className="max-w-9/12 mx-auto space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-gray-900">USDC Staking</h1>
-          <p className="text-gray-600">Earn rewards by staking your USDC tokens</p>
+          <h1 className="text-3xl font-bold">USDC Staking</h1>
+          <p className="text-base-content/50">Earn rewards by staking your USDC tokens</p>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-center items-center">
+          {/* <Card className="bg-base">
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
                 <Wallet className="h-4 w-4 text-blue-600" />
-                <span className="text-sm font-medium text-gray-600">Available Balance</span>
+                <span className="text-sm font-medium">Available Balance</span>
               </div>
               <div className="mt-2">
-                <span className="text-2xl font-bold text-gray-900">${userBalance.toLocaleString()}</span>
-                <span className="text-sm text-gray-500 ml-1">USDC</span>
+                <span className="text-2xl font-bold ">${userBalance.toLocaleString()}</span>
+                <span className="text-sm ml-1">USDC</span>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
                 <Coins className="h-4 w-4 text-green-600" />
-                <span className="text-sm font-medium text-gray-600">Staked Amount</span>
+                <span className="text-sm font-medium">Staked Amount</span>
               </div>
               <div className="mt-2">
-                <span className="text-2xl font-bold text-gray-900">${stakedAmount.toLocaleString()}</span>
-                <span className="text-sm text-gray-500 ml-1">USDC</span>
+                <span className="text-2xl font-bold ">${stakedAmount.toLocaleString()}</span>
+                <span className="text-sm  ml-1">USDC</span>
               </div>
             </CardContent>
           </Card>
@@ -73,11 +86,11 @@ const StalkingScreen = () => {
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
                 <TrendingUp className="h-4 w-4 text-purple-600" />
-                <span className="text-sm font-medium text-gray-600">Total Rewards</span>
+                <span className="text-sm font-medium">Total Rewards</span>
               </div>
               <div className="mt-2">
-                <span className="text-2xl font-bold text-gray-900">${totalRewards.toLocaleString()}</span>
-                <span className="text-sm text-gray-500 ml-1">USDC</span>
+                <span className="text-2xl font-bold">${totalRewards.toLocaleString()}</span>
+                <span className="text-sm ml-1">USDC</span>
               </div>
             </CardContent>
           </Card>
@@ -85,8 +98,21 @@ const StalkingScreen = () => {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
+                <InfoIcon className="h-4 w-4 text-orange-400" />
+                <span className="text-sm font-medium">Min Amount</span>
+              </div>
+              <div className="mt-2">
+                <span className="text-2xl font-bold">$5</span>
+                <span className="text-sm ml-1">USDC</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* <Card>
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-2">
                 <Clock className="h-4 w-4 text-orange-600" />
-                <span className="text-sm font-medium text-gray-600">APY</span>
+                <span className="text-sm font-medium">APY</span>
               </div>
               <div className="mt-2">
                 <span className="text-2xl font-bold text-green-600">{apy}%</span>
@@ -95,7 +121,7 @@ const StalkingScreen = () => {
                 </Badge>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
 
         {/* Main Content */}
@@ -114,10 +140,10 @@ const StalkingScreen = () => {
                       <ArrowUpRight className="h-4 w-4" />
                       Stake
                     </TabsTrigger>
-                    <TabsTrigger value="unstake" className="flex items-center gap-2">
+                    {/* <TabsTrigger value="unstake" className="flex items-center gap-2">
                       <ArrowDownLeft className="h-4 w-4" />
                       Unstake
-                    </TabsTrigger>
+                    </TabsTrigger> */}
                   </TabsList>
 
                   <TabsContent value="stake" className="space-y-4">
@@ -135,9 +161,9 @@ const StalkingScreen = () => {
                           Max
                         </Button>
                       </div>
-                      <p className="text-sm text-gray-500">Available: ${userBalance.toLocaleString()} USDC</p>
+                      <p className="text-sm">Available: {userBalance?.toString() ?? 0} USDC</p>
                     </div>
-
+                    {/* 
                     <div className="bg-blue-50 p-4 rounded-lg space-y-2">
                       <div className="flex items-center gap-2">
                         <Info className="h-4 w-4 text-blue-600" />
@@ -160,14 +186,14 @@ const StalkingScreen = () => {
                           </span>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
 
                     <Button className="w-full" size="lg" disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}>
                       Stake USDC
                     </Button>
                   </TabsContent>
 
-                  <TabsContent value="unstake" className="space-y-4">
+                  {/* <TabsContent value="unstake" className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="unstake-amount">Amount to Unstake</Label>
                       <div className="flex space-x-2">
@@ -208,7 +234,7 @@ const StalkingScreen = () => {
                     >
                       Unstake USDC
                     </Button>
-                  </TabsContent>
+                  </TabsContent> */}
                 </Tabs>
               </CardContent>
             </Card>
@@ -224,15 +250,15 @@ const StalkingScreen = () => {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Staked Amount</span>
+                    <span className="text-sm">Staked Amount</span>
                     <span className="font-medium">${stakedAmount.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Rewards Earned</span>
+                    <span className="text-sm">Rewards Earned</span>
                     <span className="font-medium text-green-600">${totalRewards}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-600">Total Value</span>
+                    <span className="text-sm">Total Value</span>
                     <span className="font-bold">${(stakedAmount + totalRewards).toLocaleString()}</span>
                   </div>
                 </div>
@@ -245,29 +271,29 @@ const StalkingScreen = () => {
             </Card>
 
             {/* Pool Information */}
-            <Card>
+            {/* <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Pool Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Total Pool Size</span>
+                  <span className="text-sm">Total Pool Size</span>
                   <span className="font-medium">$2.5M</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Your Share</span>
+                  <span className="text-sm">Your Share</span>
                   <span className="font-medium">0.2%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Pool APY</span>
+                  <span className="text-sm">Pool APY</span>
                   <span className="font-medium text-green-600">{apy}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Min. Stake</span>
+                  <span className="text-sm">Min. Stake</span>
                   <span className="font-medium">$10 USDC</span>
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Recent Activity */}
             <Card>
@@ -301,8 +327,8 @@ const StalkingScreen = () => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
-export default StalkingScreen;
+export default StakingScreen;

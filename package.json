@@ -57,6 +57,7 @@
     "node": ">=20.18.3"
   },
   "dependencies": {
+    "@lifi/sdk": "^3.7.9",
     "@tanstack/react-table": "^8.21.3"
   }
 }

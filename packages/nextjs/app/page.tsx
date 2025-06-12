@@ -14,8 +14,14 @@ import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 const Home: NextPage = () => {
   const { address } = useAccount();
 
+  // const { data: userBalance } = useScaffoldReadContract({
+  //   contractName: "USDC",
+  //   functionName: "balanceOf",
+  //   args: [address],
+  // });
+
   const { data: userBalance } = useScaffoldReadContract({
-    contractName: "USDC",
+    contractName: "USDCFake",
     functionName: "balanceOf",
     args: [address],
   });

@@ -22,23 +22,31 @@ const deployMetaCashback: DeployFunction = async function (hre: HardhatRuntimeEn
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  await deploy("YourContract", {
+  await deploy("USDCFake", {
     from: deployer,
     // Contract constructor arguments
-    args: ["0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"], //usdc contract
+    args: ["0xD2692F9df925D18D527ABe8b3d99EE9E9C8d75AE"],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.
     autoMine: true,
   });
 
-  // Get the deployed contract to interact with it after deploying.
-  const yourContract = await hre.ethers.getContract<Contract>("YourContract", deployer);
-  console.log("👋 Initial greeting:", await yourContract.greeting());
+  const usdcFakeContract = await hre.ethers.getContract<Contract>("USDCFake", deployer);
+
+  await deploy("MetaCashback", {
+    from: deployer,
+    // Contract constructor arguments
+    args: [await usdcFakeContract.getAddress()], //usdc contract
+    log: true,
+    // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
+    // automatically mining the contract deployment transaction. There is no effect on live networks.
+    autoMine: true,
+  });
 };
 
 export default deployMetaCashback;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
 // e.g. yarn deploy --tags YourContract
-deployMetaCashback.tags = ["MetaCashback"];
+deployMetaCashback.tags = ["USDCFake", "MetaCashback"];
