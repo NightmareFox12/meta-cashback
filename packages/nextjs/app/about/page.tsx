@@ -30,7 +30,7 @@ export default function Component() {
                         <Trophy className="w-10 h-10 text-yellow-400" />
                     </div>
                     <CardTitle className="text-4xl font-bold bg-secondary">
-                        MetaCashback
+                        MetaCashback: The Future of Cashback Rewards
                     </CardTitle>
                     <p className="text-lg  max-w-4xl mx-auto leading-relaxed">
                         A revolutionary system that allows users to earn cashback in USDC for their purchases with the MetaMask
