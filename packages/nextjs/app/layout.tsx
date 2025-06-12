@@ -5,7 +5,7 @@ import "~~/styles/globals.css";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 export const metadata = getMetadata({
-  title: "Meta-Cashback",
+  title: "MetaCashback",
   description:
     "Earn USDC cashback with MetaMask Card and boost rewards through staking or DeFi locks—maximize your spending power",
 });
