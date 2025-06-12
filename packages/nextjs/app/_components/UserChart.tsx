@@ -43,13 +43,13 @@ const chartConfig = {
 
 const colors = [
   "#3b82f6", // Blue
-  "#3b82f6", 
-  "#3b82f6", 
   "#3b82f6",
-  "#3b82f6", 
-  "#3b82f6", 
-  "#3b82f6", 
-]
+  "#3b82f6",
+  "#3b82f6",
+  "#3b82f6",
+  "#3b82f6",
+  "#3b82f6",
+];
 
 export function UserChart() {
   return (

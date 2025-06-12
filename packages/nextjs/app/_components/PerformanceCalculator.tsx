@@ -1,29 +1,28 @@
-"use client"
+"use client";
 
-import type React from "react"
+import { useEffect, useState } from "react";
+import { Wallet } from "lucide-react";
+import { NextPage } from "next";
+import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
+import { Input } from "~~/components/shad/ui/input";
+import { Label } from "~~/components/shad/ui/label";
 
-import { useState, useEffect } from "react"
-import { Wallet } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card"
-import { Input } from "~~/components/shad/ui/input"
-import { Label } from "~~/components/shad/ui/label"
-
-export function PerformanceCalculator() {
-  const [amount, setAmount] = useState(100)
-  const [days, setDays] = useState(30)
-  const [estimatedReturn, setEstimatedReturn] = useState(0)
+const PerformanceCalculator: NextPage = () => {
+  const [amount, setAmount] = useState(100);
+  const [days, setDays] = useState(30);
+  const [estimatedReturn, setEstimatedReturn] = useState(0);
 
   // Calculate returns based on amount and days
   useEffect(() => {
     // Simple calculation: 1% monthly return (0.033% daily)
-    const dailyRate = 0.00033
-    const calculatedReturn = amount * dailyRate * days
-    setEstimatedReturn(Number.parseFloat(calculatedReturn.toFixed(2)))
-  }, [amount, days])
+    const dailyRate = 0.00033;
+    const calculatedReturn = amount * dailyRate * days;
+    setEstimatedReturn(Number.parseFloat(calculatedReturn.toFixed(2)));
+  }, [amount, days]);
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDays(Number(e.target.value))
-  }
+    setDays(Number(e.target.value));
+  };
 
   return (
     <section className="flex justify-center items-center flex-1 mt-4 px-3 max-w-md">
@@ -47,7 +46,7 @@ export function PerformanceCalculator() {
                 id="amount"
                 type="number"
                 value={amount}
-                onChange={(e) => setAmount(Number(e.target.value))}
+                onChange={e => setAmount(Number(e.target.value))}
                 min={1}
                 max={10000}
                 className="bg-secondary"
@@ -123,5 +122,7 @@ export function PerformanceCalculator() {
         </CardContent>
       </Card>
     </section>
-  )
-}
+  );
+};
+
+export default PerformanceCalculator;
