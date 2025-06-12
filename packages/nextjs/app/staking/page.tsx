@@ -4,15 +4,18 @@ import { useState } from "react";
 import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { ArrowDownLeft, ArrowUpRight, CheckCircle, Clock, Coins, Info, InfoIcon, TrendingUp } from "lucide-react";
+import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 // import { Badge } from "~~/components/shad/ui/badge";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { Input } from "~~/components/shad/ui/input";
 import { Label } from "~~/components/shad/ui/label";
+import { Skeleton } from "~~/components/shad/ui/skeleton";
 // import { Progress } from "~~/components/shad/ui/progress";
 import { TabsContent } from "~~/components/shad/ui/tabs";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { formatNumber } from "~~/utils/formatNumber";
 
 const StakingScreen = () => {
   const { address } = useAccount();
@@ -41,17 +44,22 @@ const StakingScreen = () => {
     args: [address],
   });
 
+  const { data: minAmount, isLoading: minAmountLoading } = useScaffoldReadContract({
+    contractName: "MetaCashback",
+    functionName: "minStakingAmount",
+  });
+
   const handleMaxStake = () => {
     setStakeAmount(userBalance?.toString() ?? "");
   };
 
   return (
     <main className="min-h-screen p-4">
-      <div className="max-w-9/12 mx-auto space-y-6">
+      <div className="lg:max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold">USDC Staking</h1>
-          <p className="text-base-content/50">Earn rewards by staking your USDC tokens</p>
+          <p className="text-base-content/70">Earn rewards by staking your USDC tokens</p>
         </div>
 
         {/* Stats Cards */}
@@ -95,6 +103,7 @@ const StakingScreen = () => {
             </CardContent>
           </Card>
 
+          {/* Min amount card  */}
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
@@ -102,8 +111,14 @@ const StakingScreen = () => {
                 <span className="text-sm font-medium">Min Amount</span>
               </div>
               <div className="mt-2">
-                <span className="text-2xl font-bold">$5</span>
-                <span className="text-sm ml-1">USDC</span>
+                {minAmountLoading ? (
+                  <Skeleton className="h-5 w-[100px] mt-5" />
+                ) : (
+                  <>
+                    <span className="text-2xl font-bold">${formatUnits(minAmount ?? 0n, 6)}</span>
+                    <span className="text-sm ml-1">USDC</span>
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -127,7 +142,7 @@ const StakingScreen = () => {
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Staking Interface */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <Card>
               <CardHeader>
                 <CardTitle>Stake USDC</CardTitle>
@@ -152,16 +167,19 @@ const StakingScreen = () => {
                       <div className="flex space-x-2">
                         <Input
                           id="stake-amount"
-                          placeholder="0.00"
+                          placeholder="5.0"
                           value={stakeAmount}
-                          onChange={e => setStakeAmount(e.target.value)}
+                          onChange={e => {
+                            const value = e.target.value;
+                            if (/^\d*\.?\d*$/.test(value)) setStakeAmount(value);
+                          }}
                           className="flex-1"
                         />
                         <Button variant="outline" onClick={handleMaxStake}>
                           Max
                         </Button>
                       </div>
-                      <p className="text-sm">Available: {userBalance?.toString() ?? 0} USDC</p>
+                      <p className="text-sm">Available: {formatNumber(formatUnits(userBalance ?? 0n, 6))} USDC</p>
                     </div>
                     {/* 
                     <div className="bg-blue-50 p-4 rounded-lg space-y-2">
@@ -239,39 +257,40 @@ const StakingScreen = () => {
               </CardContent>
             </Card>
           </div>
+        </div>
 
-          {/* Sidebar Info */}
-          <div className="space-y-4">
-            {/* Current Position */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Your Position</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-sm">Staked Amount</span>
-                    <span className="font-medium">${stakedAmount.toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Rewards Earned</span>
-                    <span className="font-medium text-green-600">${totalRewards}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Total Value</span>
-                    <span className="font-bold">${(stakedAmount + totalRewards).toLocaleString()}</span>
-                  </div>
+        {/* Info */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-4 w-full">
+          {/* Current Position */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Your Position</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-sm">Staked Amount</span>
+                  <span className="font-medium">${stakedAmount.toLocaleString()}</span>
                 </div>
-                <Separator />
-                <Button variant="outline" className="w-full">
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  Claim Rewards
-                </Button>
-              </CardContent>
-            </Card>
+                <div className="flex justify-between">
+                  <span className="text-sm">Rewards Earned</span>
+                  <span className="font-medium text-green-600">${totalRewards}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm">Total Value</span>
+                  <span className="font-bold">${(stakedAmount + totalRewards).toLocaleString()}</span>
+                </div>
+              </div>
+              <Separator />
+              <Button variant="outline" className="w-full">
+                <CheckCircle className="h-4 w-4 mr-2" />
+                Claim Rewards
+              </Button>
+            </CardContent>
+          </Card>
 
-            {/* Pool Information */}
-            {/* <Card>
+          {/* Pool Information */}
+          {/* <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Pool Information</CardTitle>
               </CardHeader>
@@ -295,36 +314,35 @@ const StakingScreen = () => {
               </CardContent>
             </Card> */}
 
-            {/* Recent Activity */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Recent Activity</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">Staked $1,000 USDC</p>
-                    <p className="text-xs text-gray-500">2 days ago</p>
-                  </div>
+          {/* Recent Activity */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Recent Activity</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium">Staked $1,000 USDC</p>
+                  <p className="text-xs text-gray-500">2 days ago</p>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">Claimed $25.50 rewards</p>
-                    <p className="text-xs text-gray-500">1 week ago</p>
-                  </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium">Claimed $25.50 rewards</p>
+                  <p className="text-xs text-gray-500">1 week ago</p>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">Staked $4,000 USDC</p>
-                    <p className="text-xs text-gray-500">2 weeks ago</p>
-                  </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium">Staked $4,000 USDC</p>
+                  <p className="text-xs text-gray-500">2 weeks ago</p>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </main>

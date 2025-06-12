@@ -10,6 +10,7 @@ import { useAccount } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { formatNumber } from "~~/utils/formatNumber";
 
 const Home: NextPage = () => {
   const { address } = useAccount();
@@ -85,7 +86,7 @@ const Home: NextPage = () => {
             <CardContent className="text-center">
               <div className="bg-secondary rounded-2xl p-2 border border-secondary flex items-center justify-center space-x-2">
                 <Image src={"/usdc.png"} alt="usdc icon" width={20} height={20} />
-                <p className="text-4xl font-bold">${formatUnits(userBalance ?? 0n, 6)}</p>
+                <p className="text-4xl font-bold">${formatNumber(formatUnits(userBalance ?? 0n, 6))}</p>
               </div>
             </CardContent>
             <CardFooter className="pt-0">

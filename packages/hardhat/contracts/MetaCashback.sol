@@ -15,7 +15,7 @@ contract MetaCashback {
     mapping(address => uint256) public stakes;
     mapping(address => uint256) public timestamps;
     uint256 public rewardRate = 10;
-    uint256 minStakingAmount = 5 * 10 ** 6;
+    uint256 public minStakingAmount = 5 * 10 ** 6;
 
     constructor(address _tokenAddress) {
         require(_tokenAddress != address(0), "Invalid token address");
