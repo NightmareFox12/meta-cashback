@@ -23,9 +23,9 @@ El cashback aumenta según la participación del usuario en DeFi:
 
 | Nivel | Cantidad | Cashback | Beneficios |
 |-------|--------------|----------|----------|
-| 🔰 **Explorer** | $0 - $100 | 1% | Cashback Básico |
-| 🚀 **Pioneer** | $100 - $500 | 2% | Acceso a los Perk |
-| 🔥 **Legendary** | $500 - $1000 | 3% | Bonus Exclusivos |
+| 🔰 **Explorador** | $0 - $100 | 1% | Cashback Básico |
+| 🚀 **Pionero** | $100 - $500 | 2% | Acceso a los Perk |
+| 🔥 **Legendario** | $500 - $1000 | 3% | Bonus Exclusivos |
 | 👑 **Elite** | $1000+ | 4% | Beneficios Premium |
 
 ## 💰 Opciones de Recompensa y Rendimiento
