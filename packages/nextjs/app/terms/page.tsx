@@ -59,36 +59,36 @@ export default function TermsPage() {
             <table className="w-full border-collapse border border-primary rounded-lg">
               <thead>
                 <tr className="bg-primary">
-                  <th className="border border-primary p-3 text-left font-semibold">Level</th>
-                  <th className="border border-primary p-3 text-left font-semibold">Locked Funds</th>
-                  <th className="border border-primary p-3 text-left font-semibold">Base Cashback</th>
-                  <th className="border border-primary p-3 text-left font-semibold">Additional Benefits</th>
+                  <th className="border border-primary p-3 text-center font-semibold">Level</th>
+                  <th className="border border-primary p-3 text-center font-semibold">Locked Funds</th>
+                  <th className="border border-primary p-3 text-center font-semibold">Base Cashback</th>
+                  <th className="border border-primary p-3 text-center font-semibold">Additional Benefits</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-primary p-3 font-medium">Explorer</td>
-                  <td className="border border-primary p-3">$0 - $100</td>
-                  <td className="border border-primary p-3 text-green-400 font-semibold">1%</td>
-                  <td className="border border-primary p-3">—</td>
+                  <td className="border border-primary p-3 font-medium text-center">Explorer</td>
+                  <td className="border border-primary p-3 text-center">$0 - $100</td>
+                  <td className="border border-primary p-3 text-green-400 font-semibold text-center">1%</td>
+                  <td className="border border-primary p-3 text-center">—</td>
                 </tr>
                 <tr>
-                  <td className="border border-primary p-3 font-medium">Pioneer</td>
-                  <td className="border border-primary p-3">$100 - $500</td>
-                  <td className="border border-primary p-3 text-green-400 font-semibold">2%</td>
-                  <td className="border border-primary p-3">Access to exclusive perks</td>
+                  <td className="border border-primary p-3 font-medium text-center">Pioneer</td>
+                  <td className="border border-primary p-3 text-center">$100 - $500</td>
+                  <td className="border border-primary p-3 text-green-400 font-semibold text-center">2%</td>
+                  <td className="border border-primary p-3 text-center">Access to exclusive perks</td>
                 </tr>
                 <tr>
-                  <td className="border border-primary p-3 font-medium">Legendary</td>
-                  <td className="border border-primary p-3">$500 - $1000</td>
-                  <td className="border border-primary p-3 text-green-400 font-semibold">3%</td>
-                  <td className="border border-primary p-3">Special bonuses</td>
+                  <td className="border border-primary p-3 font-medium text-center">Legendary</td>
+                  <td className="border border-primary p-3 text-center">$500 - $1000</td>
+                  <td className="border border-primary p-3 text-green-400 font-semibold text-center">3%</td>
+                  <td className="border border-primary p-3 text-center">Special bonuses</td>
                 </tr>
                 <tr>
-                  <td className="border border-primary p-3 font-medium">Elite</td>
-                  <td className="border border-primary p-3">$1000+</td>
-                  <td className="border border-primary p-3 text-green-400 font-semibold">4%</td>
-                  <td className="border border-primary p-3">Premium advantages</td>
+                  <td className="border border-primary p-3 font-medium text-center">Elite</td>
+                  <td className="border border-primary p-3 text-center">$1000+</td>
+                  <td className="border border-primary p-3 text-green-400 font-semibold text-center">4%</td>
+                  <td className="border border-primary p-3 text-center">Premium advantages</td>
                 </tr>
               </tbody>
             </table>
