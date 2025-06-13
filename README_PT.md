@@ -1,5 +1,7 @@
 # MetaCashback
 
+[🔙 Back to English README](../README.md)
+
 ## 🏆 Visão Geral
 MetaCashback é um sistema revolucionário que permite aos usuários ganhar cashback em USDC por suas compras com o Cartão MetaMask. Os usuários podem aumentar sua porcentagem de cashback participando de staking ou bloqueando fundos em protocolos DeFi.
 

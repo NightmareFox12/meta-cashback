@@ -1,5 +1,12 @@
 # MetaCashback
 
+## This document is available in other languages:
+- 🇪🇸 **Español** - [README_ES.md](README_ES.md)
+- 🇮🇹 **Italiano** - [README_IT.md](README_IT.md)
+- 🇧🇷 **Português** - [README_PT.md](README_PT.md)
+- 🇫🇷 **Français** - [README_FR.md](README_FR.md)
+- 🇨🇳 **中文** - [README_ZH.md](README_ZH.md)
+
 ## 🏆 Overview
 
 MetaCashback is a revolutionary system that allows users to earn cashback in USDC for their purchases with the MetaMask Card. Users can increase their cashback percentage by participating in staking or locking funds in DeFi protocols.

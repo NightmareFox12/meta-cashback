@@ -1,5 +1,7 @@
 # MetaCashback
 
+[🔙 Back to English README](../README.md)
+
 ## 🏆 概览
 MetaCashback 是一个革命性的系统，允许用户使用 MetaMask 卡购物时赚取 USDC 返现。用户可以通过参与质押或在 DeFi 协议中锁定资金来提高其返现百分比。
 
