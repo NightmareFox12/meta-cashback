@@ -205,14 +205,14 @@ const LandingPage: NextPage = () => {
             </div>
 
             <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">
-                Terms
+              <a href="/terms" className="hover:text-white transition-colors">
+                Terms and Conditions
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="/privacy" className="hover:text-white transition-colors">
                 Privacy
               </a>
-              <a href="#" className="hover:text-white transition-colors">
-                Support
+              <a href="/FAQ" className="hover:text-white transition-colors">
+                FAQ
               </a>
             </div>
           </div>
