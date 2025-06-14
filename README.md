@@ -94,6 +94,8 @@ These technologies, together, form the technical foundation of MetaCashback, ena
 
 ## 📄 License
 
+Distributed under the **MIT License**.
+
 ## 👥 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.

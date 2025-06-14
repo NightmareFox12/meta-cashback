@@ -88,6 +88,8 @@ Queste tecnologie, insieme, formano la base tecnica di MetaCashback, consentendo
 
 ## 📄 Licenza
 
+Distribuito sotto la **Licenza MIT**.
+
 ## 👥 Contributi
 
 I contributi sono benvenuti! Non esitare a inviare una Pull Request.

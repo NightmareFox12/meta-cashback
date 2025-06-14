@@ -98,10 +98,11 @@ Para el desarrollo de MetaCashback, se han empleado diversas herramientas y libr
 
 Estas tecnologías, en conjunto, forman la base técnica de MetaCashback, permitiendo la creación de un sistema descentralizado, seguro y fácil de usar para maximizar las recompensas de cashback en el ecosistema DeFi.
 
-
 ## 🔗 Enlaces
 
 ## 📄 Licencia
+
+Distribuido bajo la **Licencia MIT**.
 
 ## 👥 Contribuciones
 

@@ -89,6 +89,8 @@ Ces technologies, ensemble, forment la base technique de MetaCashback, permettan
 
 ## 📄 Licence
 
+Distribué sous la **Licence MIT**.
+
 ## 👥 Contributions
 
 Les contributions sont les bienvenues ! N'hésitez pas à soumettre une Pull Request.
