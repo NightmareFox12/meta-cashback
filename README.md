@@ -75,6 +75,21 @@ MetaCashback integrates with:
 - MetaMask Card
 - USDC for staking (optional, but recommended for higher rewards)
 
+## 💻 Technologies Used
+MetaCashback uses several key tools and libraries to ensure smooth blockchain interaction, a robust user experience, and an efficient development environment:
+
+1. **Wagmi:** This React Hooks library for Ethereum simplifies interacting with smart contracts and wallets. Wagmi makes it easy to connect the app to the blockchain, read and write contract data, and manage transactions. This is crucial for staking functionalities and calculating cashback based on user DeFi interaction.
+
+2. **MetaMask SDK:** The MetaMask SDK is essential for allowing users to connect their MetaMask wallets directly to the MetaCashback application. It provides a secure and familiar interface for authorizing transactions, managing signatures, and general blockchain interaction, ensuring users can easily perform their cashback and staking operations.
+
+3. **Rainbow Kit:** Complementing Wagmi and MetaMask SDK, Rainbow Kit offers a pre-designed and highly customizable user interface for wallet connection. It enhances the user experience by providing an attractive and easy-to-use connection modal, compatible with multiple wallets beyond MetaMask, which expands MetaCashback's accessibility.
+
+4. **Hardhat:** Hardhat is used for developing and deploying the smart contracts that govern the cashback system and interactions with DeFi protocols. This flexible development environment allows for efficient compilation, testing, and deployment of smart contracts, which is crucial for the security and reliability of MetaCashback's business rules.
+
+5. **Next.js:** MetaCashback's user interface is built with Next.js, a React.js framework that facilitates the development of high-performance web applications. Next.js provides features like server-side rendering (SSR) and static site generation (SSG), contributing to fast loading, better search engine optimization (SEO), and a smooth, responsive user experience.
+
+These technologies, together, form the technical foundation of MetaCashback, enabling the creation of a decentralized, secure, and user-friendly system to maximize cashback rewards in the DeFi ecosystem.
+
 ## 🔗 Links
 
 ## 📄 License

@@ -82,6 +82,23 @@ Tarjeta MetaMask
 
 USDC para staking (opcional, pero recomendado para mayores recompensas)
 
+## 💻 Tecnologías Utilizadas
+
+Para el desarrollo de MetaCashback, se han empleado diversas herramientas y librerías clave que aseguran una interacción fluida con la blockchain, una experiencia de usuario robusta y un entorno de desarrollo eficiente:
+
+1. **Wagmi:** Esta librería React Hooks para Ethereum facilita la interacción con smart contracts y wallets. Wagmi simplifica la conexión de la aplicación con la blockchain, la lectura y escritura de datos en contratos, y la gestión de transacciones. Esto es fundamental para las funcionalidades de staking y el cálculo de cashback basado en la interacción DeFi del usuario.
+
+2. **MetaMask SDK:** El MetaMask SDK es esencial para permitir a los usuarios conectar sus carteras MetaMask directamente a la aplicación MetaCashback. Proporciona una interfaz segura y familiar para la autorización de transacciones, la gestión de firmas y la interacción general con la blockchain, asegurando que los usuarios puedan realizar sus operaciones de cashback y staking de forma sencilla.
+
+3. **Rainbow Kit:** Complementando a Wagmi y MetaMask SDK, Rainbow Kit ofrece una interfaz de usuario prediseñada y altamente personalizable para la conexión de carteras. Mejora la experiencia del usuario al proporcionar un modal de conexión atractivo y fácil de usar, compatible con múltiples carteras además de MetaMask, lo que amplía la accesibilidad de MetaCashback.
+
+4. **Hardhat:** Para el desarrollo y despliegue de los smart contracts que rigen el sistema de cashback y las interacciones con los protocolos DeFi, se utiliza Hardhat. Este entorno de desarrollo flexible permite compilar, testear y desplegar contratos inteligentes de manera eficiente, lo que es crucial para la seguridad y fiabilidad de las reglas de negocio de MetaCashback.
+
+5. **Next.js:** La interfaz de usuario de MetaCashback está construida con Next.js, un framework de React.js que facilita el desarrollo de aplicaciones web de alto rendimiento. Next.js proporciona características como el renderizado del lado del servidor (SSR) y la generación de sitios estáticos (SSG), lo que contribuye a una carga rápida, una mejor optimización para motores de búsqueda (SEO) y una experiencia de usuario fluida y reactiva.
+
+Estas tecnologías, en conjunto, forman la base técnica de MetaCashback, permitiendo la creación de un sistema descentralizado, seguro y fácil de usar para maximizar las recompensas de cashback en el ecosistema DeFi.
+
+
 ## 🔗 Enlaces
 
 ## 📄 Licencia
