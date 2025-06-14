@@ -24,7 +24,7 @@ import {
 export default function Component() {
     return (
         <div className="w-full max-w-6xl mx-auto p-6 space-y-8">
-            <Card className="bg-gradient-to-br from-blue-800 to-blue-300 text-white shadow-xl">
+            <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white shadow-xl">
                 <CardHeader className="text-center">
                     <div className="mx-auto w-20 h-20 bg-secondary/30 rounded-full flex items-center justify-center mb-4 shadow-lg">
                         <Trophy className="w-10 h-10 text-yellow-400" />
@@ -60,7 +60,7 @@ export default function Component() {
             </Card>
 
             {/* User Flow */}
-            <Card className="bg-gradient-to-br from-blue-800 to-blue-300 shadow-xl">
+            <Card className="bg-gradient-to-br from-blue-800 to-blue-400 shadow-xl">
                 <CardHeader>
                     <div className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-secondary/30 rounded-full flex items-center justify-center">
@@ -96,7 +96,7 @@ export default function Component() {
             </Card>
 
             {/* Cashback Levels */}
-            <Card className="bg-gradient-to-br from-blue-800 to-blue-300 shadow-xl text-white">
+            <Card className="bg-gradient-to-br from-blue-800 to-blue-400 shadow-xl text-white">
                 <CardHeader>
                     <div className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-secondary/30 rounded-full flex items-center justify-center">
@@ -167,7 +167,7 @@ export default function Component() {
             {/* Bottom Section - Three Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Lock Bonuses */}
-                <Card className="bg-gradient-to-br from-blue-800 to-blue-300 border-primary/10 shadow-xl text-white">
+                <Card className="bg-gradient-to-br from-blue-800 to-blue-400 border-primary/10 shadow-xl text-white">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
@@ -199,7 +199,7 @@ export default function Component() {
                     </CardContent>
                 </Card>
                 {/* Withdrawal Options */}
-                <Card className="bg-gradient-to-br from-blue-800 to-blue-300 text-white border-primary/20 shadow-xl">
+                <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white border-primary/20 shadow-xl">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
@@ -233,7 +233,7 @@ export default function Component() {
                 </Card>
 
                 {/* Savings Mode */}
-                <Card className="bg-gradient-to-br from-blue-800 to-blue-300 text-white border-primary/20 shadow-xl">
+                <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white border-primary/20 shadow-xl">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
