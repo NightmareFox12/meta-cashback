@@ -21,8 +21,7 @@ export default function PrivacyPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm leading-relaxed">
-            MetaCashback collects only the necessary user data to facilitate cashback processing and improve platform
-            functionality. This data includes transaction history, wallet interactions, and preferences set by users.
+            MetaCashback does not collect user data, as it works directly with the Blockchain to manage refunds and improve platform functionality. The processed information is based on on-chain transaction history, wallet interactions, and preferences set by users within the system.
           </p>
           <p className="text-sm leading-relaxed">
             By using the service, users acknowledge and consent to the data collection practices outlined here.
