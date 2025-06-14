@@ -81,6 +81,9 @@ const roles = [
               <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                 <Wallet className="w-8 h-8" />
               </div>
+              <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+                    <div className="absolute inset-0 bg-white rounded-full transform translate-x-16 -translate-y-16"></div>
+                  </div>
               <CardTitle className="text-2xl font-bold ">My Balance</CardTitle>
             </CardHeader>
 
