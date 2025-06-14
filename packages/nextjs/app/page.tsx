@@ -27,70 +27,71 @@ const Home: NextPage = () => {
     args: [address],
   });
 
-  const currentUserRole = "Explorer Level";
+  const currentUserRole = "Elite Level";
 
-  const roles = [
-    {
-      name: "Explorer Level",
-      range: "$0 - $100 locked",
-      cashback: "1% cashback",
-      icon: Shield,
-      bgColor: "bg-blue-500",
-      iconBg: "bg-blue-600/20",
-      iconColor: "text-blue-300",
-    },
-    {
-      name: "Pioneer Level",
-      range: "$100 - $500 locked",
-      cashback: "2% cashback",
-      benefit: "+ access to perks",
-      icon: Rocket,
-      bgColor: "bg-green-500",
-      iconBg: "bg-green-600/20",
-      iconColor: "text-green-300",
-    },
-    {
-      name: "Legendary Level",
-      range: "$500 - $1000 locked",
-      cashback: "3% cashback",
-      benefit: "+ exclusive bonuses",
-      icon: Flame,
-      bgColor: "bg-orange-500",
-      iconBg: "bg-orange-600/20",
-      iconColor: "text-orange-300",
-    },
-    {
-      name: "Elite Level",
-      range: "$1000+ locked",
-      cashback: "4% cashback",
-      benefit: "+ premium benefits",
-      icon: Crown,
-      bgColor: "bg-purple-500",
-      iconBg: "bg-purple-600/20",
-      iconColor: "text-purple-300",
-    },
-  ];
+const roles = [
+  {
+    name: "Explorer Level",
+    range: "$0 - $100 locked",
+    cashback: "1% cashback",
+    icon: Shield,
+    bgColor: "bg-gradient-to-r from-blue-400 to-blue-600",
+    iconBg: "bg-blue-600/20",
+    iconColor: "text-blue-300",
+  },
+  {
+    name: "Pioneer Level",
+    range: "$100 - $500 locked",
+    cashback: "2% cashback",
+    benefit: "+ access to perks",
+    icon: Rocket,
+    bgColor: "bg-gradient-to-r from-green-400 to-green-600",
+    iconBg: "bg-green-600/20",
+    iconColor: "text-green-300",
+  },
+  {
+    name: "Legendary Level",
+    range: "$500 - $1000 locked",
+    cashback: "3% cashback",
+    benefit: "+ exclusive bonuses",
+    icon: Flame,
+    bgColor: "bg-gradient-to-r from-orange-400 to-yellow-600",
+    iconBg: "bg-orange-600/20",
+    iconColor: "text-orange-300",
+  },
+  {
+    name: "Elite Level",
+    range: "$1000+ locked",
+    cashback: "4% cashback",
+    benefit: "+ premium benefits",
+    icon: Crown,
+    bgColor: "bg-gradient-to-r from-purple-400 to-purple-600",
+    iconBg: "bg-purple-600/20",
+    iconColor: "text-purple-300",
+  },
+];
+
 
   return (
     <main className="flex pt-5 mx-4 flex-col gap-4">
       <div className="flex flex-row gap-4">
         <section className="flex justify-center items-center flex-1 mt-4 px-3">
-          <Card className="w-full max-w-md bg-primary">
+          <Card className="w-full bg-gradient-to-br from-blue-800 to-blue-400 text-white h-full relative overflow-hidden">
             <CardHeader className="text-center space-y-2">
-              <div className="mx-auto w-16 h-16 bg-secondary rounded-full flex items-center justify-center backdrop-blur-sm">
+              <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                 <Wallet className="w-8 h-8" />
               </div>
               <CardTitle className="text-2xl font-bold ">My Balance</CardTitle>
             </CardHeader>
 
             <CardContent className="text-center">
-              <div className="bg-secondary rounded-2xl p-2 border border-secondary flex items-center justify-center space-x-2">
+              <div className=" bg-white/20 backdrop-blur-sm rounded-2xl p-2 border border-white/20 flex items-center justify-center space-x-2">
                 <Image src={"/usdc.png"} alt="usdc icon" width={20} height={20} />
                 <p className="text-4xl font-bold">${formatNumber(formatUnits(userBalance ?? 0n, 6))}</p>
               </div>
             </CardContent>
             <CardFooter className="pt-0">
-              <div className="w-full bg-secondary backdrop-blur-sm rounded-xl p-4 border border-secondary/20">
+              <div className="w-full bg-white/20 backdrop-blur-sm rounded-xl p-2 border border-white/20">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center">
@@ -121,6 +122,9 @@ const Home: NextPage = () => {
                   <div className="absolute top-4 right-4 opacity-20">
                     <IconComponent className="w-16 h-16" />
                   </div>
+                  <div className="absolute top-0 right-0 w-40 h-40 opacity-10">
+                    <div className="absolute inset-0 bg-white rounded-full transform translate-x-12 -translate-y-12"></div>
+                  </div>
                   {/* Content */}
                   <div className="relative z-10 space-y-6 flex flex-col justify-center items-center text-center">
                     <div className={`w-12 h-12 ${role.iconBg} rounded-full flex items-center justify-center mx-auto`}>
@@ -144,19 +148,22 @@ const Home: NextPage = () => {
       </div>
 
       <div className="flex flex-row gap-4 justify-center">
-        <section className="flex justify-center items-center flex-1 mt-4 px-3 max-w-md">
-          <Card className="w-full bg-secondary h-full">
+        <section className="flex justify-center items-center flex-1 px-3 max-w-md">
+          <Card className="w-full bg-gradient-to-br from-blue-800 to-blue-400 text-white h-full relative overflow-hidden">
             <CardHeader className="text-center space-y-2">
-              <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center backdrop-blur-sm">
+              <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                 <TrendingUp className="w-8 h-8" />
+              </div>
+              <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+                <div className="absolute inset-0 bg-white rounded-full transform translate-x-16 -translate-y-16"></div>
               </div>
               <CardTitle className="text-2xl font-bold">Progress of Level</CardTitle>
             </CardHeader>
             <CardContent className="text-center space-y-10">
-              <div className="bg-primary rounded-2xl p-12 mt-4 border border-primary">
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                 <p className="text-lg font-medium mb-2">Next Level: Pioneer</p>
                 <div className="w-full bg-secondary rounded-full h-3 mb-2">
-                  <div className="bg-green-500 h-3 rounded-full" style={{ width: "3%" }}></div>
+                  <div className="bg-green-300 h-3 rounded-full" style={{ width: "30%" }}></div>
                 </div>
                 <p className="text-sm opacity-70">You need $100 USDC to level up</p>
               </div>
