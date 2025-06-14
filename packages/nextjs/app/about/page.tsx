@@ -1,4 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "~~/components/shad/ui/card"
+import { Button } from "~~/components/shad/ui/button"
 import {
     Trophy,
     Lightbulb,
@@ -23,31 +24,43 @@ import {
 export default function Component() {
     return (
         <div className="w-full max-w-6xl mx-auto p-6 space-y-8">
-            {/* Main Header */}
-            <Card className="bg-gradient-to-br from-blue-600 to-blue-300 text-white shadow-xl">
-                <CardHeader className="text-center pb-6">
+            <Card className="bg-gradient-to-br from-blue-800 to-blue-300 text-white shadow-xl">
+                <CardHeader className="text-center">
                     <div className="mx-auto w-20 h-20 bg-secondary/30 rounded-full flex items-center justify-center mb-4 shadow-lg">
                         <Trophy className="w-10 h-10 text-yellow-400" />
                     </div>
+
                     <CardTitle className="text-4xl font-bold">
                         MetaCashback: The Future of Cashback Rewards
                     </CardTitle>
-                    <p className="text-lg  max-w-4xl mx-auto leading-relaxed">
-                        A revolutionary system that allows users to earn cashback in USDC for their purchases with the MetaMask
-                        Card, with the possibility of increasing the cashback percentage by participating in staking or locking
-                        funds in DeFi protocols.
+                    <p className="text-lg max-w-4xl mx-auto leading-relaxed">
+                        A revolutionary system that allows users to earn cashback in USDC for their purchases with the MetaMask Card, with the possibility of increasing the cashback percentage by participating in staking or locking funds in DeFi protocols.
                     </p>
-                    <div className="flex items-center justify-center gap-2 mt-4 bg-secondary/30 px-6 py-3 rounded-full backdrop-blur-sm">
-                        <Lightbulb className="w-5 h-5 text-yellow-400" />
-                        <span className="font-semibold">
-                            The more a user interacts with DeFi, the greater the rewards they receive.
-                        </span>
-                    </div>
                 </CardHeader>
+                <CardFooter className="flex justify-center gap-4">
+                    <Button className="bg-secondary/70 text-white px-4 py-2 rounded-lg hover:bg-secondary/80">
+                        Terms
+                    </Button>
+                    <Button className="bg-secondary/70 text-white px-4 py-2 rounded-lg hover:bg-secondary/80">
+                        Privacy
+                    </Button>
+                    <Button className="bg-secondary/70 text-white px-4 py-2 rounded-lg hover:bg-secondary/80">
+                        FAQ
+                    </Button>
+                    
+                </CardFooter>
+
+                {/* Nota informativa al final */}
+                <div className="flex justify-center items-center gap-2 bg-secondary/30 px-3 py-2 rounded-full backdrop-blur-sm text-sm w-fit mx-auto">
+                    <Lightbulb className="w-4 h-4 text-yellow-400" />
+                    <span className="font-semibold text-xs">
+                        The more a user interacts with DeFi, the greater the rewards they receive.
+                    </span>
+                </div>
             </Card>
 
             {/* User Flow */}
-            <Card className="bg-gradient-to-br from-blue-600 to-blue-300 shadow-xl">
+            <Card className="bg-gradient-to-br from-blue-800 to-blue-300 shadow-xl">
                 <CardHeader>
                     <div className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-secondary/30 rounded-full flex items-center justify-center">
@@ -66,7 +79,7 @@ export default function Component() {
                             { icon: Wallet, title: "Automated Payment", desc: "Rewards credited to MetaMask wallet", iconColor: "text-yellow-500" },
                         ].map((step, index) => (
                             <div key={index} className="relative">
-                                <div className="bg-secondary/30 backdrop-blur-sm rounded-xl p-4 border border-primary/10 hover:bg-primary/5 transition-all duration-300">
+                                <div className="bg-secondary/40 backdrop-blur-sm rounded-xl p-4 border border-primary/10 hover:bg-primary/5 transition-all duration-300">
                                     <div className="w-10 h-10 bg-secondary/30 rounded-full flex items-center justify-center mb-3 mx-auto">
                                         <step.icon className={`w-5 h-5 ${step.iconColor}`} />
                                     </div>
@@ -83,11 +96,11 @@ export default function Component() {
             </Card>
 
             {/* Cashback Levels */}
-            <Card className="bg-gradient-to-br from-blue-600 to-blue-300 shadow-xl text-white">
+            <Card className="bg-gradient-to-br from-blue-800 to-blue-300 shadow-xl text-white">
                 <CardHeader>
                     <div className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-secondary/30 rounded-full flex items-center justify-center">
-                            <Target className="w-6 h-6 text-indigo-700" />
+                            <Target className="w-6 h-6 text-indigo-300" />
                         </div>
                         <CardTitle className="text-2xl">Cashback Levels</CardTitle>
                     </div>
@@ -154,13 +167,13 @@ export default function Component() {
             {/* Bottom Section - Three Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Lock Bonuses */}
-                <Card className="bg-gradient-to-br from-blue-600 to-blue-300 border-primary/10 shadow-xl text-white">
+                <Card className="bg-gradient-to-br from-blue-800 to-blue-300 border-primary/10 shadow-xl text-white">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                                 <Clock className="w-5 h-5 text-red-600" />
                             </div>
-                            
+
                             <CardTitle className="text-lg">Lock Bonuses</CardTitle>
                         </div>
                     </CardHeader>
@@ -186,11 +199,11 @@ export default function Component() {
                     </CardContent>
                 </Card>
                 {/* Withdrawal Options */}
-                <Card className="bg-gradient-to-br from-blue-600 to-blue-300 text-white border-primary/20 shadow-xl">
+                <Card className="bg-gradient-to-br from-blue-800 to-blue-300 text-white border-primary/20 shadow-xl">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                                <RefreshCw className="w-5 h-5 text-blue-500" />
+                                <RefreshCw className="w-5 h-5 text-blue-800" />
                             </div>
                             <CardTitle className="text-lg">Withdrawal Options</CardTitle>
                         </div>
@@ -220,7 +233,7 @@ export default function Component() {
                 </Card>
 
                 {/* Savings Mode */}
-                <Card className="bg-gradient-to-br from-blue-600 to-blue-300 text-white border-primary/20 shadow-xl">
+                <Card className="bg-gradient-to-br from-blue-800 to-blue-300 text-white border-primary/20 shadow-xl">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
