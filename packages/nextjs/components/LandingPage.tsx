@@ -96,7 +96,10 @@ const LandingPage: NextPage = () => {
         {/* Hero Section */}
         <section className="container mx-auto px-6 py-20 text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 text-base-content">Spend. Lock. Earn.</h1>
+            <Image alt="Meta-cashback-logo" src="/favicon.png" className="mx-auto mb-6" width={100} height={100} />
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 text-base-content">
+              Spend. Lock. Earn.
+            </h1>
             <p className="text-xl md:text-2xl mb-8 leading-relaxed text-base-content">
               Get cashback in <span className="text-blue-600 font-semibold">USDC</span> with every purchase using{" "}
               <span className="text-orange-500 font-semibold">MetaMask Card</span>
