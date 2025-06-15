@@ -6,16 +6,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/
 export default function PrivacyPage() {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <Card className="bg-primary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
-            <ScrollText className="w-8 h-8" />
+          <div className="mx-auto w-16 h-16 bg-secondary/40 rounded-full flex items-center justify-center">
+            <ScrollText className="w-8 h-8 text-yellow-500" />
           </div>
           <CardTitle className="text-3xl font-bold">MetaCashback Privacy Policy</CardTitle>
         </CardHeader>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">1. Data Collection</CardTitle>
         </CardHeader>
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">2. Data Usage</CardTitle>
         </CardHeader>
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">3. Data Sharing and Security</CardTitle>
         </CardHeader>
@@ -55,7 +55,7 @@ export default function PrivacyPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">4. User Rights and Preferences</CardTitle>
         </CardHeader>
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">5. Policy Updates</CardTitle>
         </CardHeader>
