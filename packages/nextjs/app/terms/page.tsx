@@ -6,16 +6,16 @@ import { ScrollText } from "lucide-react"
 export default function TermsPage() {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <Card className="bg-primary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
-            <ScrollText className="w-8 h-8" />
+          <div className="mx-auto w-16 h-16 bg-secondary/40 rounded-full flex items-center justify-center">
+            <ScrollText className="w-8 h-8 text-yellow-400" />
           </div>
           <CardTitle className="text-3xl font-bold">MetaCashback Terms and Conditions</CardTitle>
         </CardHeader>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">1. General Information</CardTitle>
         </CardHeader>
@@ -32,7 +32,7 @@ export default function TermsPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">2. Eligibility</CardTitle>
         </CardHeader>
@@ -46,7 +46,7 @@ export default function TermsPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">3. Cashback and Reward Levels</CardTitle>
         </CardHeader>
@@ -58,7 +58,7 @@ export default function TermsPage() {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-primary rounded-lg">
               <thead>
-                <tr className="bg-primary">
+                <tr className="bg-primary/50">
                   <th className="border border-primary p-3 text-center font-semibold">Level</th>
                   <th className="border border-primary p-3 text-center font-semibold">Locked Funds</th>
                   <th className="border border-primary p-3 text-center font-semibold">Base Cashback</th>
@@ -97,7 +97,7 @@ export default function TermsPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">4. Bonus for Locked Funds</CardTitle>
         </CardHeader>
@@ -119,7 +119,7 @@ export default function TermsPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">5. Cashback Withdrawal and Usage Options</CardTitle>
         </CardHeader>
@@ -144,7 +144,7 @@ export default function TermsPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">6. User Responsibilities</CardTitle>
         </CardHeader>
@@ -156,7 +156,7 @@ export default function TermsPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">7. Program Modifications and Termination</CardTitle>
         </CardHeader>
@@ -168,7 +168,7 @@ export default function TermsPage() {
         </CardContent>
       </Card>
 
-      <Card className="bg-secondary">
+      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">8. Contact and Support</CardTitle>
         </CardHeader>
