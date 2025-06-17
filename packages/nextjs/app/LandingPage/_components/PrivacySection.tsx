@@ -3,7 +3,7 @@
 import { ScrollText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 
-export default function PrivacyPage() {
+export default function PrivacySection() {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
@@ -21,7 +21,9 @@ export default function PrivacyPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm leading-relaxed">
-            MetaCashback does not collect user data, as it works directly with the Blockchain to manage refunds and improve platform functionality. The processed information is based on on-chain transaction history, wallet interactions, and preferences set by users within the system.
+            MetaCashback does not collect user data, as it works directly with the Blockchain to manage refunds and
+            improve platform functionality. The processed information is based on on-chain transaction history, wallet
+            interactions, and preferences set by users within the system.
           </p>
           <p className="text-sm leading-relaxed">
             By using the service, users acknowledge and consent to the data collection practices outlined here.

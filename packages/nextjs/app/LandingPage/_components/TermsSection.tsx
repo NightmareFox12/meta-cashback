@@ -1,9 +1,23 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card"
-import { ScrollText } from "lucide-react"
+import { useEffect } from "react";
+import { ScrollText } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 
-export default function TermsPage() {
+export default function TermsSection() {
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      //aqui el set state
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
@@ -179,5 +193,5 @@ export default function TermsPage() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

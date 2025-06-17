@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import AppHeader from "./AppHeader";
 import AppSidebar from "./AppSideBar";
-import LandingPage from "./LandingPage";
+import LandingPage from "../app/LandingPage/LandingPage";
 import { SidebarInset, SidebarProvider } from "./shad/ui/sidebar";
 import { RainbowKitProvider, darkTheme, lightTheme } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
