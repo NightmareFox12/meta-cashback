@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { necesito } from "../lib/lifi";
+import CardLevel from "./_components/CardLevel";
 import PerformanceCalculator from "./_components/PerformanceCalculator";
 import { UserChart } from "./_components/UserChart";
-import { Crown, Flame, Rocket, Shield, TrendingUp, Wallet } from "lucide-react";
+import { TrendingUp, Wallet } from "lucide-react";
 import { NextPage } from "next";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
@@ -27,52 +29,18 @@ const Home: NextPage = () => {
     args: [address],
   });
 
-  const currentUserRole = "Elite Level";
-
-  const roles = [
-    {
-      name: "Explorer Level",
-      range: "$0 - $100 locked",
-      cashback: "1% cashback",
-      icon: Shield,
-      bgColor: "bg-gradient-to-r from-blue-400 to-blue-600",
-      iconBg: "bg-blue-600/20",
-      iconColor: "text-blue-300",
-    },
-    {
-      name: "Pioneer Level",
-      range: "$100 - $500 locked",
-      cashback: "2% cashback",
-      benefit: "+ access to perks",
-      icon: Rocket,
-      bgColor: "bg-gradient-to-r from-green-400 to-green-600",
-      iconBg: "bg-green-600/20",
-      iconColor: "text-green-300",
-    },
-    {
-      name: "Legendary Level",
-      range: "$500 - $1000 locked",
-      cashback: "3% cashback",
-      benefit: "+ exclusive bonuses",
-      icon: Flame,
-      bgColor: "bg-gradient-to-r from-orange-400 to-yellow-600",
-      iconBg: "bg-orange-600/20",
-      iconColor: "text-orange-300",
-    },
-    {
-      name: "Elite Level",
-      range: "$1000+ locked",
-      cashback: "4% cashback",
-      benefit: "+ premium benefits",
-      icon: Crown,
-      bgColor: "bg-gradient-to-r from-purple-400 to-purple-600",
-      iconBg: "bg-purple-600/20",
-      iconColor: "text-purple-300",
-    },
-  ];
-
   return (
     <main className="flex pt-5 mx-4 flex-col gap-4">
+      <Button
+        onClick={async () => {
+          console.log("violin");
+          const ayuda = await necesito();
+          console.log(ayuda);
+        }}
+      >
+        AYUDA
+      </Button>
+
       <div className="flex flex-row gap-4">
         <section className="flex justify-center items-center flex-1 mt-4 px-3">
           <Card className="w-full bg-gradient-to-br from-blue-800 to-blue-400 text-white h-full relative overflow-hidden">
@@ -111,39 +79,7 @@ const Home: NextPage = () => {
           </Card>
         </section>
         {/* Role Card Section */}
-        <section className="flex justify-center items-center flex-1 mt-4 px-3">
-          {roles.map((role, index) => {
-            if (role.name === currentUserRole) {
-              const IconComponent = role.icon;
-              return (
-                <div
-                  key={index}
-                  className={`${role.bgColor} rounded-2xl p-6 text-white relative overflow-hidden h-full w-full max-w-sm flex flex-col justify-center items-center`}
-                >
-                  {/* Background Icon */}
-                  <div className="absolute top-4 right-4 opacity-20">
-                    <IconComponent className="w-16 h-16" />
-                  </div>
-                  <div className="absolute top-0 right-0 w-40 h-40 opacity-10">
-                    <div className="absolute inset-0 bg-white rounded-full transform translate-x-12 -translate-y-12"></div>
-                  </div>
-                  {/* Content */}
-                  <div className="relative z-10 space-y-6 flex flex-col justify-center items-center text-center">
-                    <div className={`w-12 h-12 ${role.iconBg} rounded-full flex items-center justify-center mx-auto`}>
-                      <IconComponent className={`w-6 h-6 ${role.iconColor}`} />
-                    </div>
-                    <h3 className="font-bold text-2xl">{role.name}</h3>
-                    <p className="text-lg opacity-90">{role.range}</p>
-                    <p className="text-lg font-semibold">{role.cashback}</p>
-                    {role.benefit && <p className="text-sm opacity-80">{role.benefit}</p>}
-                  </div>
-                </div>
-              );
-            }
-            return null;
-          })}
-        </section>
-
+        <CardLevel />
         <section className="flex justify-center items-center flex-1 mt-4 px-3">
           <UserChart />
         </section>
