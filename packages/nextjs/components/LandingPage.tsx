@@ -8,73 +8,72 @@ import { NextPage } from "next";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent } from "~~/components/shad/ui/card";
 
+const tiers = [
+  {
+    name: "Explorer",
+    icon: Shield,
+    cashback: "1%",
+    color: "from-green-400 to-emerald-500",
+    bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
+    borderColor: "border-green-200",
+    description: "Start your journey",
+  },
+  {
+    name: "Pioneer",
+    icon: Rocket,
+    cashback: "2%",
+    color: "from-blue-400 to-cyan-500",
+    bgColor: "bg-gradient-to-br from-blue-50 to-cyan-50",
+    borderColor: "border-blue-200",
+    description: "Cashback + perks",
+  },
+  {
+    name: "Legendary",
+    icon: Zap,
+    cashback: "3%",
+    color: "from-orange-400 to-red-500",
+    bgColor: "bg-gradient-to-br from-orange-50 to-red-50",
+    borderColor: "border-orange-200",
+    description: "Exclusive bonuses",
+  },
+  {
+    name: "Elite",
+    icon: Crown,
+    cashback: "4%",
+    color: "from-purple-400 to-pink-500",
+    bgColor: "bg-gradient-to-br from-purple-50 to-pink-50",
+    borderColor: "border-purple-200",
+    description: "Premium advantages",
+  },
+];
+
+const features = [
+  {
+    icon: DollarSign,
+    title: "Instant Withdrawal",
+    description: "Get your USDC cashback instantly",
+    color: "text-green-500",
+  },
+  {
+    icon: RefreshCw,
+    title: "Auto Conversion",
+    description: "Seamless conversion with LI.FI",
+    color: "text-blue-500",
+  },
+  {
+    icon: TrendingUp,
+    title: "DeFi Strategies",
+    description: "Reinvest in high-yield protocols",
+    color: "text-purple-500",
+  },
+  {
+    icon: Vault,
+    title: "Savings Mode",
+    description: "Auto-deposit to yield vaults",
+    color: "text-orange-500",
+  },
+];
 const LandingPage: NextPage = () => {
-  const tiers = [
-    {
-      name: "Explorer",
-      icon: Shield,
-      cashback: "1%",
-      color: "from-green-400 to-emerald-500",
-      bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
-      borderColor: "border-green-200",
-      description: "Start your journey",
-    },
-    {
-      name: "Pioneer",
-      icon: Rocket,
-      cashback: "2%",
-      color: "from-blue-400 to-cyan-500",
-      bgColor: "bg-gradient-to-br from-blue-50 to-cyan-50",
-      borderColor: "border-blue-200",
-      description: "Cashback + perks",
-    },
-    {
-      name: "Legendary",
-      icon: Zap,
-      cashback: "3%",
-      color: "from-orange-400 to-red-500",
-      bgColor: "bg-gradient-to-br from-orange-50 to-red-50",
-      borderColor: "border-orange-200",
-      description: "Exclusive bonuses",
-    },
-    {
-      name: "Elite",
-      icon: Crown,
-      cashback: "4%",
-      color: "from-purple-400 to-pink-500",
-      bgColor: "bg-gradient-to-br from-purple-50 to-pink-50",
-      borderColor: "border-purple-200",
-      description: "Premium advantages",
-    },
-  ];
-
-  const features = [
-    {
-      icon: DollarSign,
-      title: "Instant Withdrawal",
-      description: "Get your USDC cashback instantly",
-      color: "text-green-500",
-    },
-    {
-      icon: RefreshCw,
-      title: "Auto Conversion",
-      description: "Seamless conversion with LI.FI",
-      color: "text-blue-500",
-    },
-    {
-      icon: TrendingUp,
-      title: "DeFi Strategies",
-      description: "Reinvest in high-yield protocols",
-      color: "text-purple-500",
-    },
-    {
-      icon: Vault,
-      title: "Savings Mode",
-      description: "Auto-deposit to yield vaults",
-      color: "text-orange-500",
-    },
-  ];
-
   return (
     <div className="bg-base-200 min-h-screen font-sans">
       <div className="relative z-10">
@@ -97,9 +96,7 @@ const LandingPage: NextPage = () => {
         <section className="container mx-auto px-6 py-20 text-center">
           <div className="max-w-4xl mx-auto">
             <Image alt="Meta-cashback-logo" src="/favicon.png" className="mx-auto mb-6" width={100} height={100} />
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 text-base-content">
-              Spend. Lock. Earn.
-            </h1>
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 text-base-content">Spend. Lock. Earn.</h1>
             <p className="text-xl md:text-2xl mb-8 leading-relaxed text-base-content">
               Get cashback in <span className="text-blue-600 font-semibold">USDC</span> with every purchase using{" "}
               <span className="text-orange-500 font-semibold">MetaMask Card</span>
@@ -208,13 +205,13 @@ const LandingPage: NextPage = () => {
             </div>
 
             <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="/terms" className="hover:text-white transition-colors">
+              <a href="/terms" className="hover:text-white transition-colors underline">
                 Terms and Conditions
               </a>
-              <a href="/privacy" className="hover:text-white transition-colors">
+              <a href="/privacy" className="hover:text-white transition-colors underline">
                 Privacy
               </a>
-              <a href="/FAQ" className="hover:text-white transition-colors">
+              <a href="/FAQ" className="hover:text-white transition-colors underline">
                 FAQ
               </a>
             </div>

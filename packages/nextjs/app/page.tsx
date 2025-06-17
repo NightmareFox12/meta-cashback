@@ -29,48 +29,47 @@ const Home: NextPage = () => {
 
   const currentUserRole = "Elite Level";
 
-const roles = [
-  {
-    name: "Explorer Level",
-    range: "$0 - $100 locked",
-    cashback: "1% cashback",
-    icon: Shield,
-    bgColor: "bg-gradient-to-r from-blue-400 to-blue-600",
-    iconBg: "bg-blue-600/20",
-    iconColor: "text-blue-300",
-  },
-  {
-    name: "Pioneer Level",
-    range: "$100 - $500 locked",
-    cashback: "2% cashback",
-    benefit: "+ access to perks",
-    icon: Rocket,
-    bgColor: "bg-gradient-to-r from-green-400 to-green-600",
-    iconBg: "bg-green-600/20",
-    iconColor: "text-green-300",
-  },
-  {
-    name: "Legendary Level",
-    range: "$500 - $1000 locked",
-    cashback: "3% cashback",
-    benefit: "+ exclusive bonuses",
-    icon: Flame,
-    bgColor: "bg-gradient-to-r from-orange-400 to-yellow-600",
-    iconBg: "bg-orange-600/20",
-    iconColor: "text-orange-300",
-  },
-  {
-    name: "Elite Level",
-    range: "$1000+ locked",
-    cashback: "4% cashback",
-    benefit: "+ premium benefits",
-    icon: Crown,
-    bgColor: "bg-gradient-to-r from-purple-400 to-purple-600",
-    iconBg: "bg-purple-600/20",
-    iconColor: "text-purple-300",
-  },
-];
-
+  const roles = [
+    {
+      name: "Explorer Level",
+      range: "$0 - $100 locked",
+      cashback: "1% cashback",
+      icon: Shield,
+      bgColor: "bg-gradient-to-r from-blue-400 to-blue-600",
+      iconBg: "bg-blue-600/20",
+      iconColor: "text-blue-300",
+    },
+    {
+      name: "Pioneer Level",
+      range: "$100 - $500 locked",
+      cashback: "2% cashback",
+      benefit: "+ access to perks",
+      icon: Rocket,
+      bgColor: "bg-gradient-to-r from-green-400 to-green-600",
+      iconBg: "bg-green-600/20",
+      iconColor: "text-green-300",
+    },
+    {
+      name: "Legendary Level",
+      range: "$500 - $1000 locked",
+      cashback: "3% cashback",
+      benefit: "+ exclusive bonuses",
+      icon: Flame,
+      bgColor: "bg-gradient-to-r from-orange-400 to-yellow-600",
+      iconBg: "bg-orange-600/20",
+      iconColor: "text-orange-300",
+    },
+    {
+      name: "Elite Level",
+      range: "$1000+ locked",
+      cashback: "4% cashback",
+      benefit: "+ premium benefits",
+      icon: Crown,
+      bgColor: "bg-gradient-to-r from-purple-400 to-purple-600",
+      iconBg: "bg-purple-600/20",
+      iconColor: "text-purple-300",
+    },
+  ];
 
   return (
     <main className="flex pt-5 mx-4 flex-col gap-4">
@@ -82,8 +81,8 @@ const roles = [
                 <Wallet className="w-8 h-8" />
               </div>
               <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-                    <div className="absolute inset-0 bg-white rounded-full transform translate-x-16 -translate-y-16"></div>
-                  </div>
+                <div className="absolute inset-0 bg-white rounded-full transform translate-x-16 -translate-y-16"></div>
+              </div>
               <CardTitle className="text-2xl font-bold ">My Balance</CardTitle>
             </CardHeader>
 
