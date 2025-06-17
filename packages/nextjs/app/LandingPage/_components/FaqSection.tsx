@@ -1,8 +1,9 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   AlertTriangle,
+  ArrowLeft,
   ChevronDown,
   CreditCard,
   LifeBuoy,
@@ -13,6 +14,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { NextPage } from "next";
+import { Button } from "~~/components/shad/ui/button";
 
 const faqItems = [
   {
@@ -105,14 +107,23 @@ type FAQSectionProps = {
 };
 
 const FAQSection: NextPage<FAQSectionProps> = ({ setShowFaq }) => {
+  //states
   const [openItem, setOpenItem] = useState<number | null>(null);
 
   const toggleItem = (index: number) => {
     setOpenItem(openItem === index ? null : index);
   };
 
+  //effects
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="w-full max-w-3xl mx-auto py-12 px-4">
+      <Button variant={"outline"} onClick={() => setShowFaq(false)}>
+        <ArrowLeft />
+      </Button>
       <h2 className="text-3xl font-bold text-center mb-2">Frequently Asked Questions</h2>
       <p className="text-center mb-8">Everything you need to know about MetaCashback</p>
       <div className="w-full bg-primary rounded-xl shadow-lg p-6">
