@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import DialogStake from "./_components/DialogStake";
 import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { ArrowUpRight, CheckCircle, Coins, InfoIcon, TrendingUp } from "lucide-react";
@@ -8,14 +9,7 @@ import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~~/components/shad/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~~/components/shad/ui/dialog";
+import { Dialog, DialogTrigger } from "~~/components/shad/ui/dialog";
 import { Input } from "~~/components/shad/ui/input";
 import { Label } from "~~/components/shad/ui/label";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
@@ -53,7 +47,7 @@ const StakingScreen = () => {
 
   //functions
   //verify the optmis chain for prevent show modal change token
-  const handleChangeUSDC = async () => {
+  const handleBrigeUSDC = async () => {
     if (chainId === undefined) return;
     console.log(chainId);
     const routes = await changeToken({ chainID: chainId, balance: stakeAmount });
@@ -241,31 +235,25 @@ const StakingScreen = () => {
                       </div>
                     </div> */}
 
-                    {chainId !== undefined && chainId !== 10 && (
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button>Change USDC</Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>Are you absolutely sure?</DialogTitle>
-                            <DialogDescription>
-                              This action cannot be undone. This will permanently delete your account and remove your
-                              data from our servers.
-                            </DialogDescription>
-                          </DialogHeader>
-                        </DialogContent>
-                      </Dialog>
-                    )}
-
-                    <Button
+                    {/* <Button
                       className="w-full"
                       size="lg"
                       onClick={handleChangeUSDC}
                       disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
                     >
                       Stake USDC
-                    </Button>
+                    </Button> */}
+
+                    <Dialog>
+                      <DialogTrigger className="w-full" asChild>
+                        <Button
+                        // disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
+                        >
+                          Stake USDC
+                        </Button>
+                      </DialogTrigger>
+                      <DialogStake handleBrigeUSDC={handleBrigeUSDC} />
+                    </Dialog>
                   </TabsContent>
 
                   {/* <TabsContent value="unstake" className="space-y-4">

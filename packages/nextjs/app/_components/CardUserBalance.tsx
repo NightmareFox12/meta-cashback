@@ -4,6 +4,7 @@ import { NextPage } from "next";
 import { formatUnits } from "viem";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
+import { Skeleton } from "~~/components/shad/ui/skeleton";
 import { formatNumber } from "~~/utils/formatNumber";
 
 type CardUserBalanceProps = {
@@ -21,18 +22,21 @@ const CardUserBalance: NextPage<CardUserBalanceProps> = ({ userBalance }) => {
         </div>
         <CardTitle className="text-2xl font-bold ">My Balance</CardTitle>
       </CardHeader>
-
-      <CardContent className="text-center">
-        <div className=" bg-white/20 backdrop-blur-sm rounded-2xl p-2 border border-white/20 flex items-center justify-center space-x-2">
-          <Image src={"/usdc.png"} alt="usdc icon" width={20} height={20} />
-          <p className="text-4xl font-bold">
-            $
-            {parseFloat(formatUnits(userBalance ?? 0n, 6)) >= 1
-              ? formatNumber(formatUnits(userBalance ?? 0n, 6))
-              : formatUnits(userBalance ?? 0n, 6)}
-          </p>
-        </div>
-      </CardContent>
+      {userBalance === undefined ? (
+        <Skeleton className="w-full h-8" />
+      ) : (
+        <CardContent className="text-center">
+          <div className=" bg-white/20 backdrop-blur-sm rounded-2xl p-2 border border-white/20 flex items-center justify-center space-x-2">
+            <Image src={"/usdc.png"} alt="usdc icon" width={20} height={20} />
+            <p className="text-4xl font-bold">
+              $
+              {parseFloat(formatUnits(userBalance ?? 0n, 6)) >= 1
+                ? formatNumber(formatUnits(userBalance ?? 0n, 6))
+                : formatUnits(userBalance ?? 0n, 6)}
+            </p>
+          </div>
+        </CardContent>
+      )}
       <CardFooter className="pt-0">
         <div className="w-full bg-white/20 backdrop-blur-sm rounded-xl p-2 border border-white/20">
           <div className="flex items-center justify-between">

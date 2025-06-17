@@ -27,7 +27,7 @@ const Home: NextPage = () => {
         user: address,
       });
 
-      setUserBalance(res?.amount ?? 0n);
+      setUserBalance(res?.amount);
       console.log(userBalance);
     } catch (err) {
       console.log(err);
