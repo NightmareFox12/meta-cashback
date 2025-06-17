@@ -5,10 +5,10 @@ import Image from "next/image";
 import { SwitchTheme } from "../../components/SwitchTheme";
 import { RainbowKitCustomConnectButton } from "../../components/scaffold-eth";
 import FAQSection from "./_components/FaqSection";
+import PrivacySection from "./_components/PrivacySection";
 import TermsSection from "./_components/TermsSection";
 import { ArrowRight, Crown, DollarSign, RefreshCw, Rocket, Shield, TrendingUp, Vault, Zap } from "lucide-react";
 import { NextPage } from "next";
-import PrivacySection from "~~/app/LandingPage/_components/PrivacySection";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent } from "~~/components/shad/ui/card";
 
@@ -88,11 +88,11 @@ const LandingPage: NextPage = () => {
     <>
       <div className="bg-base-200 min-h-screen font-sans">
         {showConditions ? (
-          <TermsSection />
+          <TermsSection setShowConditions={setShowConditions} />
         ) : showPrivacy ? (
-          <PrivacySection />
+          <PrivacySection setShowPrivacy={setShowPrivacy} />
         ) : showFaq ? (
-          <FAQSection />
+          <FAQSection setShowFaq={setShowFaq} />
         ) : (
           <div className="relative z-10">
             {/* Header */}

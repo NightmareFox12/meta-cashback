@@ -1,25 +1,26 @@
 "use client";
 
-import { useEffect } from "react";
-import { ScrollText } from "lucide-react";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { ArrowLeft, ScrollText } from "lucide-react";
+import { NextPage } from "next";
+import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 
-export default function TermsSection() {
+type TermsSectionProps = {
+  setShowConditions: Dispatch<SetStateAction<boolean>>;
+};
+
+const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
+  //effects
   useEffect(() => {
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      event.preventDefault();
-      //aqui el set state
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
+      <Button variant={"outline"} onClick={() => setShowConditions(false)}>
+        <ArrowLeft />
+      </Button>
       <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto w-16 h-16 bg-secondary/40 rounded-full flex items-center justify-center">
@@ -66,7 +67,7 @@ export default function TermsSection() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm">
-            The cashback percentage depends on the user's level of participation in DeFi, as shown in the following
+            The cashback percentage depends on the user&apos;s level of participation in DeFi, as shown in the following
             table:
           </p>
           <div className="overflow-x-auto">
@@ -107,7 +108,7 @@ export default function TermsSection() {
               </tbody>
             </table>
           </div>
-          <p className="text-sm">Cashback will be automatically transferred to the user's MetaMask wallet.</p>
+          <p className="text-sm">Cashback will be automatically transferred to the user&apos;s MetaMask wallet.</p>
         </CardContent>
       </Card>
 
@@ -194,4 +195,6 @@ export default function TermsSection() {
       </Card>
     </div>
   );
-}
+};
+
+export default TermsSection;

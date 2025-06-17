@@ -1,11 +1,26 @@
 "use client";
 
-import { ScrollText } from "lucide-react";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { ArrowLeft, ScrollText } from "lucide-react";
+import { NextPage } from "next";
+import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 
-export default function PrivacySection() {
+type PrivacySectionProps = {
+  setShowPrivacy: Dispatch<SetStateAction<boolean>>;
+};
+
+const PrivacySection: NextPage<PrivacySectionProps> = ({ setShowPrivacy }) => {
+  //effects
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
+      <Button variant={"outline"} onClick={() => setShowPrivacy(false)}>
+        <ArrowLeft />
+      </Button>
       <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto w-16 h-16 bg-secondary/40 rounded-full flex items-center justify-center">
@@ -82,4 +97,6 @@ export default function PrivacySection() {
       </Card>
     </div>
   );
-}
+};
+
+export default PrivacySection;
