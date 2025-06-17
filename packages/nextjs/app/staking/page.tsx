@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import DialogStake from "./_components/DialogStake";
+import { Route } from "@lifi/sdk";
 import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { ArrowUpRight, CheckCircle, Coins, InfoIcon, TrendingUp } from "lucide-react";
@@ -24,6 +25,7 @@ const StakingScreen = () => {
   //states
   const [stakeAmount, setStakeAmount] = useState<string>("");
   const [userBalance, setUserBalance] = useState<bigint | undefined>(undefined);
+  const [loadRoutes, setLoadRoutes] = useState(false);
   // const [unstakeAmount, setUnstakeAmount] = useState("");
 
   // Mock data
@@ -49,10 +51,16 @@ const StakingScreen = () => {
   //verify the optmis chain for prevent show modal change token
   const handleBrigeUSDC = async () => {
     if (chainId === undefined) return;
-    console.log(chainId);
-    const routes = await changeToken({ chainID: chainId, balance: stakeAmount });
+    try {
+      setLoadRoutes(true);
+      const routes: Route[] = await changeToken({ chainID: chainId, balance: stakeAmount });
 
-    console.log(routes);
+      return routes;
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoadRoutes(false);
+    }
   };
 
   const getUserBalanceCallBack = useCallback(async () => {
@@ -252,7 +260,7 @@ const StakingScreen = () => {
                           Stake USDC
                         </Button>
                       </DialogTrigger>
-                      <DialogStake handleBrigeUSDC={handleBrigeUSDC} />
+                      <DialogStake chainID={chainId} loadRoutes={loadRoutes} handleBrigeUSDC={handleBrigeUSDC} />
                     </Dialog>
                   </TabsContent>
 
