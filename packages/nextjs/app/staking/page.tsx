@@ -1,27 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { ArrowDownLeft, ArrowUpRight, CheckCircle, Clock, Coins, Info, InfoIcon, TrendingUp } from "lucide-react";
+import { ArrowUpRight, CheckCircle, Coins, InfoIcon, TrendingUp } from "lucide-react";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
-// import { Badge } from "~~/components/shad/ui/badge";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~~/components/shad/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~~/components/shad/ui/dialog";
 import { Input } from "~~/components/shad/ui/input";
 import { Label } from "~~/components/shad/ui/label";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
-// import { Progress } from "~~/components/shad/ui/progress";
 import { TabsContent } from "~~/components/shad/ui/tabs";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { changeToken, getUserBalance } from "~~/lib/lifi";
 import { formatNumber } from "~~/utils/formatNumber";
 
 const StakingScreen = () => {
-  const { address } = useAccount();
+  const { address, chainId } = useAccount();
 
   //states
-  const [stakeAmount, setStakeAmount] = useState("");
+  const [stakeAmount, setStakeAmount] = useState<string>("");
+  const [userBalance, setUserBalance] = useState<bigint | undefined>(undefined);
   // const [unstakeAmount, setUnstakeAmount] = useState("");
 
   // Mock data
@@ -38,20 +46,41 @@ const StakingScreen = () => {
   //   args: [address],
   // });
 
-  const { data: userBalance } = useScaffoldReadContract({
-    contractName: "USDCFake",
-    functionName: "balanceOf",
-    args: [address],
-  });
-
   const { data: minAmount, isLoading: minAmountLoading } = useScaffoldReadContract({
     contractName: "MetaCashback",
     functionName: "minStakingAmount",
   });
 
-  const handleMaxStake = () => {
-    setStakeAmount(userBalance?.toString() ?? "");
+  //functions
+  //verify the optmis chain for prevent show modal change token
+  const handleChangeUSDC = async () => {
+    if (chainId === undefined) return;
+    console.log(chainId);
+    const routes = await changeToken({ chainID: chainId, balance: stakeAmount });
+
+    console.log(routes);
   };
+
+  const getUserBalanceCallBack = useCallback(async () => {
+    if (chainId === undefined || address === undefined) return;
+
+    try {
+      const res = await getUserBalance({
+        chainID: chainId,
+        user: address,
+      });
+
+      setUserBalance(res?.amount ?? 0n);
+      console.log(userBalance);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [address, chainId, userBalance]);
+
+  //effects
+  useEffect(() => {
+    getUserBalanceCallBack();
+  }, [getUserBalanceCallBack]);
 
   return (
     <main className="min-h-screen p-4">
@@ -175,11 +204,17 @@ const StakingScreen = () => {
                           }}
                           className="flex-1"
                         />
-                        <Button variant="outline" onClick={handleMaxStake}>
+                        <Button variant="outline" onClick={() => setStakeAmount(userBalance?.toString() ?? "")}>
                           Max
                         </Button>
                       </div>
-                      <p className="text-sm">Available: {formatNumber(formatUnits(userBalance ?? 0n, 6))} USDC</p>
+                      <p className="text-sm">
+                        Available:{" "}
+                        {parseFloat(formatUnits(userBalance ?? 0n, 6)) >= 1
+                          ? formatNumber(formatUnits(userBalance ?? 0n, 6))
+                          : formatUnits(userBalance ?? 0n, 6)}{" "}
+                        USDC
+                      </p>
                     </div>
                     {/* 
                     <div className="bg-blue-50 p-4 rounded-lg space-y-2">
@@ -206,7 +241,29 @@ const StakingScreen = () => {
                       </div>
                     </div> */}
 
-                    <Button className="w-full" size="lg" disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}>
+                    {chainId !== undefined && chainId !== 10 && (
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button>Change USDC</Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Are you absolutely sure?</DialogTitle>
+                            <DialogDescription>
+                              This action cannot be undone. This will permanently delete your account and remove your
+                              data from our servers.
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
+                    )}
+
+                    <Button
+                      className="w-full"
+                      size="lg"
+                      onClick={handleChangeUSDC}
+                      disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
+                    >
                       Stake USDC
                     </Button>
                   </TabsContent>

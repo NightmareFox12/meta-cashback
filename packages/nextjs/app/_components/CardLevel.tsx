@@ -125,13 +125,15 @@ const CardLevel = () => {
     <section className="flex justify-center items-center flex-1 mt-4 px-3">
       {isLoading ? (
         <Skeleton className="w-full h-full" />
-      ) : (
+      ) : currentLevel !== undefined ? (
         <>
           {currentLevel === explorerLevel && <CardRole key={roles[0].name} role={roles[0]} />}
           {currentLevel === pionerLevel && <CardRole key={roles[1].name} role={roles[1]} />}
           {currentLevel === legendaryLevel && <CardRole key={roles[2].name} role={roles[2]} />}
           {currentLevel === eliteLevel && <CardRole key={roles[3].name} role={roles[3]} />}
         </>
+      ) : (
+        <Skeleton className="w-full h-full" />
       )}
     </section>
   );
