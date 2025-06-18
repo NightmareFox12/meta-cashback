@@ -1,16 +1,22 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Image from "next/image";
-import { SwitchTheme } from "../../components/SwitchTheme";
-import { RainbowKitCustomConnectButton } from "../../components/scaffold-eth";
-import FAQSection from "./_components/FaqSection";
-import PrivacySection from "./_components/PrivacySection";
-import TermsSection from "./_components/TermsSection";
-import { ArrowRight, Crown, DollarSign, RefreshCw, Rocket, Shield, TrendingUp, Vault, Zap } from "lucide-react";
-import { NextPage } from "next";
-import { Button } from "~~/components/shad/ui/button";
-import { Card, CardContent } from "~~/components/shad/ui/card";
+import { useState } from "react"
+import Image from "next/image"
+import {
+  ArrowRight,
+  Crown,
+  DollarSign,
+  RefreshCw,
+  Rocket,
+  Shield,
+  TrendingUp,
+  Vault,
+  Zap,
+  Sparkles,
+} from "lucide-react"
+import type { NextPage } from "next"
+import { Button } from "~~/components/shad/ui/button"
+import { Card, CardContent } from "~~/components/shad/ui/card"
 
 const tiers = [
   {
@@ -21,6 +27,7 @@ const tiers = [
     bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
     borderColor: "border-green-200",
     description: "Start your journey",
+    bubbleColor: "from-green-200/20 to-emerald-300/30",
   },
   {
     name: "Pioneer",
@@ -30,6 +37,7 @@ const tiers = [
     bgColor: "bg-gradient-to-br from-blue-50 to-cyan-50",
     borderColor: "border-blue-200",
     description: "Cashback + perks",
+    bubbleColor: "from-blue-200/20 to-cyan-300/30",
   },
   {
     name: "Legendary",
@@ -39,6 +47,7 @@ const tiers = [
     bgColor: "bg-gradient-to-br from-orange-50 to-red-50",
     borderColor: "border-orange-200",
     description: "Exclusive bonuses",
+    bubbleColor: "from-orange-200/20 to-red-300/30",
   },
   {
     name: "Elite",
@@ -48,8 +57,9 @@ const tiers = [
     bgColor: "bg-gradient-to-br from-purple-50 to-pink-50",
     borderColor: "border-purple-200",
     description: "Premium advantages",
+    bubbleColor: "from-purple-200/20 to-pink-300/30",
   },
-];
+]
 
 const features = [
   {
@@ -57,42 +67,61 @@ const features = [
     title: "Instant Withdrawal",
     description: "Get your USDC cashback instantly",
     color: "text-green-500",
+    bubbleColor: "from-green-200/15 to-emerald-300/25",
   },
   {
     icon: RefreshCw,
     title: "Auto Conversion",
     description: "Seamless conversion with LI.FI",
     color: "text-blue-500",
+    bubbleColor: "from-blue-200/15 to-cyan-300/25",
   },
   {
     icon: TrendingUp,
     title: "DeFi Strategies",
     description: "Reinvest in high-yield protocols",
     color: "text-purple-500",
+    bubbleColor: "from-purple-200/15 to-violet-300/25",
   },
   {
     icon: Vault,
     title: "Savings Mode",
     description: "Auto-deposit to yield vaults",
     color: "text-orange-500",
+    bubbleColor: "from-orange-200/15 to-amber-300/25",
   },
-];
+]
 
 const LandingPage: NextPage = () => {
-  //states
-  const [showConditions, setShowConditions] = useState<boolean>(false);
-  const [showPrivacy, setShowPrivacy] = useState<boolean>(false);
-  const [showFaq, setShowFaq] = useState<boolean>(false);
+  const [showConditions, setShowConditions] = useState<boolean>(false)
+  const [showPrivacy, setShowPrivacy] = useState<boolean>(false)
+  const [showFaq, setShowFaq] = useState<boolean>(false)
 
   return (
     <>
-      <div className="bg-base-200 min-h-screen font-sans">
+      <div className="bg-base-200 min-h-screen font-sans relative overflow-hidden">
+        {/* Global Sparkle Decorations */}
+        <div className="fixed inset-0 pointer-events-none z-10">
+          {[...Array(15)].map((_, i) => (
+            <Sparkles
+              key={i}
+              className="absolute text-yellow-400/40 animate-twinkle"
+              size={10}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+              }}
+            />
+          ))}
+        </div>
+
         {showConditions ? (
-          <TermsSection setShowConditions={setShowConditions} />
+          <div>Terms Section Placeholder</div>
         ) : showPrivacy ? (
-          <PrivacySection setShowPrivacy={setShowPrivacy} />
+          <div>Privacy Section Placeholder</div>
         ) : showFaq ? (
-          <FAQSection setShowFaq={setShowFaq} />
+          <div>FAQ Section Placeholder</div>
         ) : (
           <div className="relative z-10">
             {/* Header */}
@@ -100,31 +129,59 @@ const LandingPage: NextPage = () => {
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
                   <div className="flex relative w-10 h-10">
-                    <Image alt="Meta-cashback-logo" src="/favicon.png" className="cursor-pointer" fill />
+                  <Image alt="Meta-cashback-logo" src="/favicon.png" className="cursor-pointer" fill />
                   </div>
                   <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                     MetaCashback
                   </span>
                 </div>
-                <RainbowKitCustomConnectButton />
+                <Button className="bg-primary hover:bg-primary/80">Connect Wallet</Button>
               </div>
             </header>
 
             {/* Hero Section */}
-            <section className="container mx-auto px-6 py-20 text-center">
-              <div className="max-w-4xl mx-auto">
-                <Image alt="Meta-cashback-logo" src="/favicon.png" className="mx-auto mb-6" width={100} height={100} />
-                <h1 className="text-6xl md:text-7xl font-bold mb-6 text-base-content">Spend. Lock. Earn.</h1>
-                <p className="text-xl md:text-2xl mb-8 leading-relaxed text-base-content">
+            <section className="container mx-auto px-6 py-20 text-center relative">
+              {/* Hero floating elements */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(4)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute rounded-full bg-gradient-to-r from-yellow-400/10 to-orange-400/20 animate-float"
+                    style={{
+                      left: `${10 + Math.random() * 80}%`,
+                      top: `${20 + Math.random() * 60}%`,
+                      width: `${Math.random() * 50 + 20}px`,
+                      height: `${Math.random() * 50 + 20}px`,
+                      animationDelay: `${Math.random() * 3}s`,
+                      animationDuration: `${Math.random() * 8 + 8}s`,
+                    }}
+                  />
+                ))}
+              </div>
+
+              <div className="max-w-4xl mx-auto relative z-10">
+                <div className="relative inline-block mb-6">
+                  <Image
+                    alt="Meta-cashback-logo"
+                    src="/favicon.png"
+                    className="mx-auto animate-pulse"
+                    width={100}
+                    height={100}
+                  />
+                  <div className="absolute -top-2 -right-2 animate-bounce">
+                    <Sparkles className="w-6 h-6 text-yellow-400" />
+                  </div>
+                </div>
+                <h1 className="text-6xl md:text-7xl font-bold mb-6 text-base-content animate-fade-in-up">
+                  Spend. Lock. Earn.
+                </h1>
+                <p className="text-xl md:text-2xl mb-8 leading-relaxed text-base-content animate-fade-in-up animation-delay-200">
                   Get cashback in <span className="text-blue-600 font-semibold">USDC</span> with every purchase using{" "}
                   <span className="text-orange-500 font-semibold">MetaMask Card</span>
                 </p>
-                <p className="text-lg mb-12">Multiply your rewards through staking and DeFi strategies</p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Button className="bg-primary hover:bg-primary/70 px-6 py-3 shadow-lg">
-                    Learn More <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </div>
+                <p className="text-lg mb-12 animate-fade-in-up animation-delay-400">
+                  Multiply your rewards through staking and DeFi strategies
+                </p>
               </div>
             </section>
 
@@ -134,29 +191,51 @@ const LandingPage: NextPage = () => {
                 <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
                   Boost Your Cashback
                 </h2>
-
                 <p className="text-xl">Choose your tier and maximize your rewards</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                {tiers.map(tier => {
-                  const Icon = tier.icon;
+                {tiers.map((tier) => {
+                  const Icon = tier.icon
                   return (
                     <Card
                       key={tier.name}
-                      className={`${tier.bgColor} ${tier.borderColor} border-2 hover:border-opacity-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl cursor-pointer backdrop-blur-sm bg-opacity-90`}
+                      className={`${tier.bgColor} ${tier.borderColor} border-2 hover:border-opacity-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl cursor-pointer backdrop-blur-sm bg-opacity-90 relative overflow-hidden group`}
                     >
-                      <CardContent className="p-6 text-center">
+                      {/* Floating Bubbles inside tier cards */}
+                      <div className="absolute inset-0 pointer-events-none z-5">
+                        {[...Array(2)].map((_, i) => (
+                          <div
+                            key={i}
+                            className={`absolute rounded-full bg-gradient-to-r ${tier.bubbleColor} animate-float`}
+                            style={{
+                              left: `${20 + Math.random() * 60}%`,
+                              top: `${20 + Math.random() * 60}%`,
+                              width: `${Math.random() * 25 + 10}px`,
+                              height: `${Math.random() * 25 + 10}px`,
+                              animationDelay: `${Math.random() * 2}s`,
+                              animationDuration: `${Math.random() * 6 + 6}s`,
+                            }}
+                          />
+                        ))}
+                      </div>
+
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+
+                      <CardContent className="p-6 text-center relative z-10">
                         <div
-                          className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${tier.color} flex items-center justify-center shadow-lg`}
+                          className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${tier.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}
                         >
-                          <Icon className="w-8 h-8" />
+                          <Icon className="w-8 h-8 text-white" />
                         </div>
                         <h3 className="text-2xl font-bold">{tier.name}</h3>
-                        <div className="text-4xl font-bold mb-2">{tier.cashback}</div>
+                        <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-white">
+                          {tier.cashback}
+                        </div>
                         <p className="text-sm mb-4">{tier.description}</p>
                       </CardContent>
                     </Card>
-                  );
+                  )
                 })}
               </div>
             </section>
@@ -172,26 +251,64 @@ const LandingPage: NextPage = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
                 {features.map((feature, index) => {
-                  const Icon = feature.icon;
+                  const Icon = feature.icon
                   return (
                     <Card
                       key={index}
-                      className="bg-base-100 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
+                      className="bg-base-100 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 relative overflow-hidden group"
                     >
-                      <CardContent className="p-6 text-center">
-                        <Icon className={`w-12 h-12 mx-auto mb-4 ${feature.color}`} />
+                      {/* Floating Bubbles inside feature cards */}
+                      <div className="absolute inset-0 pointer-events-none z-5">
+                        {[...Array(2)].map((_, i) => (
+                          <div
+                            key={i}
+                            className={`absolute rounded-full bg-gradient-to-r ${feature.bubbleColor} animate-float`}
+                            style={{
+                              left: `${20 + Math.random() * 60}%`,
+                              top: `${30 + Math.random() * 40}%`,
+                              width: `${Math.random() * 20 + 8}px`,
+                              height: `${Math.random() * 20 + 8}px`,
+                              animationDelay: `${Math.random() * 2}s`,
+                              animationDuration: `${Math.random() * 5 + 6}s`,
+                            }}
+                          />
+                        ))}
+                      </div>
+
+                      <CardContent className="p-6 text-center relative z-10">
+                        <Icon
+                          className={`w-12 h-12 mx-auto mb-4 ${feature.color} group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}
+                        />
                         <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                        <p className=" text-sm">{feature.description}</p>
+                        <p className="text-sm">{feature.description}</p>
                       </CardContent>
                     </Card>
-                  );
+                  )
                 })}
               </div>
             </section>
 
             {/* CTA Section */}
-            <section className="container mx-auto px-6 py-6 text-center">
-              <div className="max-w-3xl mx-auto">
+            <section className="container mx-auto px-6 py-6 text-center relative">
+              {/* CTA floating elements */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(3)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute rounded-full bg-gradient-to-r from-purple-400/10 to-pink-400/20 animate-float"
+                    style={{
+                      left: `${20 + Math.random() * 60}%`,
+                      top: `${20 + Math.random() * 60}%`,
+                      width: `${Math.random() * 40 + 15}px`,
+                      height: `${Math.random() * 40 + 15}px`,
+                      animationDelay: `${Math.random() * 3}s`,
+                      animationDuration: `${Math.random() * 7 + 8}s`,
+                    }}
+                  />
+                ))}
+              </div>
+
+              <div className="max-w-3xl mx-auto relative z-10">
                 <h2 className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
                   The future of cashback is in your hands
                 </h2>
@@ -201,15 +318,14 @@ const LandingPage: NextPage = () => {
                 </p>
 
                 <div className="space-y-4">
-                  <RainbowKitCustomConnectButton />
+                  <Button className="bg-primary hover:bg-primary/80 hover:scale-105 transition-all duration-300 shadow-lg">
+                    Connect Wallet
+                  </Button>
                   <p className="text-sm text-base-content/50">Connect your MetaMask wallet to get started</p>
                 </div>
               </div>
             </section>
 
-            <div className="fixed z-10 bottom-0 p-4 flex w-full justify-end">
-              <SwitchTheme />
-            </div>
             {/* Footer */}
             <footer className="container mx-auto px-6 py-12 border-t border-white/10">
               <div className="flex flex-col md:flex-row justify-between items-center">
@@ -237,15 +353,55 @@ const LandingPage: NextPage = () => {
                 </div>
               </div>
 
-              <div className="text-center mt-8 text-gray-500 text-sm">
-                © 2025 MetaCashback. All rights reserved. 🚀
-              </div>
+              <div className="text-center mt-8 text-gray-500 text-sm">© 2025 MetaCashback. All rights reserved. 🚀</div>
             </footer>
           </div>
         )}
+
+        <style jsx>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-15px) rotate(3deg); }
+            66% { transform: translateY(-8px) rotate(-3deg); }
+          }
+          
+          @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+          }
+          
+          @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
+          
+          .animate-twinkle {
+            animation: twinkle 2s ease-in-out infinite;
+          }
+          
+          .animate-fade-in-up {
+            animation: fade-in-up 0.8s ease-out forwards;
+          }
+          
+          .animation-delay-200 {
+            animation-delay: 0.2s;
+          }
+          
+          .animation-delay-400 {
+            animation-delay: 0.4s;
+          }
+          
+          .animation-delay-600 {
+            animation-delay: 0.6s;
+          }
+        `}</style>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default LandingPage;
+export default LandingPage
