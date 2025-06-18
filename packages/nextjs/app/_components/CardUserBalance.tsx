@@ -12,7 +12,7 @@ type CardUserBalanceProps = {
 };
 const CardUserBalance: NextPage<CardUserBalanceProps> = ({ userBalance }) => {
   return (
-    <Card className="w-full bg-gradient-to-br from-blue-800 to-blue-400 text-white h-full relative overflow-hidden">
+    <Card className="w-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white h-full relative overflow-hidden">
       <CardHeader className="text-center space-y-2">
         <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
           <Wallet className="w-8 h-8" />
