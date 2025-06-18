@@ -43,7 +43,7 @@ export default function Component() {
                 ))}
             </div>
 
-            <Card className="bg-gradient-to-br from-blue-700 via-indigo-600 to-cyan-400 text-white shadow-2xl relative overflow-hidden group hover:shadow-3xl transition-all duration-500">
+            <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white shadow-2xl relative overflow-hidden group hover:shadow-3xl transition-all duration-500">
                 {/* Animated Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
@@ -93,7 +93,7 @@ export default function Component() {
                 </div>
             </Card>
 
-            <Card className="bg-gradient-to-br from-blue-700 via-indigo-600 to-cyan-400 text-white shadow-2xl relative overflow-hidden">
+            <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white shadow-2xl relative overflow-hidden">
                 <div className="absolute top-4 right-4 animate-spin-slow">
                     <Star className="w-6 h-6 text-yellow-400/60" />
                 </div>
@@ -175,7 +175,7 @@ export default function Component() {
                 </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-blue-700 via-indigo-600 to-cyan-400 shadow-2xl text-white relative overflow-hidden">
+            <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 shadow-2xl text-white relative overflow-hidden">
                 {/* Floating decorative elements */}
                 <div className="absolute top-2 left-4 animate-float">
                     <div className="w-3 h-3 bg-yellow-400/40 rounded-full"></div>
@@ -275,7 +275,7 @@ export default function Component() {
             </Card>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <Card className="bg-gradient-to-br from-blue-700 via-indigo-600 to-cyan-400 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 group">
+                <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 group">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -328,7 +328,7 @@ export default function Component() {
                     </CardContent>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-blue-700 via-indigo-600 to-cyan-400 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 group">
+                <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 group">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -395,7 +395,7 @@ export default function Component() {
                     </CardContent>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-blue-700 via-indigo-600 to-cyan-400 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 group">
+                <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 group">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
