@@ -126,12 +126,12 @@ const FAQSection: NextPage<FAQSectionProps> = ({ setShowFaq }) => {
       </Button>
       <h2 className="text-3xl font-bold text-center mb-2">Frequently Asked Questions</h2>
       <p className="text-center mb-8">Everything you need to know about MetaCashback</p>
-      <div className="w-full bg-primary rounded-xl shadow-lg p-6">
+      <div className="w-full bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white rounded-xl shadow-lg p-6">
         {faqItems.map((item, index) => (
           <div
             key={index}
             className={`mb-4 border-b rounded-lg overflow-hidden ${
-              openItem === index ? "bg-secondary shadow-md" : "hover:bg-white/50 transition-colors"
+              openItem === index ? "bg-gradient-to-br from-indigo-900 via-purple-700 to-blue-400 shadow-md" : "hover:bg-white/50 transition-colors"
             }`}
           >
             <button
