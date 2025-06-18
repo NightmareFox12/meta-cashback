@@ -51,7 +51,7 @@ const CardUserBalance: NextPage<CardUserBalanceProps> = ({ userBalance }) => {
         </div>
       </CardFooter>
       <div className="px-6 mx-auto">
-        <Button className="bg-secondary hover:bg-secondary/50">Withdraw Earnings</Button>
+        <Button className="bg-warning hover:bg-warning/20">Withdraw Earnings</Button>
       </div>
     </Card>
   );
