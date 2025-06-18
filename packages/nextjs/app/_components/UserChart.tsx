@@ -55,7 +55,7 @@ export function UserChart() {
   return (
     <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-400 max-w-lg h-full">
       <CardHeader>
-        <CardTitle>Earning Chart</CardTitle>
+        <CardTitle className="text-white">Earning Chart</CardTitle>
         <CardDescription className="text-white">Last Week</CardDescription>
       </CardHeader>
       <CardContent>
@@ -67,7 +67,7 @@ export function UserChart() {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tick={{ fill: "#000", fontSize: 14, fontWeight: "bold" }} // Asegura que el texto sea visible y más claro
+              tick={{ fontSize: 14, fontWeight: "bold" }} 
               tickFormatter={value => value.slice(0, 3)}
             />
 
@@ -82,10 +82,10 @@ export function UserChart() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-center gap-2 text-sm">
-        <div className="flex gap-2 leading-none font-medium">
+        <div className="flex gap-2 font-medium text-white">
           Trending up by 5.2% this week <TrendingUp className="h-4 w-4" />
         </div>
-        <div className="text-white-foreground leading-none">Showing total Earning last week</div>
+        <div className="text-white">Showing total Earning last week</div>
       </CardFooter>
     </Card>
   );
