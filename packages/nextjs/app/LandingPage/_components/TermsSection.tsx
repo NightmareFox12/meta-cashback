@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { ArrowLeft, ScrollText } from "lucide-react";
+import { ArrowLeft, ScrollText, Sparkles } from "lucide-react";
 import { NextPage } from "next";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
@@ -21,7 +21,7 @@ const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
       <Button variant={"outline"} onClick={() => setShowConditions(false)}>
         <ArrowLeft />
       </Button>
-      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
+      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto w-16 h-16 bg-secondary/40 rounded-full flex items-center justify-center">
             <ScrollText className="w-8 h-8 text-yellow-400" />
@@ -30,7 +30,7 @@ const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
         </CardHeader>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
+      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">1. General Information</CardTitle>
         </CardHeader>
@@ -47,7 +47,7 @@ const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
+      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">2. Eligibility</CardTitle>
         </CardHeader>
@@ -61,7 +61,7 @@ const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
+      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">3. Cashback and Reward Levels</CardTitle>
         </CardHeader>
@@ -112,7 +112,7 @@ const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
+      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">4. Bonus for Locked Funds</CardTitle>
         </CardHeader>
@@ -134,7 +134,7 @@ const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
+      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">5. Cashback Withdrawal and Usage Options</CardTitle>
         </CardHeader>
@@ -159,7 +159,7 @@ const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
+      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">6. User Responsibilities</CardTitle>
         </CardHeader>
@@ -171,7 +171,7 @@ const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
+      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">7. Program Modifications and Termination</CardTitle>
         </CardHeader>
@@ -183,7 +183,7 @@ const TermsSection: NextPage<TermsSectionProps> = ({ setShowConditions }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-800 to-blue-400 text-white">
+      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">8. Contact and Support</CardTitle>
         </CardHeader>
