@@ -5,7 +5,7 @@ import CardLevel from "./_components/CardLevel";
 import CardUserBalance from "./_components/CardUserBalance";
 import PerformanceCalculator from "./_components/PerformanceCalculator";
 import { UserChart } from "./_components/UserChart";
-import { TrendingUp, Sparkles } from "lucide-react";
+import { Sparkles, TrendingUp } from "lucide-react";
 import { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
@@ -41,21 +41,21 @@ const Home: NextPage = () => {
 
   return (
     <main className="flex pt-5 mx-4 flex-col gap-4">
-                  {/* Sparkle Decorations */}
-                  <div className="fixed inset-0 pointer-events-none z-10">
-                      {[...Array(20)].map((_, i) => (
-                          <Sparkles
-                              key={i}
-                              className="absolute text-yellow-400/60 animate-twinkle"
-                              size={12}
-                              style={{
-                                  left: `${Math.random() * 100}%`,
-                                  top: `${Math.random() * 100}%`,
-                                  animationDelay: `${Math.random() * 3}s`,
-                              }}
-                          />
-                      ))}
-                  </div>
+      {/* Sparkle Decorations */}
+      <div className="fixed inset-0 pointer-events-none z-10">
+        {[...Array(20)].map((_, i) => (
+          <Sparkles
+            key={i}
+            className="absolute text-yellow-400/60 animate-twinkle"
+            size={12}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+            }}
+          />
+        ))}
+      </div>
       <div className="flex flex-row gap-4">
         <section className="flex justify-center items-center flex-1 mt-4 px-3">
           {/* Card balance  */}

@@ -1,16 +1,16 @@
 "use client";
 
-import { NextPage } from "next";
 import { useState } from "react";
+import Image from "next/image";
 import { SwitchTheme } from "../../components/SwitchTheme";
 import { RainbowKitCustomConnectButton } from "../../components/scaffold-eth";
-import { Button } from "~~/components/shad/ui/button";
-import { Card, CardContent } from "~~/components/shad/ui/card";
-import { Crown, DollarSign, RefreshCw, Rocket, Shield, TrendingUp, Vault, Sparkles, Zap } from "lucide-react";
 import FAQSection from "./_components/FaqSection";
 import PrivacySection from "./_components/PrivacySection";
 import TermsSection from "./_components/TermsSection";
-import Image from "next/image";
+import { Crown, DollarSign, RefreshCw, Rocket, Shield, Sparkles, TrendingUp, Vault, Zap } from "lucide-react";
+import { NextPage } from "next";
+import { Button } from "~~/components/shad/ui/button";
+import { Card, CardContent } from "~~/components/shad/ui/card";
 
 const tiers = [
   {
@@ -53,7 +53,7 @@ const tiers = [
     description: "Premium advantages",
     bubbleColor: "from-purple-200/20 to-pink-300/30",
   },
-]
+];
 
 const features = [
   {
@@ -84,7 +84,7 @@ const features = [
     color: "text-orange-500",
     bubbleColor: "from-orange-200/15 to-amber-300/25",
   },
-]
+];
 
 const LandingPage: NextPage = () => {
   //states
@@ -210,8 +210,8 @@ const LandingPage: NextPage = () => {
                 <p className="text-xl">Choose your tier and maximize your rewards</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                {tiers.map((tier) => {
-                  const Icon = tier.icon
+                {tiers.map(tier => {
+                  const Icon = tier.icon;
                   return (
                     <Card
                       key={tier.name}
@@ -254,7 +254,7 @@ const LandingPage: NextPage = () => {
                         <p className="text-sm mb-4">{tier.description}</p>
                       </CardContent>
                     </Card>
-                  )
+                  );
                 })}
               </div>
             </section>
@@ -270,7 +270,7 @@ const LandingPage: NextPage = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
                 {features.map((feature, index) => {
-                  const Icon = feature.icon
+                  const Icon = feature.icon;
                   return (
                     <Card
                       key={index}
@@ -305,7 +305,7 @@ const LandingPage: NextPage = () => {
                         <p className="text-sm">{feature.description}</p>
                       </CardContent>
                     </Card>
-                  )
+                  );
                 })}
               </div>
             </section>
@@ -386,41 +386,61 @@ const LandingPage: NextPage = () => {
         )}
         <style jsx>{`
           @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-15px) rotate(3deg); }
-            66% { transform: translateY(-8px) rotate(-3deg); }
+            0%,
+            100% {
+              transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+              transform: translateY(-15px) rotate(3deg);
+            }
+            66% {
+              transform: translateY(-8px) rotate(-3deg);
+            }
           }
-          
+
           @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+            0%,
+            100% {
+              opacity: 0.3;
+              transform: scale(1);
+            }
+            50% {
+              opacity: 1;
+              transform: scale(1.2);
+            }
           }
-          
+
           @keyframes fade-in-up {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          
+
           .animate-float {
             animation: float 6s ease-in-out infinite;
           }
-          
+
           .animate-twinkle {
             animation: twinkle 2s ease-in-out infinite;
           }
-          
+
           .animate-fade-in-up {
             animation: fade-in-up 0.8s ease-out forwards;
           }
-          
+
           .animation-delay-200 {
             animation-delay: 0.2s;
           }
-          
+
           .animation-delay-400 {
             animation-delay: 0.4s;
           }
-          
+
           .animation-delay-600 {
             animation-delay: 0.6s;
           }
