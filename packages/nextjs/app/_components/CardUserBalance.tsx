@@ -23,7 +23,9 @@ const CardUserBalance: NextPage<CardUserBalanceProps> = ({ userBalance }) => {
         <CardTitle className="text-2xl font-bold ">My Balance</CardTitle>
       </CardHeader>
       {userBalance === undefined ? (
-        <Skeleton className="w-full h-8" />
+        <div className="w-full mx-auto px-5">
+          <Skeleton className="w-full h-7" />
+        </div>
       ) : (
         <CardContent className="text-center">
           <div className=" bg-white/20 backdrop-blur-sm rounded-2xl p-2 border border-white/20 flex items-center justify-center space-x-2">
