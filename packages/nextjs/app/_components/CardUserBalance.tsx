@@ -30,7 +30,7 @@ const CardUserBalance: NextPage<CardUserBalanceProps> = ({ userBalance }) => {
         <CardContent className="text-center">
           <div className=" bg-white/20 backdrop-blur-sm rounded-2xl p-2 border border-white/20 flex items-center justify-center space-x-2">
             <Image src={"/usdc.png"} alt="usdc icon" width={20} height={20} />
-            <p className="text-4xl font-bold">
+            <p className="text-3xl font-bold">
               $
               {parseFloat(formatUnits(userBalance ?? 0n, 6)) >= 1
                 ? formatNumber(formatUnits(userBalance ?? 0n, 6))

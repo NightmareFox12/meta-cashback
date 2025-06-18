@@ -28,11 +28,10 @@ const Home: NextPage = () => {
       });
 
       setUserBalance(res?.amount);
-      console.log(userBalance);
     } catch (err) {
       console.log(err);
     }
-  }, [address, chainId, userBalance]);
+  }, [address, chainId]);
 
   //effects
   useEffect(() => {

@@ -31,10 +31,12 @@ const DialogStake: NextPage<DialogStakeProps> = ({ chainID, loadRoutes, handleBr
         <DialogTitle>Are you absolutely sure?</DialogTitle>
         <DialogDescription>
           {chainID !== 10 ? (
-            <>
-              <p className="px-5 text-sm">
-                This process will move your <span className="text-blue-500">USDC</span> from the current network to
-                <span className="text-red-400"> Optimism</span> securely and quickly using LI.FI technology.
+            <div>
+              <p className="px-5">
+                This process will move your <span className="text-blue-500 font-semibold">USDC</span> from the current
+                network to
+                <span className="text-red-400 font-semibold"> Optimism</span> securely and quickly using LI.FI
+                technology.
               </p>
               <div className="w-full flex justify-center my-2">
                 {routes && routes?.length > 0 ? (
@@ -80,7 +82,7 @@ const DialogStake: NextPage<DialogStakeProps> = ({ chainID, loadRoutes, handleBr
                   </Button>
                 )}
               </div>
-            </>
+            </div>
           ) : (
             <></>
           )}
