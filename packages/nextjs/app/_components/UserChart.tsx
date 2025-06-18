@@ -42,21 +42,21 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const colors = [
-  "#3b82f6", // Blue
-  "#3b82f6",
-  "#3b82f6",
-  "#3b82f6",
-  "#3b82f6",
-  "#3b82f6",
-  "#3b82f6",
+  "#fb923c", // Orange
+  "#fb923c",
+  "#fb923c",
+  "#fb923c",
+  "#fb923c",
+  "#fb923c",
+  "#fb923c",
 ];
 
 export function UserChart() {
   return (
-    <Card className="bg-primary max-w-lg h-full">
+    <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-400 max-w-lg h-full">
       <CardHeader>
         <CardTitle>Earning Chart</CardTitle>
-        <CardDescription>Last Week</CardDescription>
+        <CardDescription className="text-white">Last Week</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-42">
@@ -67,8 +67,11 @@ export function UserChart() {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
+              tick={{ fill: "#000", fontSize: 14, fontWeight: "bold" }} // Asegura que el texto sea visible y más claro
               tickFormatter={value => value.slice(0, 3)}
             />
+
+
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
             <Bar dataKey="earning" radius={12}>
               {chartData.map((entry, index) => (
@@ -82,7 +85,7 @@ export function UserChart() {
         <div className="flex gap-2 leading-none font-medium">
           Trending up by 5.2% this week <TrendingUp className="h-4 w-4" />
         </div>
-        <div className="text-muted-foreground leading-none">Showing total Earning last week</div>
+        <div className="text-white-foreground leading-none">Showing total Earning last week</div>
       </CardFooter>
     </Card>
   );
