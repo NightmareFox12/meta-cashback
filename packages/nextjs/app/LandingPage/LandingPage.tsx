@@ -1,16 +1,16 @@
 "use client";
 
+import { NextPage } from "next";
 import { useState } from "react";
-import Image from "next/image";
 import { SwitchTheme } from "../../components/SwitchTheme";
 import { RainbowKitCustomConnectButton } from "../../components/scaffold-eth";
+import { Button } from "~~/components/shad/ui/button";
+import { Card, CardContent } from "~~/components/shad/ui/card";
+import { Crown, DollarSign, RefreshCw, Rocket, Shield, TrendingUp, Vault, Sparkles, Zap } from "lucide-react";
 import FAQSection from "./_components/FaqSection";
 import PrivacySection from "./_components/PrivacySection";
 import TermsSection from "./_components/TermsSection";
-import { ArrowRight, Crown, DollarSign, RefreshCw, Rocket, Shield, TrendingUp, Vault, Sparkles, Zap } from "lucide-react";
-import { NextPage } from "next";
-import { Button } from "~~/components/shad/ui/button";
-import { Card, CardContent } from "~~/components/shad/ui/card";
+import Image from "next/image";
 
 const tiers = [
   {
@@ -95,21 +95,38 @@ const LandingPage: NextPage = () => {
   return (
     <>
       <div className="bg-base-200 min-h-screen font-sans">
-                {/* Global Sparkle Decorations */}
-                <div className="fixed inset-0 pointer-events-none z-10">
-                  {[...Array(15)].map((_, i) => (
-                    <Sparkles
-                      key={i}
-                      className="absolute text-yellow-400/40 animate-twinkle"
-                      size={10}
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 3}s`,
-                      }}
-                    />
-                  ))}
-                </div>
+        {/* Global Sparkle Decorations */}
+        <div className="fixed inset-0 pointer-events-none z-10">
+          {[
+            { left: "10%", top: "20%", delay: "0s" },
+            { left: "25%", top: "50%", delay: "0.5s" },
+            { left: "40%", top: "30%", delay: "1s" },
+            { left: "55%", top: "60%", delay: "1.5s" },
+            { left: "70%", top: "40%", delay: "2s" },
+            { left: "85%", top: "70%", delay: "2.5s" },
+            { left: "15%", top: "80%", delay: "3s" },
+            { left: "35%", top: "10%", delay: "3.5s" },
+            { left: "50%", top: "50%", delay: "4s" },
+            { left: "65%", top: "20%", delay: "4.5s" },
+            { left: "80%", top: "60%", delay: "5s" },
+            { left: "90%", top: "30%", delay: "5.5s" },
+            { left: "20%", top: "45%", delay: "6s" },
+            { left: "50%", top: "80%", delay: "6.5s" },
+            { left: "75%", top: "10%", delay: "7s" },
+          ].map((pos, i) => (
+            <Sparkles
+              key={i}
+              className="absolute text-yellow-400/40 animate-twinkle"
+              size={10}
+              style={{
+                left: pos.left,
+                top: pos.top,
+                animationDelay: pos.delay,
+              }}
+            />
+          ))}
+        </div>
+
         {showConditions ? (
           <TermsSection setShowConditions={setShowConditions} />
         ) : showPrivacy ? (
@@ -119,34 +136,40 @@ const LandingPage: NextPage = () => {
         ) : (
           <div className="relative z-10">
             {/* Header */}
-             <header className="container mx-auto px-6 py-8">
-                          <div className="flex justify-between items-center">
-                            <div className="flex items-center space-x-2">
-                              <div className="flex relative w-10 h-10">
-                                <Image alt="Meta-cashback-logo" src="/favicon.png" className="cursor-pointer" fill />
-                              </div>
-                              <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                                MetaCashback
-                              </span>
-                            </div>
-                            <RainbowKitCustomConnectButton />
-                          </div>
-                        </header>
+            <header className="container mx-auto px-6 py-8">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center space-x-2">
+                  <div className="flex relative w-10 h-10">
+                    <Image alt="Meta-cashback-logo" src="/favicon.png" className="cursor-pointer" fill />
+                  </div>
+                  <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                    MetaCashback
+                  </span>
+                </div>
+                <RainbowKitCustomConnectButton />
+              </div>
+            </header>
             {/* Hero Section */}
             <section className="container mx-auto px-6 py-20 text-center relative">
               {/* Hero floating elements */}
               <div className="absolute inset-0 pointer-events-none">
-                {[...Array(4)].map((_, i) => (
+                {[
+                  { left: "10%", top: "30%", width: "40px", height: "40px", delay: "0s", duration: "8s" },
+                  { left: "25%", top: "50%", width: "50px", height: "50px", delay: "1s", duration: "9s" },
+                  { left: "40%", top: "20%", width: "30px", height: "30px", delay: "2s", duration: "7s" },
+                  { left: "60%", top: "70%", width: "45px", height: "45px", delay: "1.5s", duration: "8.5s" },
+                  { left: "80%", top: "40%", width: "35px", height: "35px", delay: "2.5s", duration: "10s" },
+                ].map((bubble, i) => (
                   <div
                     key={i}
                     className="absolute rounded-full bg-gradient-to-r from-yellow-400/10 to-orange-400/20 animate-float"
                     style={{
-                      left: `${10 + Math.random() * 80}%`,
-                      top: `${20 + Math.random() * 60}%`,
-                      width: `${Math.random() * 50 + 20}px`,
-                      height: `${Math.random() * 50 + 20}px`,
-                      animationDelay: `${Math.random() * 3}s`,
-                      animationDuration: `${Math.random() * 8 + 8}s`,
+                      left: bubble.left,
+                      top: bubble.top,
+                      width: bubble.width,
+                      height: bubble.height,
+                      animationDelay: bubble.delay,
+                      animationDuration: bubble.duration,
                     }}
                   />
                 ))}
@@ -179,143 +202,151 @@ const LandingPage: NextPage = () => {
             </section>
 
             {/* Tier System */}
-                       <section className="container mx-auto px-6 py-6">
-                         <div className="text-center mb-16">
-                           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
-                             Boost Your Cashback
-                           </h2>
-                           <p className="text-xl">Choose your tier and maximize your rewards</p>
-                         </div>
-                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                           {tiers.map((tier) => {
-                             const Icon = tier.icon
-                             return (
-                               <Card
-                                 key={tier.name}
-                                 className={`${tier.bgColor} ${tier.borderColor} border-2 hover:border-opacity-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl cursor-pointer backdrop-blur-sm bg-opacity-90 relative overflow-hidden group`}
-                               >
-                                 {/* Floating Bubbles inside tier cards */}
-                                 <div className="absolute inset-0 pointer-events-none z-5">
-                                   {[...Array(2)].map((_, i) => (
-                                     <div
-                                       key={i}
-                                       className={`absolute rounded-full bg-gradient-to-r ${tier.bubbleColor} animate-float`}
-                                       style={{
-                                         left: `${20 + Math.random() * 60}%`,
-                                         top: `${20 + Math.random() * 60}%`,
-                                         width: `${Math.random() * 25 + 10}px`,
-                                         height: `${Math.random() * 25 + 10}px`,
-                                         animationDelay: `${Math.random() * 2}s`,
-                                         animationDuration: `${Math.random() * 6 + 6}s`,
-                                       }}
-                                     />
-                                   ))}
-                                 </div>
-           
-                                 {/* Shimmer effect */}
-                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-           
-                                 <CardContent className="p-6 text-center relative z-10">
-                                   <div
-                                     className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${tier.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}
-                                   >
-                                     <Icon className="w-8 h-8 text-white" />
-                                   </div>
-                                   <h3 className="text-2xl font-bold">{tier.name}</h3>
-                                   <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-white">
-                                     {tier.cashback}
-                                   </div>
-                                   <p className="text-sm mb-4">{tier.description}</p>
-                                 </CardContent>
-                               </Card>
-                             )
-                           })}
-                         </div>
-                       </section>
-           
-                       {/* Features Section */}
-                       <section className="container mx-auto px-6 py-20">
-                         <div className="text-center mb-16">
-                           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                             Withdraw or Grow Your Money
-                           </h2>
-                           <p className="text-xl">Complete control over your cashback rewards</p>
-                         </div>
-           
-                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                           {features.map((feature, index) => {
-                             const Icon = feature.icon
-                             return (
-                               <Card
-                                 key={index}
-                                 className="bg-base-100 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 relative overflow-hidden group"
-                               >
-                                 {/* Floating Bubbles inside feature cards */}
-                                 <div className="absolute inset-0 pointer-events-none z-5">
-                                   {[...Array(2)].map((_, i) => (
-                                     <div
-                                       key={i}
-                                       className={`absolute rounded-full bg-gradient-to-r ${feature.bubbleColor} animate-float`}
-                                       style={{
-                                         left: `${20 + Math.random() * 60}%`,
-                                         top: `${30 + Math.random() * 40}%`,
-                                         width: `${Math.random() * 20 + 8}px`,
-                                         height: `${Math.random() * 20 + 8}px`,
-                                         animationDelay: `${Math.random() * 2}s`,
-                                         animationDuration: `${Math.random() * 5 + 6}s`,
-                                       }}
-                                     />
-                                   ))}
-                                 </div>
-           
-                                 <CardContent className="p-6 text-center relative z-10">
-                                   <Icon
-                                     className={`w-12 h-12 mx-auto mb-4 ${feature.color} group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}
-                                   />
-                                   <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                                   <p className="text-sm">{feature.description}</p>
-                                 </CardContent>
-                               </Card>
-                             )
-                           })}
-                         </div>
-                       </section>
-           
-                       {/* CTA Section */}
-                       <section className="container mx-auto px-6 py-6 text-center relative">
-                         {/* CTA floating elements */}
-                         <div className="absolute inset-0 pointer-events-none">
-                           {[...Array(3)].map((_, i) => (
-                             <div
-                               key={i}
-                               className="absolute rounded-full bg-gradient-to-r from-purple-400/10 to-pink-400/20 animate-float"
-                               style={{
-                                 left: `${20 + Math.random() * 60}%`,
-                                 top: `${20 + Math.random() * 60}%`,
-                                 width: `${Math.random() * 40 + 15}px`,
-                                 height: `${Math.random() * 40 + 15}px`,
-                                 animationDelay: `${Math.random() * 3}s`,
-                                 animationDuration: `${Math.random() * 7 + 8}s`,
-                               }}
-                             />
-                           ))}
-                         </div>
-           
-                         <div className="max-w-3xl mx-auto relative z-10">
-                           <h2 className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-                             The future of cashback is in your hands
-                           </h2>
-           
-                           <p className="text-xl text-base-content/50 mb-12">
-                             Join thousands of users already earning more with MetaCashback
-                           </p>
-           
-                           <div className="space-y-4">
-           <RainbowKitCustomConnectButton />
-                             <p className="text-sm text-base-content/50">Connect your MetaMask wallet to get started</p>
-                           </div>
-                         </div>
-                       </section>
+            <section className="container mx-auto px-6 py-6">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
+                  Boost Your Cashback
+                </h2>
+                <p className="text-xl">Choose your tier and maximize your rewards</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                {tiers.map((tier) => {
+                  const Icon = tier.icon
+                  return (
+                    <Card
+                      key={tier.name}
+                      className={`${tier.bgColor} ${tier.borderColor} border-2 hover:border-opacity-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl cursor-pointer backdrop-blur-sm bg-opacity-90 relative overflow-hidden group`}
+                    >
+                      {/* Floating Bubbles inside tier cards */}
+                      <div className="absolute inset-0 pointer-events-none z-5">
+                        {[
+                          { left: "25%", top: "30%", width: "20px", height: "20px", delay: "0s", duration: "6s" },
+                          { left: "60%", top: "70%", width: "15px", height: "15px", delay: "1s", duration: "7s" },
+                        ].map((bubble, i) => (
+                          <div
+                            key={i}
+                            className={`absolute rounded-full bg-gradient-to-r ${tier.bubbleColor} animate-float`}
+                            style={{
+                              left: bubble.left,
+                              top: bubble.top,
+                              width: bubble.width,
+                              height: bubble.height,
+                              animationDelay: bubble.delay,
+                              animationDuration: bubble.duration,
+                            }}
+                          />
+                        ))}
+                      </div>
+
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+
+                      <CardContent className="p-6 text-center relative z-10">
+                        <div
+                          className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${tier.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}
+                        >
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-bold">{tier.name}</h3>
+                        <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-white">
+                          {tier.cashback}
+                        </div>
+                        <p className="text-sm mb-4">{tier.description}</p>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+              </div>
+            </section>
+
+            {/* Features Section */}
+            <section className="container mx-auto px-6 py-20">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                  Withdraw or Grow Your Money
+                </h2>
+                <p className="text-xl">Complete control over your cashback rewards</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                {features.map((feature, index) => {
+                  const Icon = feature.icon
+                  return (
+                    <Card
+                      key={index}
+                      className="bg-base-100 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 relative overflow-hidden group"
+                    >
+                      {/* Floating Bubbles inside feature cards */}
+                      <div className="absolute inset-0 pointer-events-none z-5">
+                        {[
+                          { left: "25%", top: "30%", width: "20px", height: "20px", delay: "0s", duration: "5s" },
+                          { left: "60%", top: "70%", width: "15px", height: "15px", delay: "1s", duration: "6s" },
+                        ].map((bubble, i) => (
+                          <div
+                            key={i}
+                            className={`absolute rounded-full bg-gradient-to-r ${feature.bubbleColor} animate-float`}
+                            style={{
+                              left: bubble.left,
+                              top: bubble.top,
+                              width: bubble.width,
+                              height: bubble.height,
+                              animationDelay: bubble.delay,
+                              animationDuration: bubble.duration,
+                            }}
+                          />
+                        ))}
+                      </div>
+
+                      <CardContent className="p-6 text-center relative z-10">
+                        <Icon
+                          className={`w-12 h-12 mx-auto mb-4 ${feature.color} group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}
+                        />
+                        <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                        <p className="text-sm">{feature.description}</p>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+              </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="container mx-auto px-6 py-6 text-center relative">
+              {/* CTA floating elements */}
+              {/* Floating Bubbles */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[
+                  { left: "20%", top: "30%", width: "40px", height: "40px", delay: "0s", duration: "8s" },
+                  { left: "50%", top: "50%", width: "45px", height: "45px", delay: "1s", duration: "9s" },
+                  { left: "75%", top: "20%", width: "35px", height: "35px", delay: "2s", duration: "7s" },
+                ].map((bubble, i) => (
+                  <div
+                    key={i}
+                    className="absolute rounded-full bg-gradient-to-r from-purple-400/10 to-pink-400/20 animate-float"
+                    style={{
+                      left: bubble.left,
+                      top: bubble.top,
+                      width: bubble.width,
+                      height: bubble.height,
+                      animationDelay: bubble.delay,
+                      animationDuration: bubble.duration,
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="max-w-3xl mx-auto relative z-10">
+                <h2 className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                  The future of cashback is in your hands
+                </h2>
+                <p className="text-xl text-base-content/50 mb-12">
+                  Join thousands of users already earning more with MetaCashback
+                </p>
+                <div className="space-y-4">
+                  <RainbowKitCustomConnectButton />
+                  <p className="text-sm text-base-content/50">Connect your MetaMask wallet to get started</p>
+                </div>
+              </div>
+            </section>
 
             <div className="fixed z-10 bottom-0 p-4 flex w-full justify-end">
               <SwitchTheme />
