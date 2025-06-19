@@ -16,7 +16,7 @@ import { Label } from "~~/components/shad/ui/label";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
 import { TabsContent } from "~~/components/shad/ui/tabs";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
-import { changeToken, getUserBalance } from "~~/lib/lifi";
+import { getAvailableRoutes, getUserBalance } from "~~/lib/lifi";
 import { formatNumber } from "~~/utils/formatNumber";
 
 const StakingScreen = () => {
@@ -36,24 +36,17 @@ const StakingScreen = () => {
   // const timeRemaining = 15; // days
 
   //smart contract
-  // const { data: userBalance } = useScaffoldReadContract({
-  //   contractName: "USDC",
-  //   functionName: "balanceOf",
-  //   args: [address],
-  // });
-
   const { data: minAmount, isLoading: minAmountLoading } = useScaffoldReadContract({
     contractName: "MetaCashback",
     functionName: "minStakingAmount",
   });
 
   //functions
-  //verify the optmis chain for prevent show modal change token
   const handleBrigeUSDC = async () => {
-    if (chainId === undefined) return;
+    if (chainId === undefined || address === undefined) return;
     try {
       setLoadRoutes(true);
-      const routes: Route[] = await changeToken({ chainID: chainId, balance: stakeAmount });
+      const routes: Route[] = await getAvailableRoutes({ chainID: chainId, balance: stakeAmount, address });
 
       return routes;
     } catch (err) {
@@ -260,7 +253,12 @@ const StakingScreen = () => {
                           Stake USDC
                         </Button>
                       </DialogTrigger>
-                      <DialogStake chainID={chainId} loadRoutes={loadRoutes} handleBrigeUSDC={handleBrigeUSDC} />
+                      <DialogStake
+                        chainID={chainId}
+                        loadRoutes={loadRoutes}
+                        stakeAmount={stakeAmount}
+                        handleBrigeUSDC={handleBrigeUSDC}
+                      />
                     </Dialog>
                   </TabsContent>
 

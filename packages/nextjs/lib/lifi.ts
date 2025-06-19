@@ -1,4 +1,4 @@
-import { EVM, RoutesRequest, createConfig, getToken, getTokenBalance } from "@lifi/sdk";
+import { EVM, Route, RoutesRequest, createConfig, executeRoute, getToken, getTokenBalance } from "@lifi/sdk";
 import { getRoutes } from "@lifi/sdk";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 
@@ -22,18 +22,36 @@ const USDCAddress: Record<number, string> = {
   59144: "0x176211869cA2b568f2A7D4EE941E073a821EE1ff", //Linea
 };
 
-export const changeToken = async ({ chainID, balance }: { chainID: number; balance: string }) => {
+interface IGetAvailableRoutes {
+  chainID: number;
+  balance: string;
+  address: string;
+}
+export const getAvailableRoutes = async ({ chainID, balance, address }: IGetAvailableRoutes) => {
   const routesRequest: RoutesRequest = {
     fromChainId: chainID,
     toChainId: 10, // Optimism
     fromTokenAddress: USDCAddress[chainID],
     toTokenAddress: USDCAddress[10],
     fromAmount: balance,
+    fromAddress: address,
+    toAddress: address,
   };
 
   const result = await getRoutes(routesRequest);
   const routes = result.routes;
   return routes;
+};
+
+export const executeSelectRoute = async (route: Route) => {
+  const nose = await executeRoute(route, {
+    // Gets called once the route object gets new updates
+    updateRouteHook(route) {
+      console.log(route);
+    },
+  });
+
+  return nose;
 };
 
 export const getUserBalance = async ({ chainID, user }: { chainID: number; user: string }) => {
