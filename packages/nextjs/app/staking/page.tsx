@@ -5,7 +5,7 @@ import DialogStake from "./_components/DialogStake";
 import { Route } from "@lifi/sdk";
 import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { ArrowUpRight, CheckCircle, Coins, InfoIcon, TrendingUp } from "lucide-react";
+import { ArrowUpRight, CheckCircle, Coins, InfoIcon, TrendingUp, Sparkles } from "lucide-react";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
@@ -79,6 +79,21 @@ const StakingScreen = () => {
 
   return (
     <main className="min-h-screen p-4">
+        {/* Sparkle Decorations */}
+            <div className="fixed inset-0 pointer-events-none z-10">
+              {[...Array(20)].map((_, i) => (
+                <Sparkles
+                  key={i}
+                  className="absolute text-yellow-400/60 animate-twinkle"
+                  size={12}
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 3}s`,
+                  }}
+                />
+              ))}
+            </div>
       <div className="lg:max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
@@ -101,7 +116,7 @@ const StakingScreen = () => {
             </CardContent>
           </Card> */}
 
-          <Card>
+          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
                 <Coins className="h-4 w-4 text-green-600" />
@@ -114,7 +129,7 @@ const StakingScreen = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
                 <TrendingUp className="h-4 w-4 text-purple-600" />
@@ -128,7 +143,7 @@ const StakingScreen = () => {
           </Card>
 
           {/* Min amount card  */}
-          <Card>
+          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
                 <InfoIcon className="h-4 w-4 text-orange-400" />
@@ -167,16 +182,16 @@ const StakingScreen = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Staking Interface */}
           <div className="lg:col-span-3">
-            <Card>
+            <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
               <CardHeader>
                 <CardTitle>Stake USDC</CardTitle>
-                <CardDescription>Stake your USDC tokens to earn {apy}% APY rewards</CardDescription>
+                <CardDescription className="text-white">Stake your USDC tokens to earn {apy}% APY rewards</CardDescription>
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="stake" className="w-full">
                   <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="stake" className="flex items-center gap-2">
-                      <ArrowUpRight className="h-4 w-4" />
+                      <ArrowUpRight className="h-4 w-4 text-green-500" />
                       Stake
                     </TabsTrigger>
                     {/* <TabsTrigger value="unstake" className="flex items-center gap-2">
@@ -199,7 +214,7 @@ const StakingScreen = () => {
                           }}
                           className="flex-1"
                         />
-                        <Button variant="outline" onClick={() => setStakeAmount(userBalance?.toString() ?? "")}>
+                        <Button variant="outline" className="bg-orange-500 text-white hover:bg-orange-600" onClick={() => setStakeAmount(userBalance?.toString() ?? "")}>
                           Max
                         </Button>
                       </div>
@@ -247,7 +262,7 @@ const StakingScreen = () => {
 
                     <Dialog>
                       <DialogTrigger className="w-full" asChild>
-                        <Button
+                        <Button className="bg-green-600 text-white hover:bg-green-700"
                         // disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
                         >
                           Stake USDC
@@ -277,7 +292,7 @@ const StakingScreen = () => {
                           Max
                         </Button>
                       </div>
-                      <p className="text-sm text-gray-500">Staked: ${stakedAmount.toLocaleString()} USDC</p>
+                      <p className="text-sm text-white">Staked: ${stakedAmount.toLocaleString()} USDC</p>
                     </div>
 
                     <div className="bg-orange-50 p-4 rounded-lg space-y-2">
@@ -313,7 +328,7 @@ const StakingScreen = () => {
         {/* Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-4 w-full">
           {/* Current Position */}
-          <Card>
+          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
             <CardHeader>
               <CardTitle className="text-lg">Your Position</CardTitle>
             </CardHeader>
@@ -325,7 +340,7 @@ const StakingScreen = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Rewards Earned</span>
-                  <span className="font-medium text-green-600">${totalRewards}</span>
+                  <span className="font-medium text-green-700">${totalRewards}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Total Value</span>
@@ -333,7 +348,7 @@ const StakingScreen = () => {
                 </div>
               </div>
               <Separator />
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full bg-yellow-500 text-white hover:bg-yellow-600">
                 <CheckCircle className="h-4 w-4 mr-2" />
                 Claim Rewards
               </Button>
@@ -366,7 +381,7 @@ const StakingScreen = () => {
             </Card> */}
 
           {/* Recent Activity */}
-          <Card>
+          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
             <CardHeader>
               <CardTitle className="text-lg">Recent Activity</CardTitle>
             </CardHeader>
@@ -375,21 +390,21 @@ const StakingScreen = () => {
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <div className="flex-1">
                   <p className="text-sm font-medium">Staked $1,000 USDC</p>
-                  <p className="text-xs text-gray-500">2 days ago</p>
+                  <p className="text-xs text-white">2 days ago</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <div className="flex-1">
                   <p className="text-sm font-medium">Claimed $25.50 rewards</p>
-                  <p className="text-xs text-gray-500">1 week ago</p>
+                  <p className="text-xs text-white">1 week ago</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
                 <div className="flex-1">
                   <p className="text-sm font-medium">Staked $4,000 USDC</p>
-                  <p className="text-xs text-gray-500">2 weeks ago</p>
+                  <p className="text-xs text-white">2 weeks ago</p>
                 </div>
               </div>
             </CardContent>
