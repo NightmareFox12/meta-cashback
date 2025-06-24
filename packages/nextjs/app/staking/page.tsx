@@ -5,7 +5,7 @@ import DialogStake from "./_components/DialogStake";
 import { Route } from "@lifi/sdk";
 import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { ArrowUpRight, CheckCircle, Coins, InfoIcon, TrendingUp, Sparkles } from "lucide-react";
+import { ArrowUpRight, CheckCircle, Coins, InfoIcon, Sparkles, TrendingUp } from "lucide-react";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
@@ -79,21 +79,21 @@ const StakingScreen = () => {
 
   return (
     <main className="min-h-screen p-4">
-        {/* Sparkle Decorations */}
-            <div className="fixed inset-0 pointer-events-none z-10">
-              {[...Array(20)].map((_, i) => (
-                <Sparkles
-                  key={i}
-                  className="absolute text-yellow-400/60 animate-twinkle"
-                  size={12}
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 3}s`,
-                  }}
-                />
-              ))}
-            </div>
+      {/* Sparkle Decorations */}
+      <div className="fixed inset-0 pointer-events-none z-10">
+        {[...Array(20)].map((_, i) => (
+          <Sparkles
+            key={i}
+            className="absolute text-yellow-400/60 animate-twinkle"
+            size={12}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+            }}
+          />
+        ))}
+      </div>
       <div className="lg:max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
@@ -185,7 +185,9 @@ const StakingScreen = () => {
             <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
               <CardHeader>
                 <CardTitle>Stake USDC</CardTitle>
-                <CardDescription className="text-white">Stake your USDC tokens to earn {apy}% APY rewards</CardDescription>
+                <CardDescription className="text-white">
+                  Stake your USDC tokens to earn {apy}% APY rewards
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="stake" className="w-full">
@@ -214,7 +216,11 @@ const StakingScreen = () => {
                           }}
                           className="flex-1"
                         />
-                        <Button variant="outline" className="bg-orange-500 text-white hover:bg-orange-600" onClick={() => setStakeAmount(userBalance?.toString() ?? "")}>
+                        <Button
+                          variant="outline"
+                          className="bg-orange-500 text-white hover:bg-orange-600"
+                          onClick={() => setStakeAmount(userBalance?.toString() ?? "")}
+                        >
                           Max
                         </Button>
                       </div>
@@ -262,8 +268,9 @@ const StakingScreen = () => {
 
                     <Dialog>
                       <DialogTrigger className="w-full" asChild>
-                        <Button className="bg-green-600 text-white hover:bg-green-700"
-                        // disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
+                        <Button
+                          className="bg-green-600 text-white hover:bg-green-700"
+                          // disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
                         >
                           Stake USDC
                         </Button>

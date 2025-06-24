@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import LandingPage from "../app/LandingPage/LandingPage";
 import AppHeader from "./AppHeader";
 import AppSidebar from "./AppSideBar";
-import LandingPage from "../app/LandingPage/LandingPage";
 import { SidebarInset, SidebarProvider } from "./shad/ui/sidebar";
+import { EVM, createConfig } from "@lifi/sdk";
 import { RainbowKitProvider, darkTheme, lightTheme } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { getWalletClient } from "@wagmi/core";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { useTheme } from "next-themes";
 import { Toaster } from "react-hot-toast";
-import { WagmiProvider, useAccount } from "wagmi";
+import { Client } from "viem";
+import { WagmiProvider, useAccount, useWalletClient } from "wagmi";
 import { Footer } from "~~/components/Footer";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
 import { useInitializeNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
@@ -18,7 +21,27 @@ import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   useInitializeNativeCurrencyPrice();
+  const { data: wagmiClient } = useWalletClient();
   const { isConnected } = useAccount();
+
+  useEffect(() => {
+    if (!wagmiClient) return;
+    liFiConnection();
+  }, [wagmiClient]);
+
+  const liFiConnection = async () => {
+    const wagmiClient: Client = await getWalletClient(wagmiConfig);
+
+    createConfig({
+      integrator: "metacashback",
+      providers: [
+        EVM({
+          getWalletClient: async () => wagmiClient,
+        }),
+      ],
+      preloadChains: true,
+    });
+  };
 
   return (
     <>

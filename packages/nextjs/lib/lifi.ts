@@ -1,19 +1,5 @@
-import { EVM, Route, RoutesRequest, createConfig, executeRoute, getToken, getTokenBalance } from "@lifi/sdk";
+import { Route, RoutesRequest, executeRoute, getToken, getTokenBalance } from "@lifi/sdk";
 import { getRoutes } from "@lifi/sdk";
-import { wagmiConfig } from "~~/services/web3/wagmiConfig";
-
-createConfig({
-  integrator: "metacashback",
-  providers: [
-    EVM({
-      getWalletClient: async () => {
-        if (!wagmiConfig) return;
-        return wagmiConfig as any;
-      },
-    }),
-  ],
-  preloadChains: true,
-});
 
 const USDCAddress: Record<number, string> = {
   10: "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85", //OP
@@ -35,7 +21,7 @@ export const getAvailableRoutes = async ({ chainID, balance, address }: IGetAvai
     toTokenAddress: USDCAddress[10],
     fromAmount: balance,
     fromAddress: address,
-    toAddress: address,
+    // toAddress: address,
   };
 
   const result = await getRoutes(routesRequest);

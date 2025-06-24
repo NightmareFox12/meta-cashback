@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
  */
 
 contract MetaCashback {
-    IERC20 public stakingToken;
+    // IERC20 public stakingToken;
 
     //constans
     bytes32 public constant EXPLORER_LEVEL = "EXPLORER_LEVEL";
@@ -29,8 +29,8 @@ contract MetaCashback {
 
     //constructor
     constructor(address _tokenAddress) {
-        require(_tokenAddress != address(0), "Invalid token address");
-        stakingToken = IERC20(_tokenAddress);
+        // require(_tokenAddress != address(0), "Invalid token address");
+        // stakingToken = IERC20(_tokenAddress);
     }
 
     //Views
@@ -50,10 +50,10 @@ contract MetaCashback {
 
     function stakeTokens(uint256 _amount) public payable {
         require(_amount > 0, "Deposit amount must be greater than zero");
-        require(
-            _amount >= minStakingAmount && stakingToken.allowance(msg.sender, address(this)) >= minStakingAmount,
-            "The amount of the deposit must be higher than the minimum amount"
-        );
+        // require(
+        //     _amount >= minStakingAmount && stakingToken.allowance(msg.sender, address(this)) >= minStakingAmount,
+        //     "The amount of the deposit must be higher than the minimum amount"
+        // );
 
         // require(stakingToken.allowance(msg.sender, address(this)) >= minStakingAmount,"");
         // require(stakingToken.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
