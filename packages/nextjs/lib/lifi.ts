@@ -1,5 +1,9 @@
-import { Route, RoutesRequest, executeRoute, getToken, getTokenBalance } from "@lifi/sdk";
-import { getRoutes } from "@lifi/sdk";
+import { getToken, getTokenBalance, revokeTokenApproval, setTokenAllowance } from "@lifi/sdk";
+import { getTokenAllowance } from "@lifi/sdk";
+import { Client } from "viem";
+
+//constans
+const META_CASHBACK_ADDRESS = "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE";
 
 const USDCAddress: Record<number, string> = {
   10: "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85", //OP
@@ -8,44 +12,80 @@ const USDCAddress: Record<number, string> = {
   59144: "0x176211869cA2b568f2A7D4EE941E073a821EE1ff", //Linea
 };
 
-interface IGetAvailableRoutes {
-  chainID: number;
-  balance: string;
-  address: string;
-}
-export const getAvailableRoutes = async ({ chainID, balance, address }: IGetAvailableRoutes) => {
-  const routesRequest: RoutesRequest = {
-    fromChainId: chainID,
-    toChainId: 10, // Optimism
-    fromTokenAddress: USDCAddress[chainID],
-    toTokenAddress: USDCAddress[10],
-    fromAmount: balance,
-    fromAddress: address,
-    // toAddress: address,
-  };
+// interface IGetAvailableRoutes {
+//   chainID: number;
+//   balance: string;
+//   address: string;
+// }
+// export const getAvailableRoutes = async ({ chainID, balance, address }: IGetAvailableRoutes) => {
+//   const routesRequest: RoutesRequest = {
+//     fromChainId: chainID,
+//     toChainId: 10, // Optimism
+//     fromTokenAddress: USDCAddress[chainID],
+//     toTokenAddress: USDCAddress[10],
+//     fromAmount: balance,
+//     fromAddress: address,
+//     toAddress: address,
+//   };
 
-  const result = await getRoutes(routesRequest);
-  const routes = result.routes;
-  return routes;
-};
+//   const result = await getRoutes(routesRequest);
+//   const routes = result.routes;
+//   return routes;
+// };
 
-export const executeSelectRoute = async (route: Route) => {
-  const nose = await executeRoute(route, {
-    // Gets called once the route object gets new updates
-    updateRouteHook(route) {
-      console.log(route);
-    },
-  });
+// export const executeSelectRoute = async (route: Route) => {
+//   const nose = await executeRoute(route, {
+//     // Gets called once the route object gets new updates
+//     updateRouteHook(route) {
+//       console.log(route);
+//     },
+//   });
 
-  return nose;
-};
+//   return nose;
+// };
 
 export const getUserBalance = async ({ chainID, user }: { chainID: number; user: string }) => {
-  try {
-    const token = await getToken(chainID, USDCAddress[chainID]);
-    const tokenBalance = await getTokenBalance(user, token);
-    return tokenBalance;
-  } catch (err) {
-    console.log(err);
-  }
+  const token = await getToken(chainID, USDCAddress[chainID]);
+  const tokenBalance = await getTokenBalance(user, token);
+  return tokenBalance;
+};
+
+export const aproveAmount = async (walletClient: Client, amount: bigint) => {
+  const approvalRequest = {
+    walletClient: walletClient,
+    token: {
+      address: USDCAddress[10],
+      chainId: 10,
+    },
+    spenderAddress: META_CASHBACK_ADDRESS,
+    amount,
+  };
+  //@ts-ignore
+  const txHash = await setTokenAllowance(approvalRequest);
+  return txHash;
+};
+
+export const revokeAmount = async (walletClient: Client) => {
+  const revokeRequest = {
+    walletClient: walletClient,
+    token: {
+      address: USDCAddress[10],
+      chainId: 10,
+    },
+    spenderAddress: META_CASHBACK_ADDRESS,
+  };
+
+  //@ts-ignore
+  const txHash = await revokeTokenApproval(revokeRequest);
+  return txHash;
+};
+
+export const getAllowance = async (userAddress: string) => {
+  const token = {
+    address: USDCAddress[10],
+    chainId: 10,
+  };
+
+  const allowance = await getTokenAllowance(token, userAddress, META_CASHBACK_ADDRESS);
+  return allowance;
 };

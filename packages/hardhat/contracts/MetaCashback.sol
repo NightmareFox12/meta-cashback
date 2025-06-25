@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
  */
 
 contract MetaCashback {
-    // IERC20 public stakingToken;
+    IERC20 public USDCToken = IERC20(0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85);
 
     //constans
     bytes32 public constant EXPLORER_LEVEL = "EXPLORER_LEVEL";
@@ -17,21 +17,18 @@ contract MetaCashback {
     bytes32 public constant LEGENDARY_LEVEL = "LEGENDARY_LEVEL";
     bytes32 public constant ELITE_LEVEL = "ELITE_LEVEL";
 
-    struct UserStaking {
+    struct StakeStruct {
         uint256 amount;
         uint256 timeStamp;
     }
 
     // states
-    mapping(address => UserStaking) stakes;
+    mapping(address => StakeStruct) stakes;
     uint256 public rewardRate = 10;
     uint256 public minStakingAmount = 5 * 10 ** 6;
 
     //constructor
-    constructor(address _tokenAddress) {
-        // require(_tokenAddress != address(0), "Invalid token address");
-        // stakingToken = IERC20(_tokenAddress);
-    }
+    constructor() {}
 
     //Views
     function getLevel() public view returns (bytes32) {
@@ -48,17 +45,16 @@ contract MetaCashback {
         }
     }
 
-    function stakeTokens(uint256 _amount) public payable {
+    function stakeTokens(uint256 _amount) public {
         require(_amount > 0, "Deposit amount must be greater than zero");
-        // require(
-        //     _amount >= minStakingAmount && stakingToken.allowance(msg.sender, address(this)) >= minStakingAmount,
-        //     "The amount of the deposit must be higher than the minimum amount"
-        // );
+        require(
+            _amount >= minStakingAmount && USDCToken.allowance(msg.sender, address(this)) >= minStakingAmount,
+            "The amount of the deposit must be higher than the minimum amount"
+        );
 
-        // require(stakingToken.allowance(msg.sender, address(this)) >= minStakingAmount,"");
-        // require(stakingToken.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
+        require(USDCToken.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
 
-        stakes[msg.sender] = UserStaking({ amount: msg.value, timeStamp: block.timestamp });
+        stakes[msg.sender] = StakeStruct({ amount: _amount, timeStamp: block.timestamp });
     }
 
     // function calculateReward(address staker) public view returns (uint256) {
@@ -68,15 +64,16 @@ contract MetaCashback {
     //     return (stakes[staker] * rewardRate * timeStaked) / (365 days * 100);
     // }
 
-    // function withdrawStake() external {
-    //     require(stakes[msg.sender] > 0, "No tokens available for withdrawal");
+    // Descomenta y usa la función calculateReward para obtener la recompensa
+    // uint256 reward = calculateReward(msg.sender); // <-- Aquí se define 'reward'
+    // uint256 totalAmount = stakes[msg.sender] + reward;
 
-    //     uint256 reward = calculateReward(msg.sender);
-    //     uint256 totalAmount = stakes[msg.sender] + reward;
+    function withdrawStake() public {
+        require(stakes[msg.sender].amount > 0, "No tokens available for withdrawal");
 
-    //     require(stakingToken.transfer(msg.sender, totalAmount), "Token transfer failed");
+        uint256 totalAmount = stakes[msg.sender].amount;
 
-    //     stakes[msg.sender] = 0;
-    //     timestamps[msg.sender] = 0;
-    // }
+        delete stakes[msg.sender];
+        require(USDCToken.transfer(msg.sender, totalAmount), "Token transfer failed");
+    }
 }

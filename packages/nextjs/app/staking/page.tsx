@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import DialogStake from "./_components/DialogStake";
-import { Route } from "@lifi/sdk";
 import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { ArrowUpRight, CheckCircle, Coins, InfoIcon, Sparkles, TrendingUp } from "lucide-react";
@@ -16,7 +15,7 @@ import { Label } from "~~/components/shad/ui/label";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
 import { TabsContent } from "~~/components/shad/ui/tabs";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
-import { getAvailableRoutes, getUserBalance } from "~~/lib/lifi";
+import { getUserBalance } from "~~/lib/lifi";
 import { formatNumber } from "~~/utils/formatNumber";
 
 const StakingScreen = () => {
@@ -25,7 +24,9 @@ const StakingScreen = () => {
   //states
   const [stakeAmount, setStakeAmount] = useState<string>("");
   const [userBalance, setUserBalance] = useState<bigint | undefined>(undefined);
-  const [loadRoutes, setLoadRoutes] = useState(false);
+  const [loadingTransaction, setLoadingTransaction] = useState<boolean>(false);
+  const [showDialog, setShowDialog] = useState<boolean>(false);
+
   // const [unstakeAmount, setUnstakeAmount] = useState("");
 
   // Mock data
@@ -42,20 +43,6 @@ const StakingScreen = () => {
   });
 
   //functions
-  const handleBrigeUSDC = async () => {
-    if (chainId === undefined || address === undefined) return;
-    try {
-      setLoadRoutes(true);
-      const routes: Route[] = await getAvailableRoutes({ chainID: chainId, balance: stakeAmount, address });
-
-      return routes;
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoadRoutes(false);
-    }
-  };
-
   const getUserBalanceCallBack = useCallback(async () => {
     if (chainId === undefined || address === undefined) return;
 
@@ -66,11 +53,10 @@ const StakingScreen = () => {
       });
 
       setUserBalance(res?.amount ?? 0n);
-      console.log(userBalance);
     } catch (err) {
       console.log(err);
     }
-  }, [address, chainId, userBalance]);
+  }, [address, chainId]);
 
   //effects
   useEffect(() => {
@@ -124,7 +110,7 @@ const StakingScreen = () => {
               </div>
               <div className="mt-2">
                 <span className="text-2xl font-bold ">${stakedAmount.toLocaleString()}</span>
-                <span className="text-sm  ml-1">USDC</span>
+                <span className="text-sm ml-1">USDC</span>
               </div>
             </CardContent>
           </Card>
@@ -266,22 +252,25 @@ const StakingScreen = () => {
                       Stake USDC
                     </Button> */}
 
-                    <Dialog>
-                      <DialogTrigger className="w-full" asChild>
-                        <Button
-                          className="bg-green-600 text-white hover:bg-green-700"
-                          // disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
-                        >
-                          Stake USDC
-                        </Button>
-                      </DialogTrigger>
-                      <DialogStake
-                        chainID={chainId}
-                        loadRoutes={loadRoutes}
-                        stakeAmount={stakeAmount}
-                        handleBrigeUSDC={handleBrigeUSDC}
-                      />
-                    </Dialog>
+                    {address && (
+                      <Dialog onOpenChange={setShowDialog}>
+                        <DialogTrigger className="w-full" asChild>
+                          <Button
+                            className="bg-green-600 text-white hover:bg-green-700"
+                            // disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
+                          >
+                            Stake USDC
+                          </Button>
+                        </DialogTrigger>
+                        <DialogStake
+                          showDialog={showDialog}
+                          address={address}
+                          stakeAmount={stakeAmount}
+                          loadingTransaction={loadingTransaction}
+                          setLoadingTransaction={setLoadingTransaction}
+                        />
+                      </Dialog>
+                    )}
                   </TabsContent>
 
                   {/* <TabsContent value="unstake" className="space-y-4">

@@ -58,9 +58,10 @@
   },
   "dependencies": {
     "@lifi/sdk": "^3.7.9",
-    "@tanstack/react-table": "^8.21.3"
+    "@tanstack/react-table": "^8.21.3",
+    "viem": "^2.31.4"
   },
   "resolutions": {
-    "viem": "2.31.0"
+    "viem": "2.31.4"
   }
 }
