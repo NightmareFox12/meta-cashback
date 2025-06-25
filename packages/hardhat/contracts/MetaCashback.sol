@@ -2,13 +2,14 @@
 pragma solidity >=0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * @author Echizen500
  * @author NightmareFox12
  */
 
-contract MetaCashback {
+contract MetaCashback is Ownable {
     IERC20 public USDCToken = IERC20(0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85);
 
     //constans
@@ -28,7 +29,7 @@ contract MetaCashback {
     uint256 public minStakingAmount = 5 * 10 ** 6;
 
     //constructor
-    constructor() {}
+    constructor(address initalOwner) Ownable(initalOwner) {}
 
     //Views
     function getLevel() public view returns (bytes32) {

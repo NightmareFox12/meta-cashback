@@ -3,7 +3,7 @@ import { getTokenAllowance } from "@lifi/sdk";
 import { Client } from "viem";
 
 //constans
-const META_CASHBACK_ADDRESS = "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE";
+const META_CASHBACK_ADDRESS = "0x69fBe5461B16aC5047c4d995667E7A38d1270E9E";
 
 const USDCAddress: Record<number, string> = {
   10: "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85", //OP

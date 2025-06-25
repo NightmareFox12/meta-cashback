@@ -4,7 +4,8 @@ import { parseUnits } from "viem";
 import { useWalletClient } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "~~/components/shad/ui/dialog";
-import { aproveAmount, getAllowance } from "~~/lib/lifi";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWriteContract";
+import { aproveAmount, getAllowance, revokeAmount } from "~~/lib/lifi";
 
 type DialogStakeProps = {
   showDialog: boolean;
@@ -40,30 +41,37 @@ const DialogStake: NextPage<DialogStakeProps> = ({
     }
   }, [address, setLoadingTransaction, showDialog]);
 
+  //smart contract
+  const { writeContractAsync: writeYourContractAsync } = useScaffoldWriteContract({ contractName: "MetaCashback" });
+
   //functions
-  const explicame = async () => {
+  const handleAllowance = async () => {
     if (!wagmiClient) return;
     try {
+      setLoadingTransaction(true);
       const si = await aproveAmount(wagmiClient, parseUnits(stakeAmount, 6));
 
       console.log(si);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoadingTransaction(true);
     }
   };
 
-  // const getTokenAllowance = async () => {
-  //   setLoadingTransaction(true);
-  //   try {
-  //     const allowance = await getAllowance(address);
-
-  //     console.log(allowance, "allowance");
-  //   } catch (err) {
-  //     console.log(err);
-  //   } finally {
-  //     setLoadingTransaction(false);
-  //   }
-  // };
+  const handleTransfer = async () => {
+    try {
+      setLoadingTransaction(true);
+      await writeYourContractAsync({
+        functionName: "stakeTokens",
+        args: [parseUnits(stakeAmount, 6)],
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoadingTransaction(false);
+    }
+  };
 
   //effects
   useEffect(() => {
@@ -78,7 +86,17 @@ const DialogStake: NextPage<DialogStakeProps> = ({
       </DialogHeader>
       <DialogDescription>You must first approve the amount entered</DialogDescription>
       <div className="flex flex-col justify-center">
-        {allowance && allowance > 0n && <Button onClick={explicame}>Approve</Button>}
+        {!allowance ? (
+          <Button onClick={handleAllowance} disabled={loadingTransaction}>
+            Approve
+          </Button>
+        ) : (
+          <Button onClick={() => revokeAmount(wagmiClient!)} disabled={loadingTransaction}>
+            Transfer
+          </Button>
+        )}
+
+        {allowance}
       </div>
     </DialogContent>
   );
