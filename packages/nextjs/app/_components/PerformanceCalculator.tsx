@@ -23,11 +23,7 @@ const PerformanceCalculator: NextPage = () => {
 
         // Buscar la mejor opción de USDC, p. ej. en Base, Optimism o Polygon
         const usdcOption = data.yields.find(
-          (item: any) =>
-            item.token.symbol === "USDC" &&
-            item.protocol &&
-            item.apy &&
-            !isNaN(Number(item.apy))
+          (item: any) => item.token.symbol === "USDC" && item.protocol && item.apy && !isNaN(Number(item.apy)),
         );
 
         const apy = parseFloat(usdcOption?.apy || "0");
@@ -105,10 +101,9 @@ const PerformanceCalculator: NextPage = () => {
                   onChange={handleSliderChange}
                   className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer"
                   style={{
-                    background: `linear-gradient(to right, #86efac 0%, #86efac ${(
-                      (days / 365) *
-                      100
-                    ).toFixed(2)}%, #1e293b ${((days / 365) * 100).toFixed(2)}%, #1e293b 100%)`,
+                    background: `linear-gradient(to right, #86efac 0%, #86efac ${((days / 365) * 100).toFixed(
+                      2,
+                    )}%, #1e293b ${((days / 365) * 100).toFixed(2)}%, #1e293b 100%)`,
                   }}
                 />
                 <style jsx global>{`
@@ -156,7 +151,8 @@ const PerformanceCalculator: NextPage = () => {
               </p>
               {sourceApy !== null && (
                 <p className="text-sm text-white/70">
-                  APY utilizado: <span className="text-white font-medium">{sourceApy.toFixed(2)}%</span> vía Return Finance
+                  APY utilizado: <span className="text-white font-medium">{sourceApy.toFixed(2)}%</span> vía Return
+                  Finance
                 </p>
               )}
             </div>

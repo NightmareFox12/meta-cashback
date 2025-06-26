@@ -5,8 +5,6 @@ import { Bar, BarChart, CartesianGrid, Cell, XAxis } from "recharts";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "~~/components/shad/ui/chart";
 
-export const description = "Earnings Bar";
-
 const chartData = [
   { month: "Monday", earning: 30 },
   { month: "Tuesday", earning: 10 },

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import DialogStake from "./_components/DialogStake";
 import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { ArrowUpRight, CheckCircle, Coins, InfoIcon, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowUpRight, CheckCircle, Coins, InfoIcon, Loader, Sparkles, TrendingUp } from "lucide-react";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
@@ -253,7 +253,7 @@ const StakingScreen = () => {
                       Stake USDC
                     </Button> */}
 
-                    {address && metaCashbackData && (
+                    {address && metaCashbackData ? (
                       <Dialog>
                         <DialogTrigger className="w-full" asChild>
                           <Button
@@ -271,6 +271,10 @@ const StakingScreen = () => {
                           setLoadingTransaction={setLoadingTransaction}
                         />
                       </Dialog>
+                    ) : (
+                      <Button disabled className="mx-auto w-full">
+                        <Loader className="animate-spin" /> Loading...
+                      </Button>
                     )}
                   </TabsContent>
 

@@ -5,6 +5,9 @@ export interface ItransferEvent {
     to: `0x${string}`;
     value: bigint;
   };
+  blockData: {
+    timestamp: bigint;
+  };
   transactionHash: `0x${string}`;
   eventName: string;
   blockNumber: bigint;
