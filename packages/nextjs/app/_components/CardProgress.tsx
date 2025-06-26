@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { TrendingUp } from "lucide-react";
+import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
@@ -42,8 +43,14 @@ const CardProgress = () => {
     functionName: "ELITE_LEVEL",
   });
 
+  const { data: stakeAmount } = useScaffoldReadContract({
+    contractName: "MetaCashback",
+    functionName: "stakes",
+    args: [address],
+  });
+
   const progressData = useMemo(() => {
-    if (!currentLevel || !explorerLevel || !pioneerLevel || !legendaryLevel || !eliteLevel) return null;
+    if (!currentLevel || !explorerLevel || !pioneerLevel || !legendaryLevel || !eliteLevel || !stakeAmount) return null;
 
     const levelHex = currentLevel.toString();
     let currentIndex = 0;
@@ -54,6 +61,10 @@ const CardProgress = () => {
 
     const current = levelThresholds[currentIndex];
     const next = levelThresholds[currentIndex + 1];
+
+    //TODO: Esto está mal:
+    //TODO: staking del usuario descomentar linea de abajo
+    // const userStaking = formatUnits(stakeAmount[0], 6);
 
     const range = next ? next.min - current.min : 1n;
     const achieved = next ? 0n : 1n; // cuando no hay siguiente nivel
@@ -66,7 +77,7 @@ const CardProgress = () => {
       progress: Math.min(progress, 100),
       remaining,
     };
-  }, [currentLevel, explorerLevel, pioneerLevel, legendaryLevel, eliteLevel]);
+  }, [currentLevel, explorerLevel, pioneerLevel, legendaryLevel, eliteLevel, stakeAmount]);
 
   return (
     <Card className="w-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white h-full relative overflow-hidden">
