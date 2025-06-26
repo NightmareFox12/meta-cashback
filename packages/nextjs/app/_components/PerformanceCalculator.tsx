@@ -11,13 +11,45 @@ const PerformanceCalculator: NextPage = () => {
   const [amount, setAmount] = useState(100);
   const [days, setDays] = useState(30);
   const [estimatedReturn, setEstimatedReturn] = useState(0);
+  const [sourceApy, setSourceApy] = useState<number | null>(null);
 
-  // Calculate returns based on amount and days
   useEffect(() => {
-    // Simple calculation: 1% monthly return (0.033% daily)
-    const dailyRate = 0.00033;
-    const calculatedReturn = amount * dailyRate * days;
-    setEstimatedReturn(Number.parseFloat(calculatedReturn.toFixed(2)));
+    const fetchReturnAPY = async () => {
+      try {
+        const response = await fetch("https://app.return.finance/api/v1/yields");
+        if (!response.ok) throw new Error("API response not OK");
+
+        const data = await response.json();
+
+        // Buscar la mejor opción de USDC, p. ej. en Base, Optimism o Polygon
+        const usdcOption = data.yields.find(
+          (item: any) =>
+            item.token.symbol === "USDC" &&
+            item.protocol &&
+            item.apy &&
+            !isNaN(Number(item.apy))
+        );
+
+        const apy = parseFloat(usdcOption?.apy || "0");
+        if (!apy) throw new Error("Invalid APY");
+
+        setSourceApy(apy);
+
+        const annualRate = apy / 100;
+        const dailyRate = annualRate / 365;
+        const result = amount * dailyRate * days;
+        setEstimatedReturn(Number(result.toFixed(2)));
+      } catch (error) {
+        console.warn("Fallo al obtener APY en Return Finance, usando fallback:", error);
+        const fallbackApy = 10; // 10% fijo si falla
+        setSourceApy(fallbackApy);
+        const dailyRate = fallbackApy / 100 / 365;
+        const result = amount * dailyRate * days;
+        setEstimatedReturn(Number(result.toFixed(2)));
+      }
+    };
+
+    fetchReturnAPY();
   }, [amount, days]);
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +64,7 @@ const PerformanceCalculator: NextPage = () => {
             <Calculator className="w-8 h-8" />
           </div>
           <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-            <div className="absolute inset-0 bg-white rounded-full transform translate-x-16 -translate-y-16"></div>
+            <div className="absolute inset-0 bg-white rounded-full transform translate-x-16 -translate-y-16" />
           </div>
           <CardTitle className="text-2xl font-bold">Performance Calculator</CardTitle>
         </CardHeader>
@@ -56,7 +88,7 @@ const PerformanceCalculator: NextPage = () => {
               />
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 mt-4">
               <div className="flex justify-between items-center">
                 <Label htmlFor="days" className="text-sm font-medium">
                   Time Period:
@@ -69,13 +101,14 @@ const PerformanceCalculator: NextPage = () => {
                   id="days"
                   min="1"
                   max="365"
-                  step="1"
                   value={days}
                   onChange={handleSliderChange}
                   className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer"
                   style={{
-                    background: `linear-gradient(to right, #86efac 0%, #86efac ${(days / 365) * 100}%, #1e293b ${(days / 365) * 100
-                      }%, #1e293b 100%)`,
+                    background: `linear-gradient(to right, #86efac 0%, #86efac ${(
+                      (days / 365) *
+                      100
+                    ).toFixed(2)}%, #1e293b ${((days / 365) * 100).toFixed(2)}%, #1e293b 100%)`,
                   }}
                 />
                 <style jsx global>{`
@@ -108,16 +141,24 @@ const PerformanceCalculator: NextPage = () => {
                   }
                 `}</style>
               </div>
-              <div className="flex justify-between text-xs text-gray-400 px-1">
-                <span className="text-white">1d</span>
-                <span className="text-white">30d</span>
-                <span className="text-white">90d</span>
-                <span className="text-white">180d</span>
-                <span className="text-white">365d</span>
+              <div className="flex justify-between text-xs text-white/70 px-1 mt-1">
+                <span>1d</span>
+                <span>30d</span>
+                <span>90d</span>
+                <span>180d</span>
+                <span>365d</span>
               </div>
             </div>
-            <div className="border-t border-white pt-3 mt-2">
-              <p className="text-lg font-bold">Estimated Return: ${estimatedReturn}</p>
+
+            <div className="border-t border-white pt-3 mt-4 space-y-1">
+              <p className="text-lg font-bold">
+                Estimated Return: <span className="text-green-300">${estimatedReturn}</span>
+              </p>
+              {sourceApy !== null && (
+                <p className="text-sm text-white/70">
+                  APY utilizado: <span className="text-white font-medium">{sourceApy.toFixed(2)}%</span> vía Return Finance
+                </p>
+              )}
             </div>
           </div>
         </CardContent>
