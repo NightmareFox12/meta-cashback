@@ -1,16 +1,45 @@
+import { useState } from "react";
 import Image from "next/image";
-import { TrendingUp, Wallet } from "lucide-react";
+import { Loader, TrendingUp, Wallet } from "lucide-react";
 import { NextPage } from "next";
 import { formatUnits } from "viem";
+import { useAccount } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth/useScaffoldReadContract";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWriteContract";
 import { formatNumber } from "~~/utils/formatNumber";
 
-type CardUserBalanceProps = {
-  userBalance: bigint | undefined;
-};
-const CardUserBalance: NextPage<CardUserBalanceProps> = ({ userBalance }) => {
+const CardUserBalance: NextPage = () => {
+  const { address } = useAccount();
+
+  //states
+  const [withdrawLoading, setWithdrawLoading] = useState<boolean>(false);
+
+  //smart contract
+  const { writeContractAsync: writeMetaCashbackAsync } = useScaffoldWriteContract({ contractName: "MetaCashback" });
+
+  const { data: userBalance } = useScaffoldReadContract({
+    contractName: "USDC",
+    functionName: "balanceOf",
+    args: [address],
+  });
+
+  //functions
+  const handleWithdraw = async () => {
+    try {
+      setWithdrawLoading(true);
+      await writeMetaCashbackAsync({
+        functionName: "withdrawStake",
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setWithdrawLoading(false);
+    }
+  };
+
   return (
     <Card className="w-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white h-full relative overflow-hidden">
       <CardHeader className="text-center space-y-2">
@@ -46,14 +75,23 @@ const CardUserBalance: NextPage<CardUserBalanceProps> = ({ userBalance }) => {
               <div className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center">
                 <TrendingUp className="w-4 h-4 text-green-400" />
               </div>
-              <span className="font-medium">Weekly Earnings</span>
+              <span className="font-medium">Total earnings</span>
             </div>
             <span className="font-bold">15 USDC</span>
           </div>
         </div>
       </CardFooter>
       <div className="px-6 mx-auto">
-        <Button className="bg-warning hover:bg-warning/20">Withdraw Earnings</Button>
+        <Button className="bg-warning hover:bg-warning/80" onClick={handleWithdraw} disabled={withdrawLoading}>
+          {!withdrawLoading ? (
+            "Withdraw earnings"
+          ) : (
+            <>
+              <Loader className="animate-spin" />
+              Withdrawing...
+            </>
+          )}
+        </Button>
       </div>
     </Card>
   );

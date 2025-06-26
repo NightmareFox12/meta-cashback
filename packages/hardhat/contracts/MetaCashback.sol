@@ -27,7 +27,7 @@ contract MetaCashback is AccessControl {
     }
 
     // states
-    mapping(address => StakeStruct) stakes;
+    mapping(address => StakeStruct) public stakes;
     uint256 public rewardRate = 10;
     uint256 public minStakingAmount = 1 * 10 ** 6;
 
@@ -40,11 +40,11 @@ contract MetaCashback is AccessControl {
     function getLevel() public view returns (bytes32) {
         uint256 userStaking = stakes[msg.sender].amount;
 
-        if (userStaking < 100) {
+        if (userStaking < 100 * 10 ** 6) {
             return EXPLORER_LEVEL;
-        } else if (userStaking < 500) {
+        } else if (userStaking < 500 * 10 ** 6) {
             return PIONEER_LEVEL;
-        } else if (userStaking < 1000) {
+        } else if (userStaking < 1000 * 10 ** 6) {
             return LEGENDARY_LEVEL;
         } else {
             return ELITE_LEVEL;
@@ -71,7 +71,8 @@ contract MetaCashback is AccessControl {
 
         require(USDCToken.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
 
-        stakes[msg.sender] = StakeStruct({ amount: _amount, timeStamp: block.timestamp });
+        stakes[msg.sender].amount += _amount;
+        stakes[msg.sender].timeStamp = block.timestamp;
     }
 
     function withdrawStake() public {

@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { TrendingUp } from "lucide-react";
 import { useAccount } from "wagmi";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
-import { TrendingUp } from "lucide-react";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 const levelThresholds = [
   { name: "Explorer", min: 0n, max: 100n },

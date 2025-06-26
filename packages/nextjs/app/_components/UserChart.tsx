@@ -67,10 +67,9 @@ export function UserChart() {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tick={{ fontSize: 14, fontWeight: "bold" }} 
+              tick={{ fontSize: 14, fontWeight: "bold" }}
               tickFormatter={value => value.slice(0, 3)}
             />
-
 
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
             <Bar dataKey="earning" radius={12}>

@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   10: {
     MetaCashback: {
-      address: "0x1b3e380a994F5909c5C808b872aC73c27D9d0B6C",
+      address: "0x54948441abA3e8083c23D11810D6E51EA09512C8",
       abi: [
         {
           inputs: [],
@@ -361,6 +361,30 @@ const deployedContracts = {
           name: "stakeTokens",
           outputs: [],
           stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "stakes",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "timeStamp",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {
