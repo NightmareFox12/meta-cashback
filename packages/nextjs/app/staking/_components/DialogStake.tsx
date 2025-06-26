@@ -1,24 +1,26 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Loader } from "lucide-react";
 import { NextPage } from "next";
 import { parseUnits } from "viem";
 import { useWalletClient } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "~~/components/shad/ui/dialog";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth/useScaffoldReadContract";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWriteContract";
-import { aproveAmount, getAllowance } from "~~/lib/lifi";
+import { aproveAmount, revokeAmount } from "~~/lib/lifi";
 
 type DialogStakeProps = {
-  showDialog: boolean;
   address: string;
+  contractAddress: string;
   stakeAmount: string;
   loadingTransaction: boolean;
   setLoadingTransaction: Dispatch<SetStateAction<boolean>>;
 };
 
 const DialogStake: NextPage<DialogStakeProps> = ({
-  showDialog,
   address,
+
+  contractAddress,
   stakeAmount,
   loadingTransaction,
   setLoadingTransaction,
@@ -26,43 +28,30 @@ const DialogStake: NextPage<DialogStakeProps> = ({
   const { data: wagmiClient } = useWalletClient();
 
   //states
-  const [allowance, setAllowance] = useState<bigint | undefined>(undefined);
-
-  //callbacks
-  const getTokenAllowance = useCallback(async () => {
-    if (!showDialog) return;
-    try {
-      setLoadingTransaction(true);
-      const res = await getAllowance(address);
-      setAllowance(res);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoadingTransaction(false);
-    }
-  }, [address, setLoadingTransaction, showDialog, loadingTransaction]);
 
   //smart contract
+  const { data: allowance, isLoading } = useScaffoldReadContract({
+    contractName: "USDC",
+    functionName: "allowance",
+    args: [address, contractAddress],
+  });
+
   const { writeContractAsync: writeYourContractAsync } = useScaffoldWriteContract({ contractName: "MetaCashback" });
 
   //functions
-  const handleAllowance = async () => {
+  const handleSetApprove = async () => {
     if (!wagmiClient) return;
     try {
       setLoadingTransaction(true);
-      const si = await aproveAmount(wagmiClient, parseUnits(stakeAmount, 6));
+      const si = await aproveAmount(wagmiClient, contractAddress, parseUnits(stakeAmount, 6));
 
       console.log(si);
     } catch (err) {
       console.log(err);
     } finally {
-      setLoadingTransaction(true);
+      setLoadingTransaction(false);
     }
   };
-
-  //TODO: crear estado para actualizar el allowance cada vez que transfiera
-  //TODO: poner el minAmount en un state para modificarlo en el admin
-  //TODO: probar la transferencia completa
 
   const handleTransfer = async () => {
     try {
@@ -78,11 +67,6 @@ const DialogStake: NextPage<DialogStakeProps> = ({
     }
   };
 
-  //effects
-  useEffect(() => {
-    getTokenAllowance();
-  }, [getTokenAllowance]);
-
   return (
     <DialogContent className="bg-base-200">
       <DialogHeader>
@@ -92,8 +76,8 @@ const DialogStake: NextPage<DialogStakeProps> = ({
       <DialogDescription>You must first approve the amount entered</DialogDescription>
       <div className="flex flex-col justify-center">
         {!allowance ? (
-          <Button onClick={handleAllowance} disabled={loadingTransaction}>
-            {!loadingTransaction ? (
+          <Button onClick={handleSetApprove} disabled={loadingTransaction || isLoading}>
+            {!loadingTransaction || isLoading ? (
               "Approve"
             ) : (
               <>
@@ -102,11 +86,21 @@ const DialogStake: NextPage<DialogStakeProps> = ({
             )}
           </Button>
         ) : (
-          <Button onClick={handleTransfer} disabled={loadingTransaction}>
+          <Button onClick={handleTransfer} disabled={loadingTransaction || isLoading}>
             Transfer
           </Button>
         )}
 
+        {allowance && (
+          <Button
+            variant={"destructive"}
+            onClick={async () => {
+              await revokeAmount(wagmiClient!, contractAddress);
+            }}
+          >
+            DELETE BUTTON
+          </Button>
+        )}
         {allowance}
       </div>
     </DialogContent>

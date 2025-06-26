@@ -3,7 +3,6 @@ import { getTokenAllowance } from "@lifi/sdk";
 import { Client } from "viem";
 
 //constans
-const META_CASHBACK_ADDRESS = "0x1243cFC1De9a19D72fEF7fd99c46e4FFFBaf307c";
 
 const USDCAddress: Record<number, string> = {
   10: "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85", //OP
@@ -50,14 +49,14 @@ export const getUserBalance = async ({ chainID, user }: { chainID: number; user:
   return tokenBalance;
 };
 
-export const aproveAmount = async (walletClient: Client, amount: bigint) => {
+export const aproveAmount = async (walletClient: Client, contractAddress: string, amount: bigint) => {
   const approvalRequest = {
     walletClient: walletClient,
     token: {
       address: USDCAddress[10],
       chainId: 10,
     },
-    spenderAddress: META_CASHBACK_ADDRESS,
+    spenderAddress: contractAddress,
     amount,
   };
   //@ts-ignore
@@ -65,14 +64,14 @@ export const aproveAmount = async (walletClient: Client, amount: bigint) => {
   return txHash;
 };
 
-export const revokeAmount = async (walletClient: Client) => {
+export const revokeAmount = async (walletClient: Client, contractAddress: string) => {
   const revokeRequest = {
     walletClient: walletClient,
     token: {
       address: USDCAddress[10],
       chainId: 10,
     },
-    spenderAddress: META_CASHBACK_ADDRESS,
+    spenderAddress: contractAddress,
   };
 
   //@ts-ignore
@@ -80,12 +79,12 @@ export const revokeAmount = async (walletClient: Client) => {
   return txHash;
 };
 
-export const getAllowance = async (userAddress: string) => {
+export const getAllowance = async (userAddress: string, contractAddress: string) => {
   const token = {
     address: USDCAddress[10],
     chainId: 10,
   };
 
-  const allowance = await getTokenAllowance(token, userAddress, META_CASHBACK_ADDRESS);
+  const allowance = await getTokenAllowance(token, userAddress, contractAddress);
   return allowance;
 };

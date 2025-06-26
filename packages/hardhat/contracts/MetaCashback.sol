@@ -46,6 +46,12 @@ contract MetaCashback is Ownable {
         }
     }
 
+    //Modify
+    function minStakingAmount(uint256 minAmount) onlyOwner public {
+        uint256 public minStakingAmount = minAmount;
+    }
+
+    //Writes
     function stakeTokens(uint256 _amount) public {
         require(_amount > 0, "Deposit amount must be greater than zero");
         require(

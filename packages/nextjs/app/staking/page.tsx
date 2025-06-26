@@ -14,7 +14,7 @@ import { Input } from "~~/components/shad/ui/input";
 import { Label } from "~~/components/shad/ui/label";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
 import { TabsContent } from "~~/components/shad/ui/tabs";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { useDeployedContractInfo, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { getUserBalance } from "~~/lib/lifi";
 import { formatNumber } from "~~/utils/formatNumber";
 
@@ -25,7 +25,6 @@ const StakingScreen = () => {
   const [stakeAmount, setStakeAmount] = useState<string>("");
   const [userBalance, setUserBalance] = useState<bigint | undefined>(undefined);
   const [loadingTransaction, setLoadingTransaction] = useState<boolean>(false);
-  const [showDialog, setShowDialog] = useState<boolean>(false);
 
   // const [unstakeAmount, setUnstakeAmount] = useState("");
 
@@ -37,6 +36,8 @@ const StakingScreen = () => {
   // const timeRemaining = 15; // days
 
   //smart contract
+  const { data: metaCashbackData } = useDeployedContractInfo({ contractName: "MetaCashback" });
+
   const { data: minAmount, isLoading: minAmountLoading } = useScaffoldReadContract({
     contractName: "MetaCashback",
     functionName: "minStakingAmount",
@@ -252,8 +253,8 @@ const StakingScreen = () => {
                       Stake USDC
                     </Button> */}
 
-                    {address && (
-                      <Dialog onOpenChange={setShowDialog}>
+                    {address && metaCashbackData && (
+                      <Dialog>
                         <DialogTrigger className="w-full" asChild>
                           <Button
                             className="bg-green-600 text-white hover:bg-green-700"
@@ -263,8 +264,8 @@ const StakingScreen = () => {
                           </Button>
                         </DialogTrigger>
                         <DialogStake
-                          showDialog={showDialog}
                           address={address}
+                          contractAddress={metaCashbackData.address}
                           stakeAmount={stakeAmount}
                           loadingTransaction={loadingTransaction}
                           setLoadingTransaction={setLoadingTransaction}
