@@ -2,14 +2,17 @@
 pragma solidity >=0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
 /**
  * @author Echizen500
  * @author NightmareFox12
  */
 
-contract MetaCashback is Ownable {
+contract MetaCashback is AccessControl {
+    // roles
+    bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
+
     IERC20 public USDCToken = IERC20(0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85);
 
     //constans
@@ -26,10 +29,12 @@ contract MetaCashback is Ownable {
     // states
     mapping(address => StakeStruct) stakes;
     uint256 public rewardRate = 10;
-    uint256 public minStakingAmount = 5 * 10 ** 6;
+    uint256 public minStakingAmount = 1 * 10 ** 6;
 
     //constructor
-    constructor(address initalOwner) Ownable(initalOwner) {}
+    constructor() {
+        _grantRole(ADMIN_ROLE, msg.sender);
+    }
 
     //Views
     function getLevel() public view returns (bytes32) {
@@ -46,9 +51,14 @@ contract MetaCashback is Ownable {
         }
     }
 
-    //Modify
-    function minStakingAmount(uint256 minAmount) onlyOwner public {
-        uint256 public minStakingAmount = minAmount;
+    //Updates
+    function updateStakingAmount(uint256 _minAmount) public onlyRole(ADMIN_ROLE) {
+        minStakingAmount = _minAmount;
+    }
+
+    function addAdmin(address newAdmin) public onlyRole(ADMIN_ROLE) {
+        require(!hasRole(ADMIN_ROLE, newAdmin), "The admin already exists");
+        _grantRole(ADMIN_ROLE, newAdmin);
     }
 
     //Writes
