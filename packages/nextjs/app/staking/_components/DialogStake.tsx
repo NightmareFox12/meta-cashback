@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
+import { Loader } from "lucide-react";
 import { NextPage } from "next";
 import { parseUnits } from "viem";
 import { useWalletClient } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "~~/components/shad/ui/dialog";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWriteContract";
-import { aproveAmount, getAllowance, revokeAmount } from "~~/lib/lifi";
+import { aproveAmount, getAllowance } from "~~/lib/lifi";
 
 type DialogStakeProps = {
   showDialog: boolean;
@@ -39,7 +40,7 @@ const DialogStake: NextPage<DialogStakeProps> = ({
     } finally {
       setLoadingTransaction(false);
     }
-  }, [address, setLoadingTransaction, showDialog]);
+  }, [address, setLoadingTransaction, showDialog, loadingTransaction]);
 
   //smart contract
   const { writeContractAsync: writeYourContractAsync } = useScaffoldWriteContract({ contractName: "MetaCashback" });
@@ -58,6 +59,10 @@ const DialogStake: NextPage<DialogStakeProps> = ({
       setLoadingTransaction(true);
     }
   };
+
+  //TODO: crear estado para actualizar el allowance cada vez que transfiera
+  //TODO: poner el minAmount en un state para modificarlo en el admin
+  //TODO: probar la transferencia completa
 
   const handleTransfer = async () => {
     try {
@@ -88,10 +93,16 @@ const DialogStake: NextPage<DialogStakeProps> = ({
       <div className="flex flex-col justify-center">
         {!allowance ? (
           <Button onClick={handleAllowance} disabled={loadingTransaction}>
-            Approve
+            {!loadingTransaction ? (
+              "Approve"
+            ) : (
+              <>
+                <Loader className="animate-spin" /> Loading...
+              </>
+            )}
           </Button>
         ) : (
-          <Button onClick={() => revokeAmount(wagmiClient!)} disabled={loadingTransaction}>
+          <Button onClick={handleTransfer} disabled={loadingTransaction}>
             Transfer
           </Button>
         )}

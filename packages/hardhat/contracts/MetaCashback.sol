@@ -58,17 +58,6 @@ contract MetaCashback is Ownable {
         stakes[msg.sender] = StakeStruct({ amount: _amount, timeStamp: block.timestamp });
     }
 
-    // function calculateReward(address staker) public view returns (uint256) {
-    //     require(stakes[staker] > 0, "No tokens staked");
-
-    //     uint256 timeStaked = block.timestamp - timestamps[staker];
-    //     return (stakes[staker] * rewardRate * timeStaked) / (365 days * 100);
-    // }
-
-    // Descomenta y usa la función calculateReward para obtener la recompensa
-    // uint256 reward = calculateReward(msg.sender); // <-- Aquí se define 'reward'
-    // uint256 totalAmount = stakes[msg.sender] + reward;
-
     function withdrawStake() public {
         require(stakes[msg.sender].amount > 0, "No tokens available for withdrawal");
 
