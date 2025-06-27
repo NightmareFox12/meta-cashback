@@ -366,14 +366,14 @@ export default function Component() {
                             },
                             {
                                 icon: Repeat,
-                                title: "Token Conversion",
-                                desc: "Auto swaps using LI.FI SDK",
+                                title: "Wallet Balance",
+                                desc: "Read USDC with LI.FI SDK (Optimism)",
                                 iconColor: "text-yellow-500",
                             },
                             {
                                 icon: TrendingUp,
-                                title: "DeFi Reinvestment",
-                                desc: "Reinvest into yield pools",
+                                title: "Yield Insights",
+                                desc: "Real-time APY via Return.Finance",
                                 iconColor: "text-purple-500",
                             },
                         ].map((option, index) => (

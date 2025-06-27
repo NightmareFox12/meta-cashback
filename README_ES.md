@@ -15,7 +15,7 @@ MetaCashback es un sistema revolucionario que permite a los usuarios ganar cashb
 
 3. **Aumento de Cashback mediante Staking** — Si el usuario bloquea USDC en un pool DeFi, su cashback puede subir al 2%, 3% o más, dependiendo de la cantidad bloqueada.
 
-4. **Conversión Automática con LI.FI SDK** — El sistema utiliza LI.FI para mover recompensas entre cadenas y asegurar una liquidez eficiente.
+4. **Lectura de Balance con LI.FI SDK** — El sistema utiliza LI.FI para consultar saldos de USDC en Optimism y facilitar operaciones eficientes.
 
 5. **Pago Automático a la Cartera** — Las recompensas acumuladas se acreditan directamente en la cartera MetaMask del usuario.
 

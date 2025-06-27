@@ -24,25 +24,10 @@ const CardProgress = () => {
     account: address,
   });
 
-  const { data: explorerLevel } = useScaffoldReadContract({
-    contractName: "MetaCashback",
-    functionName: "EXPLORER_LEVEL",
-  });
-
-  const { data: pioneerLevel } = useScaffoldReadContract({
-    contractName: "MetaCashback",
-    functionName: "PIONEER_LEVEL",
-  });
-
-  const { data: legendaryLevel } = useScaffoldReadContract({
-    contractName: "MetaCashback",
-    functionName: "LEGENDARY_LEVEL",
-  });
-
-  const { data: eliteLevel } = useScaffoldReadContract({
-    contractName: "MetaCashback",
-    functionName: "ELITE_LEVEL",
-  });
+  const { data: explorerLevel } = useScaffoldReadContract({ contractName: "MetaCashback", functionName: "EXPLORER_LEVEL" });
+  const { data: pioneerLevel } = useScaffoldReadContract({ contractName: "MetaCashback", functionName: "PIONEER_LEVEL" });
+  const { data: legendaryLevel } = useScaffoldReadContract({ contractName: "MetaCashback", functionName: "LEGENDARY_LEVEL" });
+  const { data: eliteLevel } = useScaffoldReadContract({ contractName: "MetaCashback", functionName: "ELITE_LEVEL" });
 
   const { data: stakeAmount } = useScaffoldReadContract({
     contractName: "MetaCashback",
@@ -63,42 +48,42 @@ const CardProgress = () => {
     const current = levelThresholds[currentIndex];
     const next = levelThresholds[currentIndex + 1];
 
-    //TODO: monto staking TOTAL del usuario descomentar linea de abajo 🔽
-    // const userStaking = formatUnits(stakeAmount[0], 6); -> 485.54
+    const userStaking = parseFloat(formatUnits(stakeAmount[0], 6));
+    const currentMin = Number(current.min);
+    const nextMin = next ? Number(next.min) : currentMin;
 
-    const range = next ? next.min - current.min : 1n;
-    const achieved = next ? 0n : 1n; // cuando no hay siguiente nivel
-    const progress = next ? Number((achieved * 100n) / range) : 100;
-    const remaining = next ? next.min - current.min : 0n;
+    const range = nextMin - currentMin || 1;
+    const achieved = userStaking - currentMin;
+    const rawProgress = (achieved * 100) / range;
+    const progress = next ? Math.min(rawProgress, 100) : 100;
+    const remaining = next ? Math.max(nextMin - userStaking, 0) : 0;
 
     return {
       currentName: current.name,
       nextName: next?.name ?? "Maxed Out",
-      progress: Math.min(progress, 100),
-      remaining,
+      progress: parseFloat(progress.toFixed(2)),
+      remaining: remaining.toFixed(2),
+      userStaking: userStaking.toFixed(2),
     };
   }, [currentLevel, explorerLevel, pioneerLevel, legendaryLevel, eliteLevel, stakeAmount]);
 
-  //components
-  const BackgroundIcon = () => {
-    return (
-      <>
-        <div className="absolute top-2 right-2 opacity-20">
-          <TrendingUp className="w-16 h-16" />
+  const BackgroundIcon = () => (
+    <>
+      <div className="absolute top-2 right-2 opacity-20">
+        <TrendingUp className="w-16 h-16" />
+      </div>
+      <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+        <div className="absolute inset-0 bg-white rounded-full transform translate-x-8 -translate-y-8">
+          <TrendingUp className="w-8 h-8 opacity-20" />
         </div>
-        <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-          <div className="absolute inset-0 bg-white rounded-full transform translate-x-8 -translate-y-8">
-            <TrendingUp className="w-8 h-8 opacity-20" />
-          </div>
-        </div>
-      </>
-    );
-  };
+      </div>
+    </>
+  );
 
   return (
     <Card className="sm:col-span-2 md:col-span-1 w-full h-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 relative overflow-hidden justify-center">
       <CardHeader>
-        <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+        <div className="mx-auto w-16 h-16 bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
           <TrendingUp className="w-8 h-8" />
         </div>
         <BackgroundIcon />
@@ -112,12 +97,15 @@ const CardProgress = () => {
                 ? `Next Level: ${progressData.nextName}`
                 : "You've reached the highest level 🎉"}
             </p>
-            <div className="px-2">
-              <Progress value={progressData.progress + 47} className="bg-base-100" />
+            <div>
+              <Progress value={progressData.progress} className="bg-base-100" />
             </div>
+            <p className="text-sm opacity-70">
+              Your staking amount: <strong>${progressData.userStaking}</strong> USDC
+            </p>
             {progressData.nextName !== "Maxed Out" && (
               <p className="text-sm opacity-70">
-                You need approximately ${progressData.remaining.toString()} USDC to level up
+                You need <strong>${progressData.remaining}</strong> USDC to level up
               </p>
             )}
           </div>

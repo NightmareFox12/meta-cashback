@@ -133,7 +133,7 @@ const StakingScreen = () => {
           <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
-                <InfoIcon className="h-4 w-4 text-orange-400" />
+                <InfoIcon className="h-4 w-4 text-gray-500" />
                 <span className="text-sm font-medium">Min Amount</span>
               </div>
               <div className="mt-2">
@@ -180,7 +180,7 @@ const StakingScreen = () => {
                 <Tabs defaultValue="stake" className="w-full">
                   <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="stake" className="flex items-center gap-2">
-                      <ArrowUpRight className="h-4 w-4 text-green-500" />
+                      <ArrowUpRight className="h-4 w-4 text-green-400" />
                       Stake
                     </TabsTrigger>
                     {/* <TabsTrigger value="unstake" className="flex items-center gap-2">
@@ -205,7 +205,7 @@ const StakingScreen = () => {
                         />
                         <Button
                           variant="outline"
-                          className="bg-orange-500 text-white hover:bg-orange-600"
+                          className="bg-gray-400 text-white hover:bg-gray-500"
                           onClick={() => setStakeAmount(userBalance?.toString() ?? "")}
                         >
                           Max
@@ -257,7 +257,7 @@ const StakingScreen = () => {
                       <Dialog>
                         <DialogTrigger className="w-full" asChild>
                           <Button
-                            className="bg-green-600 text-white hover:bg-green-700"
+                            className="bg-green-400 text-white hover:bg-green-500"
                             // disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
                           >
                             Stake USDC
@@ -341,7 +341,7 @@ const StakingScreen = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Rewards Earned</span>
-                  <span className="font-medium text-green-700">${totalRewards}</span>
+                  <span className="font-medium text-sm">${totalRewards}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Total Value</span>
