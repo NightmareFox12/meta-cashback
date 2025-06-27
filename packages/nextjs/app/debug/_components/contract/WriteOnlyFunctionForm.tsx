@@ -14,10 +14,10 @@ import {
   transformAbiFunction,
 } from "~~/app/debug/_components/contract";
 import { IntegerInput } from "~~/components/scaffold-eth";
+import { Button } from "~~/components/shad/ui/button";
 import { useTransactor } from "~~/hooks/scaffold-eth";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { simulateContractWriteAndNotifyError } from "~~/utils/scaffold-eth/contract";
-import { Button } from "~~/components/shad/ui/button";
 
 type WriteOnlyFunctionFormProps = {
   abi: Abi;

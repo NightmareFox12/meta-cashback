@@ -54,7 +54,6 @@ export const FaucetButton = () => {
 
   const isBalanceZero = balance && balance.value === 0n;
 
-
   //TODO: si el balance es 0 mostrar el toop tip para siempre
 
   return (
