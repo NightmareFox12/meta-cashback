@@ -63,9 +63,8 @@ const CardProgress = () => {
     const current = levelThresholds[currentIndex];
     const next = levelThresholds[currentIndex + 1];
 
-    //TODO: Esto está mal:
-    //TODO: monto staking TOTOAL del usuario descomentar linea de abajo 🔽
-    // const userStaking = formatUnits(stakeAmount[0], 6);
+    //TODO: monto staking TOTAL del usuario descomentar linea de abajo 🔽
+    // const userStaking = formatUnits(stakeAmount[0], 6); -> 485.54
 
     const range = next ? next.min - current.min : 1n;
     const achieved = next ? 0n : 1n; // cuando no hay siguiente nivel
@@ -103,7 +102,7 @@ const CardProgress = () => {
           <TrendingUp className="w-8 h-8" />
         </div>
         <BackgroundIcon />
-        <CardTitle className="text-2xl font-bold">Progress of Level</CardTitle>
+        <CardTitle className="text-2xl font-bold text-center">Progress of Level</CardTitle>
       </CardHeader>
       <CardContent className="text-center">
         {progressData ? (
