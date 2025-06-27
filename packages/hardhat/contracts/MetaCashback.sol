@@ -9,6 +9,8 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
  * @author NightmareFox12
  */
 
+//TODO: leer eventos en staking
+//TODO: implementar eventos en el chart
 contract MetaCashback is AccessControl {
     // roles
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
@@ -21,15 +23,13 @@ contract MetaCashback is AccessControl {
     bytes32 public constant LEGENDARY_LEVEL = "LEGENDARY_LEVEL";
     bytes32 public constant ELITE_LEVEL = "ELITE_LEVEL";
 
-    struct StakeStruct {
-        uint256 amount;
-        uint256 timeStamp;
-    }
-
-    // states
-    mapping(address => StakeStruct) public stakes;
+    //states
+    mapping(address => uint256) public totalStake;
     uint256 public rewardRate = 10;
     uint256 public minStakingAmount = 1 * 10 ** 6;
+
+    //events
+    event Staking(address indexed user, uint256 amount, uint256 timeStamp);
 
     //constructor
     constructor() {
@@ -38,7 +38,7 @@ contract MetaCashback is AccessControl {
 
     //Views
     function getLevel() public view returns (bytes32) {
-        uint256 userStaking = stakes[msg.sender].amount;
+        uint256 userStaking = totalStake[msg.sender];
 
         if (userStaking < 100 * 10 ** 6) {
             return EXPLORER_LEVEL;
@@ -63,24 +63,28 @@ contract MetaCashback is AccessControl {
 
     //Writes
     function stakeTokens(uint256 _amount) public {
+        address user = msg.sender;
+        require(user == tx.origin,"only user");
         require(_amount > 0, "Deposit amount must be greater than zero");
         require(
-            _amount >= minStakingAmount && USDCToken.allowance(msg.sender, address(this)) >= minStakingAmount,
+            _amount >= minStakingAmount && USDCToken.allowance(user, address(this)) >= minStakingAmount,
             "The amount of the deposit must be higher than the minimum amount"
         );
 
-        require(USDCToken.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
+        require(USDCToken.transferFrom(user, address(this), _amount), "Token transfer failed");
 
-        stakes[msg.sender].amount += _amount;
-        stakes[msg.sender].timeStamp = block.timestamp;
+        totalStake[user] += _amount;
+        emit Staking(user, _amount, block.timestamp);
     }
 
     function withdrawStake() public {
-        require(stakes[msg.sender].amount > 0, "No tokens available for withdrawal");
+        address user = msg.sender;
 
-        uint256 totalAmount = stakes[msg.sender].amount;
+        require(totalStake[user] > 0, "No tokens available for withdrawal");
 
-        delete stakes[msg.sender];
-        require(USDCToken.transfer(msg.sender, totalAmount), "Token transfer failed");
+        uint256 totalAmount = totalStake[user];
+
+        delete totalStake[user];
+        require(USDCToken.transfer(user, totalAmount), "Token transfer failed");
     }
 }
