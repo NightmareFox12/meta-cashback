@@ -5,6 +5,7 @@ import { TrendingUp } from "lucide-react";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
+import { Progress } from "~~/components/shad/ui/progress";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 const levelThresholds = [
@@ -63,7 +64,7 @@ const CardProgress = () => {
     const next = levelThresholds[currentIndex + 1];
 
     //TODO: Esto está mal:
-    //TODO: staking del usuario descomentar linea de abajo
+    //TODO: monto staking TOTOAL del usuario descomentar linea de abajo 🔽
     // const userStaking = formatUnits(stakeAmount[0], 6);
 
     const range = next ? next.min - current.min : 1n;
@@ -79,30 +80,41 @@ const CardProgress = () => {
     };
   }, [currentLevel, explorerLevel, pioneerLevel, legendaryLevel, eliteLevel, stakeAmount]);
 
-  return (
-    <Card className="w-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white h-full relative overflow-hidden">
-      <CardHeader className="text-center space-y-2">
-        <div className="mx-auto w-16 h-16 bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-          <TrendingUp className="w-8 h-8" />
+  //components
+  const BackgroundIcon = () => {
+    return (
+      <>
+        <div className="absolute top-2 right-2 opacity-20">
+          <TrendingUp className="w-16 h-16" />
         </div>
         <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-          <div className="absolute inset-0 bg-white rounded-full transform translate-x-16 -translate-y-16" />
+          <div className="absolute inset-0 bg-white rounded-full transform translate-x-8 -translate-y-8">
+            <TrendingUp className="w-8 h-8 opacity-20" />
+          </div>
         </div>
+      </>
+    );
+  };
+
+  return (
+    <Card className="sm:col-span-2 md:col-span-1 w-full h-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 relative overflow-hidden justify-center">
+      <CardHeader>
+        <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+          <TrendingUp className="w-8 h-8" />
+        </div>
+        <BackgroundIcon />
         <CardTitle className="text-2xl font-bold">Progress of Level</CardTitle>
       </CardHeader>
-      <CardContent className="text-center space-y-10">
+      <CardContent className="text-center">
         {progressData ? (
-          <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+          <div className="bg-white/20 backdrop-blur-sm rounded-2xl flex flex-col gap-2 p-1 border border-white/20">
             <p className="text-lg font-medium mb-2">
               {progressData.nextName !== "Maxed Out"
                 ? `Next Level: ${progressData.nextName}`
                 : "You've reached the highest level 🎉"}
             </p>
-            <div className="w-full bg-secondary rounded-full h-3 mb-2">
-              <div
-                className="bg-green-300 h-3 rounded-full transition-all duration-700"
-                style={{ width: `${progressData.progress}%` }}
-              ></div>
+            <div className="px-2">
+              <Progress value={progressData.progress + 47} className="bg-base-100" />
             </div>
             {progressData.nextName !== "Maxed Out" && (
               <p className="text-sm opacity-70">

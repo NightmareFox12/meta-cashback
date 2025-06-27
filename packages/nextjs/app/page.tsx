@@ -26,22 +26,16 @@ const Home: NextPage = () => {
           />
         ))}
       </div>
-      <div className="flex flex-row gap-4">
-        <section className="flex justify-center items-center flex-1 mt-4 px-3">
-          {/* Card balance  */}
-          <CardUserBalance />
-        </section>
-        {/* Role Card Section */}
+
+      {/* Cards  */}
+      <div className="grid md:h-[250px] gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <CardUserBalance />
         <CardLevel />
-        <section className="flex justify-center items-center flex-1 mt-4 px-3">
-          <UserChart />
-        </section>
+        <CardProgress />
       </div>
 
-      <div className="flex flex-row gap-4 justify-center">
-        <section className="flex justify-center items-center flex-1 px-3 max-w-md">
-          <CardProgress />
-        </section>
+      <div className="flex flex-col md:flex-row gap-5">
+        <UserChart />
         <PerformanceCalculator />
       </div>
     </main>

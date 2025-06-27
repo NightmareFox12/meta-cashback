@@ -1,7 +1,7 @@
-import { ForwardRefExoticComponent, RefAttributes } from "react";
+import React, { ForwardRefExoticComponent, RefAttributes } from "react";
 import { Crown, Flame, LucideProps, Rocket, Shield } from "lucide-react";
 import { useAccount } from "wagmi";
-import { Card } from "~~/components/shad/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
@@ -93,36 +93,48 @@ const CardLevel = () => {
   });
 
   //components
+  const BackgroundIcon = (
+    IconComponent: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>,
+  ) => {
+    return (
+      <>
+        <div className="absolute top-2 right-2 opacity-20">
+          <IconComponent className="w-16 h-16" />
+        </div>
+        <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+          <div className="absolute inset-0 bg-white rounded-full transform translate-x-8 -translate-y-8">
+            <IconComponent className="w-8 h-8 opacity-20" />
+          </div>
+        </div>
+      </>
+    );
+  };
+
   const CardRole = ({ role }: { role: IRoles }) => {
     const IconComponent = role.icon;
 
     return (
       <Card
-        className={`${role.bgColor} rounded-2xl p-6 text-white relative overflow-hidden h-full w-full max-w-sm flex flex-col justify-center items-center`}
+        className={`${role.bgColor} rounded-2xl p-6 text-white relative overflow-hidden h-full w-full justify-center`}
       >
-        {/* Background Icon */}
-        <div className="absolute top-4 right-4 opacity-20">
-          <IconComponent className="w-16 h-16" />
-        </div>
-        <div className="absolute top-0 right-0 w-40 h-40 opacity-10">
-          <div className="absolute inset-0 bg-white rounded-full transform translate-x-12 -translate-y-12"></div>
-        </div>
-        {/* Content */}
-        <div className="relative z-10 space-y-6 flex flex-col justify-center items-center text-center">
-          <div className={`w-12 h-12 ${role.iconBg} rounded-full flex items-center justify-center mx-auto`}>
-            <IconComponent className={`w-6 h-6 ${role.iconColor}`} />
+        <CardHeader>
+          <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+            <IconComponent className="w-8 h-8" />
           </div>
-          <h3 className="font-bold text-2xl">{role.name}</h3>
+          {BackgroundIcon(IconComponent)}
+          <CardTitle className="text-center text-2xl font-bold">{role.name}</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col justify-center items-center">
           <p className="text-lg opacity-90">{role.range}</p>
           <p className="text-lg font-semibold">{role.cashback}</p>
           {role.benefit && <p className="text-sm opacity-80">{role.benefit}</p>}
-        </div>
+        </CardContent>
       </Card>
     );
   };
 
   return (
-    <section className="flex justify-center items-center flex-1 mt-4 px-3">
+    <>
       {isLoading ? (
         <Skeleton className="w-full h-full" />
       ) : currentLevel !== undefined ? (
@@ -135,7 +147,7 @@ const CardLevel = () => {
       ) : (
         <Skeleton className="w-full h-full" />
       )}
-    </section>
+    </>
   );
 };
 export default CardLevel;

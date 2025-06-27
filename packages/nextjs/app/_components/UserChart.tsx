@@ -50,14 +50,34 @@ const colors = [
 ];
 
 export function UserChart() {
+  //components
+  const BackgroundIcon = () => {
+    return (
+      <>
+        <div className="absolute top-2 right-2 opacity-20">
+          <TrendingUp className="w-16 h-16" />
+        </div>
+        <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+          <div className="absolute inset-0 bg-white rounded-full transform translate-x-8 -translate-y-8">
+            <TrendingUp className="w-8 h-8 opacity-20" />
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
-    <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-400 max-w-lg h-full">
+    <Card className="h-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 relative overflow-hidden justify-center flex-1">
       <CardHeader>
-        <CardTitle className="text-white">Earning Chart</CardTitle>
-        <CardDescription className="text-white">Last Week</CardDescription>
+        <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+          <TrendingUp className="w-8 h-8" />
+        </div>
+        <BackgroundIcon />
+        <CardTitle className="text-center text-2xl font-bold">Earning Chart</CardTitle>
+        <CardDescription className="text-center">Last Week</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-42">
+        <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
