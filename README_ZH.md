@@ -63,7 +63,7 @@ MetaCashback 集成了：
 
 **LI.FI SDK** 用于在 Optimism 上读取余额  
 
-**Return Finance API** 用于显示实时 APY  
+**DeFiLlama API** 用于显示实时 APY: https://defillama.com/docs/api  
 
 **DeFi 协议** 用于质押和收益生成
 

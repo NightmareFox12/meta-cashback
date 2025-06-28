@@ -72,7 +72,7 @@ MetaCashback se integra con:
 
 **LI.FI SDK** para lectura de balances en Optimism  
 
-**Return Finance API** para mostrar APY en tiempo real  
+**DeFiLlama API** para mostrar APY en tiempo real: https://defillama.com/docs/api
 
 **Protocolos DeFi** para staking y generación de rendimiento
 
