@@ -2,54 +2,106 @@
 
 import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, Cell, XAxis } from "recharts";
+import { formatUnits } from "viem";
+import { useAccount } from "wagmi";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "~~/components/shad/ui/chart";
-
-const chartData = [
-  { month: "Monday", earning: 30 },
-  { month: "Tuesday", earning: 10 },
-  { month: "Wednesday", earning: 5 },
-  { month: "Thursday", earning: 2 },
-  { month: "Friday", earning: 20 },
-  { month: "Saturday", earning: 13 },
-  { month: "Sunday", earning: 6 },
-];
-
-const chartConfig = {
-  monday: {
-    label: "Monday",
-  },
-  tuesday: {
-    label: "Tuesday",
-  },
-  wednesday: {
-    label: "Wednesday",
-  },
-  thursday: {
-    label: "Thursday",
-  },
-  friday: {
-    label: "Friday",
-  },
-  saturday: {
-    label: "Saturday",
-  },
-  sunday: {
-    label: "Sunday",
-  },
-} satisfies ChartConfig;
-
-const colors = [
-  "#fb923c", // Orange
-  "#fb923c",
-  "#fb923c",
-  "#fb923c",
-  "#fb923c",
-  "#fb923c",
-  "#fb923c",
-];
+import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth/useScaffoldEventHistory";
 
 export function UserChart() {
+  const { address } = useAccount();
+
+  const { data: events } = useScaffoldEventHistory({
+    contractName: "MetaCashback",
+    eventName: "Staking",
+    fromBlock: 137559986n,
+    watch: true,
+    filters: { user: address },
+    blockData: true,
+    transactionData: true,
+    receiptData: true,
+  });
+
+  const weekdayMap = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  // last 7 days
+  const now = new Date();
+  const pastWeek = Array.from({ length: 7 }).map((_, i) => {
+    const date = new Date();
+    date.setDate(now.getDate() - i);
+    return {
+      date,
+      label: weekdayMap[date.getDay()],
+      earning: 0,
+    };
+  });
+
+  const earningsByDay = pastWeek.reduce(
+    (acc, day) => {
+      acc[day.label] = 0;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  events?.forEach(x => {
+    const args = x?.args;
+    if (!args) return;
+
+    const timestamp = args.timeStamp;
+    if (!timestamp) return;
+
+    const timestampSeconds = parseFloat(timestamp.toString());
+    const eventDate = new Date(timestampSeconds * 1000);
+
+    const isInLast7Days = (now.getTime() - eventDate.getTime()) / (1000 * 60 * 60 * 24) <= 7;
+    if (!isInLast7Days) return;
+
+    const dayLabel = weekdayMap[eventDate.getDay()];
+    const amount = parseFloat(formatUnits(args.amount ?? 0n, 6).toString());
+
+    earningsByDay[dayLabel] += amount;
+  });
+
+  const chartData = weekdayMap.map(day => ({
+    month: day,
+    earning: earningsByDay[day] || 0,
+  }));
+
+  const chartConfig = {
+    monday: {
+      label: "Monday",
+    },
+    tuesday: {
+      label: "Tuesday",
+    },
+    wednesday: {
+      label: "Wednesday",
+    },
+    thursday: {
+      label: "Thursday",
+    },
+    friday: {
+      label: "Friday",
+    },
+    saturday: {
+      label: "Saturday",
+    },
+    sunday: {
+      label: "Sunday",
+    },
+  } satisfies ChartConfig;
+
+  const colors = [
+    "#fb923c", // Orange
+    "#fb923c",
+    "#fb923c",
+    "#fb923c",
+    "#fb923c",
+    "#fb923c",
+    "#fb923c",
+  ];
+
   //components
   const BackgroundIcon = () => {
     return (
@@ -73,7 +125,7 @@ export function UserChart() {
           <TrendingUp className="w-8 h-8" />
         </div>
         <BackgroundIcon />
-        <CardTitle className="text-center text-2xl font-bold">Earning Chart</CardTitle>
+        <CardTitle className="text-center text-2xl font-bold">Staking Chart</CardTitle>
         <CardDescription className="text-center">Last Week</CardDescription>
       </CardHeader>
       <CardContent>
@@ -102,7 +154,7 @@ export function UserChart() {
         <div className="flex gap-2 font-medium text-white">
           Trending up by 5.2% this week <TrendingUp className="h-4 w-4" />
         </div>
-        <div className="text-white">Showing total Earning last week</div>
+        <div className="text-white">Showing total Staking last week</div>
       </CardFooter>
     </Card>
   );

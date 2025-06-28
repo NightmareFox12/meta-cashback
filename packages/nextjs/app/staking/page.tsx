@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import DialogHistory from "./_components/DialogHistory";
 import DialogStake from "./_components/DialogStake";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
@@ -15,25 +15,18 @@ import { Label } from "~~/components/shad/ui/label";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
 import { TabsContent } from "~~/components/shad/ui/tabs";
 import { useDeployedContractInfo, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
-import { getUserBalance } from "~~/lib/lifi";
 import { formatNumber } from "~~/utils/formatNumber";
 
 const StakingScreen = () => {
-  const { address, chainId } = useAccount();
+  const { address } = useAccount();
 
   //states
   const [stakeAmount, setStakeAmount] = useState<string>("");
-  const [userBalance, setUserBalance] = useState<bigint | undefined>(undefined);
   const [loadingTransaction, setLoadingTransaction] = useState<boolean>(false);
 
-  // const [unstakeAmount, setUnstakeAmount] = useState("");
-
-  //TODO: leer eventos en staking
   //TODO: implementar eventos en el chart
   // Mock data
   const apy = 8.5;
-  // const lockPeriod = 30; // days
-  // const timeRemaining = 15; // days
 
   //smart contract
   const { data: metaCashbackData } = useDeployedContractInfo({ contractName: "MetaCashback" });
@@ -49,26 +42,11 @@ const StakingScreen = () => {
     args: [address],
   });
 
-  //functions
-  const getUserBalanceCallBack = useCallback(async () => {
-    if (chainId === undefined || address === undefined) return;
-
-    try {
-      const res = await getUserBalance({
-        chainID: chainId,
-        user: address,
-      });
-
-      setUserBalance(res?.amount ?? 0n);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [address, chainId]);
-
-  //effects
-  useEffect(() => {
-    getUserBalanceCallBack();
-  }, [getUserBalanceCallBack]);
+  const { data: userBalance } = useScaffoldReadContract({
+    contractName: "USDC",
+    functionName: "balanceOf",
+    args: [address],
+  });
 
   return (
     <main className="min-h-screen p-4">
@@ -128,21 +106,6 @@ const StakingScreen = () => {
               </div>
             </CardContent>
           </Card>
-
-          {/* <Card>
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-2">
-                <Clock className="h-4 w-4 text-orange-600" />
-                <span className="text-sm font-medium">APY</span>
-              </div>
-              <div className="mt-2">
-                <span className="text-2xl font-bold text-green-600">{apy}%</span>
-                <Badge variant="secondary" className="ml-2">
-                  Active
-                </Badge>
-              </div>
-            </CardContent>
-          </Card> */}
         </div>
 
         {/* Main Content */}
@@ -199,46 +162,13 @@ const StakingScreen = () => {
                         USDC
                       </p>
                     </div>
-                    {/* 
-                    <div className="bg-blue-50 p-4 rounded-lg space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Info className="h-4 w-4 text-blue-600" />
-                        <span className="font-medium text-blue-900">Staking Details</span>
-                      </div>
-                      <div className="text-sm text-blue-800 space-y-1">
-                        <div className="flex justify-between">
-                          <span>APY:</span>
-                          <span className="font-medium">{apy}%</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Lock Period:</span>
-                          <span className="font-medium">{lockPeriod} days</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Estimated Monthly Rewards:</span>
-                          <span className="font-medium">
-                            ${stakeAmount ? ((Number.parseFloat(stakeAmount) * apy) / 100 / 12).toFixed(2) : "0.00"}{" "}
-                            USDC
-                          </span>
-                        </div>
-                      </div>
-                    </div> */}
-
-                    {/* <Button
-                      className="w-full"
-                      size="lg"
-                      onClick={handleChangeUSDC}
-                      disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
-                    >
-                      Stake USDC
-                    </Button> */}
 
                     {address && metaCashbackData ? (
                       <Dialog>
                         <DialogTrigger className="w-full" asChild>
                           <Button
                             className="bg-green-400 text-white hover:bg-green-500"
-                            // disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
+                            disabled={!stakeAmount || Number.parseFloat(stakeAmount) <= 0}
                           >
                             Stake USDC
                           </Button>
@@ -269,49 +199,6 @@ const StakingScreen = () => {
                       <DialogHistory />
                     </Dialog>
                   </TabsContent>
-
-                  {/* <TabsContent value="unstake" className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="unstake-amount">Amount to Unstake</Label>
-                      <div className="flex space-x-2">
-                        <Input
-                          id="unstake-amount"
-                          placeholder="0.00"
-                          value={unstakeAmount}
-                          onChange={e => setUnstakeAmount(e.target.value)}
-                          className="flex-1"
-                        />
-                        <Button variant="outline" onClick={handleMaxUnstake}>
-                          Max
-                        </Button>
-                      </div>
-                      <p className="text-sm text-white">Staked: ${stakedAmount.toLocaleString()} USDC</p>
-                    </div>
-
-                    <div className="bg-orange-50 p-4 rounded-lg space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-orange-600" />
-                        <span className="font-medium text-orange-900">Lock Period Status</span>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm text-orange-800">
-                          <span>Time Remaining:</span>
-                          <span className="font-medium">{timeRemaining} days</span>
-                        </div>
-                        <Progress value={(timeRemaining / lockPeriod) * 100} className="h-2" />
-                        <p className="text-xs text-orange-700">Early unstaking may result in penalty fees</p>
-                      </div>
-                    </div>
-
-                    <Button
-                      className="w-full"
-                      size="lg"
-                      variant="destructive"
-                      disabled={!unstakeAmount || Number.parseFloat(unstakeAmount) <= 0}
-                    >
-                      Unstake USDC
-                    </Button>
-                  </TabsContent> */}
                 </Tabs>
               </CardContent>
             </Card>
