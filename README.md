@@ -18,7 +18,7 @@ MetaCashback is a revolutionary system that allows users to earn cashback in USD
 1. **Purchase with MetaMask Card** — The user pays with the card at any merchant.
 2. **Base Cashback** — Receives an initial refund in USDC (example: 1%).
 3. **Cashback Increase via Staking** — If the user locks USDC in a DeFi pool, their cashback can rise to 2%, 3%, or more, depending on the amount locked.
-4. **Automatic Conversion with LI.FI SDK** — The system uses LI.FI to move rewards across chains and ensure efficient liquidity.
+4. **Balance Reading with LI.FI SDK** — The system uses LI.FI to fetch USDC balances on Optimism and support efficient operations.
 5. **Automated Wallet Payment** — Accumulated rewards are credited directly to the user's MetaMask wallet.
 
 ## 🎯 Cashback Levels
@@ -65,9 +65,13 @@ A smart option for users who want to maximize their rewards effortlessly:
 
 MetaCashback integrates with:
 
-- **MetaMask Card** for payment processing
-- **LI.FI SDK** for cross-chain transfers and swaps
-- **DeFi protocols** for staking and yield generation
+**MetaMask Card** for payment processing  
+
+**LI.FI SDK** for balance reading on Optimism  
+
+**Return Finance API** to display real-time APY  
+
+**DeFi protocols** for staking and yield generation
 
 ## 📋 Requirements
 
@@ -91,6 +95,8 @@ MetaCashback uses several key tools and libraries to ensure smooth blockchain in
 These technologies, together, form the technical foundation of MetaCashback, enabling the creation of a decentralized, secure, and user-friendly system to maximize cashback rewards in the DeFi ecosystem.
 
 ## 🔗 Links
+
+https://meta-cashback.vercel.app/
 
 ## 📄 License
 
