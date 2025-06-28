@@ -190,7 +190,7 @@ const StakingScreen = () => {
                     <Dialog>
                       <DialogTrigger asChild>
                         <div className="flex justify-center">
-                          <Button>
+                          <Button className="bg-gray-400 text-white hover:bg-gray-500">
                             <History />
                             View History
                           </Button>
