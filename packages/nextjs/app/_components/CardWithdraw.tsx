@@ -5,7 +5,7 @@ import { useAccount } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 const CardWithdraw = () => {
   const { address } = useAccount();
@@ -16,6 +16,20 @@ const CardWithdraw = () => {
     functionName: "totalStake",
     args: [address],
   });
+
+  const { writeContractAsync: writeMetaCashBackAsync } = useScaffoldWriteContract({ contractName: "MetaCashback" });
+
+  //functions
+  const handleWithdraw = async () => {
+    try {
+      await writeMetaCashBackAsync({
+        functionName: "withdrawStake",
+        account: address,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   //components
   const BackgroundIcon = () => {
@@ -47,7 +61,7 @@ const CardWithdraw = () => {
           Total Stake: {isLoading ? <Skeleton className="w-8 h-4" /> : <>{formatUnits(totalStake ?? 0n, 6)} USDC</>}
           {/* <p className="text-lg font-semibold">cashback</p> */}
         </CardContent>
-        <Button>Withdraw</Button>
+        <Button onClick={handleWithdraw}>Withdraw</Button>
       </Card>
     </>
   );
