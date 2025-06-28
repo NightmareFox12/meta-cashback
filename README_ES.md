@@ -68,9 +68,11 @@ Una opción inteligente para usuarios que desean maximizar sus recompensas sin e
 
 MetaCashback se integra con:
 
-**Tarjeta MetaMask** para el procesamiento de pagos
+**Tarjeta MetaMask** para el procesamiento de pagos  
 
-**LI.FI SDK** para transferencias y swaps entre cadenas
+**LI.FI SDK** para lectura de balances en Optimism  
+
+**Return Finance API** para mostrar APY en tiempo real  
 
 **Protocolos DeFi** para staking y generación de rendimiento
 
@@ -99,6 +101,8 @@ Para el desarrollo de MetaCashback, se han empleado diversas herramientas y libr
 Estas tecnologías, en conjunto, forman la base técnica de MetaCashback, permitiendo la creación de un sistema descentralizado, seguro y fácil de usar para maximizar las recompensas de cashback en el ecosistema DeFi.
 
 ## 🔗 Enlaces
+
+https://meta-cashback.vercel.app/
 
 ## 📄 Licencia
 
