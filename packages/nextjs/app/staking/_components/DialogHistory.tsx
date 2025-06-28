@@ -50,24 +50,26 @@ const DialogHistory: NextPage = () => {
           </TableHeader>
           <TableBody>
             {events === undefined || isLoading ? (
-              <Skeleton />
+              <TableRow>
+                <Skeleton className="w-full h-52" />
+              </TableRow>
             ) : (
               events.map((x, y) => (
                 <TableRow key={y}>
                   <TableCell>
-                    {new Date(
-                      parseFloat(x.args === undefined ? "0" : (x.args.timeStamp?.toString() ?? "0")) * 1000,
-                    ).toLocaleDateString("en-US", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "2-digit",
-                    })}
+                    {x?.args?.timeStamp
+                      ? new Date(parseFloat(x.args.timeStamp.toString()) * 1000).toLocaleDateString("en-US", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "2-digit",
+                        })
+                      : "N/A"}
                   </TableCell>
                   <TableCell>Success</TableCell>
-                  <TableCell>{formatUnits(x.args.amount ?? 0n, 6)} USDC</TableCell>
+                  <TableCell>{formatUnits(x?.args.amount ?? 0n, 6)} USDC</TableCell>
                   <TableCell>
                     <a
-                      href={`https://optimistic.etherscan.io/tx/${x.transactionHash}`}
+                      href={`https://optimistic.etherscan.io/tx/${x?.transactionHash}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2"
