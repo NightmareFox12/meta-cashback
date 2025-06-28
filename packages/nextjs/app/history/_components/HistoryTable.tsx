@@ -96,23 +96,23 @@ const HistoryTable: NextPage<HistoryTableProps> = ({ data }) => {
   });
 
   return (
-    <div className="w-full bg-primary rounded-2xl p-6 border border-primary/20">
+    <div className="w-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 rounded-2xl p-6 border border-primary/20">
       {/* Header Section */}
-      <div className="mb-6">
+      <div className="mb-10">
         <div className="flex items-center gap-4 mb-4">
           <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
             <Database className="w-5 h-5 text-warning" />
           </div>
           <div>
-            <h2 className="text-xl font-bold">Transaction History</h2>
-            <p className="text-sm">Track your recent transfers and transactions</p>
+            <h2 className="text-xl font-bold text-white">Transaction History</h2>
+            <p className="text-sm text-white">Track your recent transfers and transactions</p>
           </div>
         </div>
 
         {/* Controls */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4 mb-4">
           <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary/60 w-4 h-4" />
+            
             <Input
               placeholder="Filter transactions..."
               value={(table.getColumn("to")?.getFilterValue() as string) ?? ""}
@@ -120,35 +120,37 @@ const HistoryTable: NextPage<HistoryTableProps> = ({ data }) => {
             />
           </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Columns <ChevronDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter(column => column.getCanHide())
-                .map(column => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={value => column.toggleVisibility(!!value)}
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline" className="ml-auto">
+      Columns <ChevronDown />
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent
+    align="end"
+    className="bg-gray-900 p-4 text-white rounded-lg shadow-lg opacity-100 backdrop-blur-none z-50 isolate"
+  >
+    {table
+      .getAllColumns()
+      .filter(column => column.getCanHide())
+      .map(column => (
+        <DropdownMenuCheckboxItem
+          key={column.id}
+          className="capitalize"
+          checked={column.getIsVisible()}
+          onCheckedChange={value => column.toggleVisibility(!!value)}
+        >
+          {column.id}
+        </DropdownMenuCheckboxItem>
+      ))}
+  </DropdownMenuContent>
+</DropdownMenu>
+
         </div>
       </div>
 
       {/* Table Container */}
-      <div className="rounded-xl border border-primary/20 bg-secondary/5 shadow-lg">
+      <div className="rounded-xl border border-primary/20 bg-secondary/70 shadow-lg">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
