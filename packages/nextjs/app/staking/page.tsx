@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import DialogHistory from "./_components/DialogHistory";
 import DialogStake from "./_components/DialogStake";
-import { Separator } from "@radix-ui/react-separator";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { ArrowUpRight, CheckCircle, Coins, InfoIcon, Loader, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Coins, History, InfoIcon, Loader, Sparkles } from "lucide-react";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
@@ -28,9 +28,9 @@ const StakingScreen = () => {
 
   // const [unstakeAmount, setUnstakeAmount] = useState("");
 
+  //TODO: leer eventos en staking
+  //TODO: implementar eventos en el chart
   // Mock data
-  const stakedAmount = 5000.0;
-  const totalRewards = 125.75;
   const apy = 8.5;
   // const lockPeriod = 30; // days
   // const timeRemaining = 15; // days
@@ -41,6 +41,12 @@ const StakingScreen = () => {
   const { data: minAmount, isLoading: minAmountLoading } = useScaffoldReadContract({
     contractName: "MetaCashback",
     functionName: "minStakingAmount",
+  });
+
+  const { data: totalStake } = useScaffoldReadContract({
+    contractName: "MetaCashback",
+    functionName: "totalStake",
+    args: [address],
   });
 
   //functions
@@ -89,48 +95,22 @@ const StakingScreen = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-center items-center">
-          {/* <Card className="bg-base">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-2">
-                <Wallet className="h-4 w-4 text-blue-600" />
-                <span className="text-sm font-medium">Available Balance</span>
-              </div>
-              <div className="mt-2">
-                <span className="text-2xl font-bold ">${userBalance.toLocaleString()}</span>
-                <span className="text-sm ml-1">USDC</span>
-              </div>
-            </CardContent>
-          </Card> */}
-
-          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
+        <div className="flex  gap-4 w-full">
+          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white flex-1">
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
                 <Coins className="h-4 w-4 text-green-600" />
                 <span className="text-sm font-medium">Staked Amount</span>
               </div>
               <div className="mt-2">
-                <span className="text-2xl font-bold ">${stakedAmount.toLocaleString()}</span>
-                <span className="text-sm ml-1">USDC</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-2">
-                <TrendingUp className="h-4 w-4 text-purple-600" />
-                <span className="text-sm font-medium">Total Rewards</span>
-              </div>
-              <div className="mt-2">
-                <span className="text-2xl font-bold">${totalRewards.toLocaleString()}</span>
+                <span className="text-2xl font-bold ">{formatUnits(totalStake ?? 0n, 6)}</span>
                 <span className="text-sm ml-1">USDC</span>
               </div>
             </CardContent>
           </Card>
 
           {/* Min amount card  */}
-          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
+          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white flex-1">
             <CardContent className="p-4">
               <div className="flex items-center space-x-2">
                 <InfoIcon className="h-4 w-4 text-gray-500" />
@@ -276,6 +256,18 @@ const StakingScreen = () => {
                         <Loader className="animate-spin" /> Loading...
                       </Button>
                     )}
+
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <div className="flex justify-center">
+                          <Button>
+                            <History />
+                            View History
+                          </Button>
+                        </div>
+                      </DialogTrigger>
+                      <DialogHistory />
+                    </Dialog>
                   </TabsContent>
 
                   {/* <TabsContent value="unstake" className="space-y-4">
@@ -329,7 +321,7 @@ const StakingScreen = () => {
         {/* Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-4 w-full">
           {/* Current Position */}
-          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
+          {/* <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
             <CardHeader>
               <CardTitle className="text-lg">Your Position</CardTitle>
             </CardHeader>
@@ -354,7 +346,7 @@ const StakingScreen = () => {
                 Claim Rewards
               </Button>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Pool Information */}
           {/* <Card>
@@ -382,7 +374,7 @@ const StakingScreen = () => {
             </Card> */}
 
           {/* Recent Activity */}
-          <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
+          {/* <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
             <CardHeader>
               <CardTitle className="text-lg">Recent Activity</CardTitle>
             </CardHeader>
@@ -409,7 +401,7 @@ const StakingScreen = () => {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </main>

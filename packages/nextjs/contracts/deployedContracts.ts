@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   10: {
     MetaCashback: {
-      address: "0x54948441abA3e8083c23D11810D6E51EA09512C8",
+      address: "0xDE664fCa4c217dC30a1d851261EC9Af0726E8D5a",
       abi: [
         {
           inputs: [],
@@ -108,6 +108,31 @@ const deployedContracts = {
             },
           ],
           name: "RoleRevoked",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "user",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "timeStamp",
+              type: "uint256",
+            },
+          ],
+          name: "Staking",
           type: "event",
         },
         {
@@ -366,30 +391,6 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "address",
-              name: "",
-              type: "address",
-            },
-          ],
-          name: "stakes",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "timeStamp",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
               internalType: "bytes4",
               name: "interfaceId",
               type: "bytes4",
@@ -401,6 +402,25 @@ const deployedContracts = {
               internalType: "bool",
               name: "",
               type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "totalStake",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
             },
           ],
           stateMutability: "view",

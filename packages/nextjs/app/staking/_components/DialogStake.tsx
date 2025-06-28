@@ -19,7 +19,6 @@ type DialogStakeProps = {
 
 const DialogStake: NextPage<DialogStakeProps> = ({
   address,
-
   contractAddress,
   stakeAmount,
   loadingTransaction,
@@ -70,8 +69,7 @@ const DialogStake: NextPage<DialogStakeProps> = ({
   return (
     <DialogContent className="bg-base-200">
       <DialogHeader>
-        <DialogTitle>Testing GOD</DialogTitle>
-        <DialogDescription></DialogDescription>
+        <DialogTitle>Staking USDC</DialogTitle>
       </DialogHeader>
       <DialogDescription>You must first approve the amount entered</DialogDescription>
       <div className="flex flex-col justify-center">
@@ -91,7 +89,7 @@ const DialogStake: NextPage<DialogStakeProps> = ({
           </Button>
         )}
 
-        {allowance && (
+        {allowance ? (
           <Button
             variant={"destructive"}
             onClick={async () => {
@@ -100,8 +98,9 @@ const DialogStake: NextPage<DialogStakeProps> = ({
           >
             DELETE BUTTON
           </Button>
+        ) : (
+          ""
         )}
-        {allowance}
       </div>
     </DialogContent>
   );

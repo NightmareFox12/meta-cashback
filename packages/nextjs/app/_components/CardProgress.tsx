@@ -24,14 +24,23 @@ const CardProgress = () => {
     account: address,
   });
 
-  const { data: explorerLevel } = useScaffoldReadContract({ contractName: "MetaCashback", functionName: "EXPLORER_LEVEL" });
-  const { data: pioneerLevel } = useScaffoldReadContract({ contractName: "MetaCashback", functionName: "PIONEER_LEVEL" });
-  const { data: legendaryLevel } = useScaffoldReadContract({ contractName: "MetaCashback", functionName: "LEGENDARY_LEVEL" });
+  const { data: explorerLevel } = useScaffoldReadContract({
+    contractName: "MetaCashback",
+    functionName: "EXPLORER_LEVEL",
+  });
+  const { data: pioneerLevel } = useScaffoldReadContract({
+    contractName: "MetaCashback",
+    functionName: "PIONEER_LEVEL",
+  });
+  const { data: legendaryLevel } = useScaffoldReadContract({
+    contractName: "MetaCashback",
+    functionName: "LEGENDARY_LEVEL",
+  });
   const { data: eliteLevel } = useScaffoldReadContract({ contractName: "MetaCashback", functionName: "ELITE_LEVEL" });
 
   const { data: stakeAmount } = useScaffoldReadContract({
     contractName: "MetaCashback",
-    functionName: "stakes",
+    functionName: "totalStake",
     args: [address],
   });
 
@@ -48,7 +57,7 @@ const CardProgress = () => {
     const current = levelThresholds[currentIndex];
     const next = levelThresholds[currentIndex + 1];
 
-    const userStaking = parseFloat(formatUnits(stakeAmount[0], 6));
+    const userStaking = parseFloat(formatUnits(stakeAmount, 6));
     const currentMin = Number(current.min);
     const nextMin = next ? Number(next.min) : currentMin;
 

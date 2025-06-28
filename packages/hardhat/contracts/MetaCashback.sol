@@ -9,8 +9,6 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
  * @author NightmareFox12
  */
 
-//TODO: leer eventos en staking
-//TODO: implementar eventos en el chart
 contract MetaCashback is AccessControl {
     // roles
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
@@ -64,7 +62,7 @@ contract MetaCashback is AccessControl {
     //Writes
     function stakeTokens(uint256 _amount) public {
         address user = msg.sender;
-        require(user == tx.origin,"only user");
+        require(user == tx.origin, "only user");
         require(_amount > 0, "Deposit amount must be greater than zero");
         require(
             _amount >= minStakingAmount && USDCToken.allowance(user, address(this)) >= minStakingAmount,
