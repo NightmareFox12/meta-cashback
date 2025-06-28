@@ -22,7 +22,7 @@ const DialogHistory: NextPage = () => {
   const { data: events } = useScaffoldEventHistory({
     contractName: "MetaCashback",
     eventName: "Staking",
-    fromBlock: 31231n,
+    fromBlock: 137559986n,
     watch: true,
     filters: { user: address },
     blockData: true,
@@ -30,7 +30,6 @@ const DialogHistory: NextPage = () => {
     receiptData: true,
   });
 
-  console.log(events);
   return (
     <DialogContent className="bg-secondary">
       <DialogHeader>

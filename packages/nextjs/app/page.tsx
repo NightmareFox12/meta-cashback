@@ -3,6 +3,7 @@
 import CardLevel from "./_components/CardLevel";
 import CardProgress from "./_components/CardProgress";
 import CardUserBalance from "./_components/CardUserBalance";
+import CardWithdraw from "./_components/CardWithdraw";
 import PerformanceCalculator from "./_components/PerformanceCalculator";
 import { UserChart } from "./_components/UserChart";
 import { Sparkles } from "lucide-react";
@@ -28,8 +29,9 @@ const Home: NextPage = () => {
       </div>
 
       {/* Cards  */}
-      <div className="grid md:h-[250px] gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid lg:h-[250px] gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <CardUserBalance />
+        <CardWithdraw />
         <CardLevel />
         <CardProgress />
       </div>

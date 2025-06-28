@@ -90,7 +90,7 @@ const CardProgress = () => {
   );
 
   return (
-    <Card className="sm:col-span-2 md:col-span-1 w-full h-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 relative overflow-hidden justify-center">
+    <Card className=" w-full h-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 relative overflow-hidden justify-center">
       <CardHeader>
         <div className="mx-auto w-16 h-12 bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
           <TrendingUp className="w-8 h-8" />
