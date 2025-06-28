@@ -4,6 +4,7 @@ import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "~~/components/shad/ui/dialog";
 import { ScrollArea } from "~~/components/shad/ui/scroll-area";
+import { Skeleton } from "~~/components/shad/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -19,7 +20,7 @@ const DialogHistory: NextPage = () => {
   const { address } = useAccount();
 
   //smart contract
-  const { data: events } = useScaffoldEventHistory({
+  const { data: events, isLoading } = useScaffoldEventHistory({
     contractName: "MetaCashback",
     eventName: "Staking",
     fromBlock: 137559986n,
@@ -48,29 +49,35 @@ const DialogHistory: NextPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {events?.map((x, y) => (
-              <TableRow key={y}>
-                <TableCell>
-                  {new Date(parseFloat(x.args.timeStamp?.toString() ?? "0") * 1000).toLocaleDateString("en-US", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "2-digit",
-                  })}
-                </TableCell>
-                <TableCell>Success</TableCell>
-                <TableCell>{formatUnits(x.args.amount ?? 0n, 6)} USDC</TableCell>
-                <TableCell>
-                  <a
-                    href={`https://optimistic.etherscan.io/tx/${x.transactionHash}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <ExternalLink className="w-5 h-5" /> See
-                  </a>
-                </TableCell>
-              </TableRow>
-            ))}
+            {events === undefined || isLoading ? (
+              <Skeleton />
+            ) : (
+              events.map((x, y) => (
+                <TableRow key={y}>
+                  <TableCell>
+                    {new Date(
+                      parseFloat(x.args === undefined ? "0" : (x.args.timeStamp?.toString() ?? "0")) * 1000,
+                    ).toLocaleDateString("en-US", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "2-digit",
+                    })}
+                  </TableCell>
+                  <TableCell>Success</TableCell>
+                  <TableCell>{formatUnits(x.args.amount ?? 0n, 6)} USDC</TableCell>
+                  <TableCell>
+                    <a
+                      href={`https://optimistic.etherscan.io/tx/${x.transactionHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <ExternalLink className="w-5 h-5" /> See
+                    </a>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </ScrollArea>

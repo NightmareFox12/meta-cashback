@@ -1,6 +1,8 @@
-import React, { ForwardRefExoticComponent, RefAttributes } from "react";
-import { Coins, Crown, Flame, LucideProps, Rocket, Shield } from "lucide-react";
+import React from "react";
+import { Coins } from "lucide-react";
+import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
+import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
@@ -9,10 +11,10 @@ const CardWithdraw = () => {
   const { address } = useAccount();
 
   //smart contract
-  const { data: currentLevel, isLoading } = useScaffoldReadContract({
+  const { data: totalStake, isLoading } = useScaffoldReadContract({
     contractName: "MetaCashback",
-    functionName: "getLevel",
-    account: address,
+    functionName: "totalStake",
+    args: [address],
   });
 
   //components
@@ -33,25 +35,20 @@ const CardWithdraw = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Skeleton className="w-full h-full" />
-      ) : currentLevel !== undefined ? (
-        <Card className="bg-gradient-to-r from-blue-400 to-blue-600 rounded-2xl p-6 text-white relative overflow-hidden h-full w-full justify-center">
-          <CardHeader>
-            <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-              <Coins className="w-8 h-8" />
-            </div>
-            <BackgroundIcon />
-            <CardTitle className="text-center text-2xl font-bold">name</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col justify-center items-center">
-            <p className="text-lg opacity-90">range</p>
-            <p className="text-lg font-semibold">cashback</p>
-          </CardContent>
-        </Card>
-      ) : (
-        <Skeleton className="w-full h-full" />
-      )}
+      <Card className="bg-gradient-to-r from-blue-400 to-blue-600 rounded-2xl p-6 text-white relative overflow-hidden h-full w-full justify-center">
+        <CardHeader>
+          <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+            <Coins className="w-8 h-8" />
+          </div>
+          <BackgroundIcon />
+          <CardTitle className="text-center text-2xl font-bold">Withdraw</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col justify-center items-center">
+          Total Stake: {isLoading ? <Skeleton className="w-8 h-4" /> : <>{formatUnits(totalStake ?? 0n, 6)} USDC</>}
+          {/* <p className="text-lg font-semibold">cashback</p> */}
+        </CardContent>
+        <Button>Withdraw</Button>
+      </Card>
     </>
   );
 };
