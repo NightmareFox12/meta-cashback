@@ -19,7 +19,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, Database, ExternalLink, Search } from "lucide-react";
+import { ArrowUpDown, ChevronDown, Database, ExternalLink } from "lucide-react";
 import { NextPage } from "next";
 import { formatUnits } from "viem";
 import { Button } from "~~/components/shad/ui/button";
@@ -45,7 +45,7 @@ const columns: ColumnDef<ItransferEventParsed>[] = [
     },
     cell: ({ row }) => (
       <a
-        href={`https://etherscan.io/tx/${row.getValue("transactionHash")}`}
+        href={`https://optimistic.etherscan.io/tx/${row.getValue("transactionHash")}`}
         className="cursor-pointer underline flex gap-2 items-center"
         target="_BLANK"
       >
@@ -112,7 +112,6 @@ const HistoryTable: NextPage<HistoryTableProps> = ({ data }) => {
         {/* Controls */}
         <div className="flex items-center gap-4 mb-4">
           <div className="relative flex-1 max-w-sm">
-            
             <Input
               placeholder="Filter transactions..."
               value={(table.getColumn("to")?.getFilterValue() as string) ?? ""}
@@ -120,32 +119,31 @@ const HistoryTable: NextPage<HistoryTableProps> = ({ data }) => {
             />
           </div>
 
-<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline" className="ml-auto">
-      Columns <ChevronDown />
-    </Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent
-    align="end"
-    className="bg-gray-900 p-4 text-white rounded-lg shadow-lg opacity-100 backdrop-blur-none z-50 isolate"
-  >
-    {table
-      .getAllColumns()
-      .filter(column => column.getCanHide())
-      .map(column => (
-        <DropdownMenuCheckboxItem
-          key={column.id}
-          className="capitalize"
-          checked={column.getIsVisible()}
-          onCheckedChange={value => column.toggleVisibility(!!value)}
-        >
-          {column.id}
-        </DropdownMenuCheckboxItem>
-      ))}
-  </DropdownMenuContent>
-</DropdownMenu>
-
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                Columns <ChevronDown />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="bg-gray-900 p-4 text-white rounded-lg shadow-lg opacity-100 backdrop-blur-none z-50 isolate"
+            >
+              {table
+                .getAllColumns()
+                .filter(column => column.getCanHide())
+                .map(column => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={value => column.toggleVisibility(!!value)}
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 

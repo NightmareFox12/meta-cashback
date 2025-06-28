@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { Loader } from "lucide-react";
 import { NextPage } from "next";
+import toast from "react-hot-toast";
 import { parseUnits } from "viem";
 import { useWalletClient } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
@@ -26,8 +27,6 @@ const DialogStake: NextPage<DialogStakeProps> = ({
 }) => {
   const { data: wagmiClient } = useWalletClient();
 
-  //states
-
   //smart contract
   const { data: allowance, isLoading } = useScaffoldReadContract({
     contractName: "USDC",
@@ -42,9 +41,8 @@ const DialogStake: NextPage<DialogStakeProps> = ({
     if (!wagmiClient) return;
     try {
       setLoadingTransaction(true);
-      const si = await aproveAmount(wagmiClient, contractAddress, parseUnits(stakeAmount, 6));
-
-      console.log(si);
+      await aproveAmount(wagmiClient, contractAddress, parseUnits(stakeAmount, 6));
+      toast.success("staking success!");
     } catch (err) {
       console.log(err);
     } finally {

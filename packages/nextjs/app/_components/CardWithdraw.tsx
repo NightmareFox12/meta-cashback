@@ -61,7 +61,9 @@ const CardWithdraw = () => {
           Total Stake: {isLoading ? <Skeleton className="w-8 h-4" /> : <>{formatUnits(totalStake ?? 0n, 6)} USDC</>}
           {/* <p className="text-lg font-semibold">cashback</p> */}
         </CardContent>
-        <Button onClick={handleWithdraw}>Withdraw</Button>
+        <Button onClick={handleWithdraw} disabled={totalStake === undefined || totalStake <= 0n}>
+          Withdraw
+        </Button>
       </Card>
     </>
   );
