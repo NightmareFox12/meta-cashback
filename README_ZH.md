@@ -12,7 +12,7 @@ MetaCashback 是一个革命性的系统，允许用户使用 MetaMask 卡购物
 1. **使用 MetaMask 卡购买** — 用户使用该卡在任何商家处支付。
 2. **基本返现** — 获得初始 USDC 退款（例如：1%）。
 3. **通过质押增加返现** — 如果用户将 USDC 锁定在 DeFi 池中，其返现可能会根据锁定的金额增加到 2%、3% 或更多。
-4. **使用 LI.FI SDK 自动转换** — 系统使用 LI.FI 在链之间移动奖励，并确保高效的流动性。
+4. **使用 LI.FI SDK 读取余额** — 系统利用 LI.FI 在 Optimism 上查询 USDC 余额，以实现高效操作。
 5. **自动钱包支付** — 累计的奖励将直接存入用户的 MetaMask 钱包。
 
 ## 🎯 返现等级
@@ -57,11 +57,16 @@ MetaCashback 是一个革命性的系统，允许用户使用 MetaMask 卡购物
 
 ## 🛠️ 技术实现
 
-MetaCashback 与以下各项集成：
+MetaCashback 集成了：
 
-- **MetaMask 卡** 用于支付处理
-- **LI.FI SDK** 用于跨链传输和兑换
-- **DeFi 协议** 用于质押和收益生成
+**MetaMask 卡** 用于支付处理  
+
+**LI.FI SDK** 用于在 Optimism 上读取余额  
+
+**Return Finance API** 用于显示实时 APY  
+
+**DeFi 协议** 用于质押和收益生成
+
 
 ## 📋 要求
 
@@ -87,6 +92,8 @@ MetaCashback 采用了多种关键工具和库，以确保与区块链的流畅�
 ## 🔗 链接
 
 ## 📄 许可证
+
+https://meta-cashback.vercel.app/
 
 根据 **MIT 许可证** 发布。
 
