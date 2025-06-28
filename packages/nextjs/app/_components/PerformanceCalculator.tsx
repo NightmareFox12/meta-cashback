@@ -7,83 +7,106 @@ import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/
 import { Input } from "~~/components/shad/ui/input";
 import { Label } from "~~/components/shad/ui/label";
 
+interface DefiLlamaPool {
+  chain: string;
+  project: string;
+  symbol: string;
+  apy: number;
+  tvlUsd: number;
+  pool: string;
+}
+
 const PerformanceCalculator: NextPage = () => {
   const [amount, setAmount] = useState(100);
   const [days, setDays] = useState(30);
   const [estimatedReturn, setEstimatedReturn] = useState(0);
   const [sourceApy, setSourceApy] = useState<number | null>(null);
+  const [usedFallback, setUsedFallback] = useState(false);
 
   useEffect(() => {
-    const fetchReturnAPY = async () => {
+    const fetchAPY = async () => {
       try {
-        const response = await fetch("https://app.return.finance/api/v1/yields");
-        if (!response.ok) throw new Error("API response not OK");
+        const response = await fetch("https://yields.llama.fi/pools");
+        if (!response.ok) {
+          throw new Error(`API response not OK: ${response.status} ${response.statusText}`);
+        }
 
         const data = await response.json();
+        const allPools: DefiLlamaPool[] = data.data; 
 
-        // Buscar la mejor opción de USDC, p. ej. en Base, Optimism o Polygon
-        const usdcOption = data.yields.find(
-          (item: any) => item.token.symbol === "USDC" && item.protocol && item.apy && !isNaN(Number(item.apy)),
+        const preferredChains = ["Base", "Optimism", "Polygon"];
+        const usdcOptions = allPools.filter(
+          (item: DefiLlamaPool) =>
+            item.symbol === "USDC" &&
+            preferredChains.includes(item.chain) &&
+            typeof item.apy === "number" &&
+            item.apy > 0 && 
+            item.tvlUsd > 1000 
         );
 
-        const apy = parseFloat(usdcOption?.apy || "0");
-        if (!apy) throw new Error("Invalid APY");
+        usdcOptions.sort((a: DefiLlamaPool, b: DefiLlamaPool) => b.apy - a.apy);
+        const bestOption = usdcOptions[0];
 
+        if (!bestOption || bestOption.apy <= 0) {
+          throw new Error("No valid USDC APY found on preferred chains.");
+        }
+
+        const apy = bestOption.apy;
+        
         setSourceApy(apy);
-
-        const annualRate = apy / 100;
-        const dailyRate = annualRate / 365;
-        const result = amount * dailyRate * days;
-        setEstimatedReturn(Number(result.toFixed(2)));
+        setUsedFallback(false);
+        calculateReturn(apy);
       } catch (error) {
-        console.warn("Fallo al obtener APY en Return Finance, usando fallback:", error);
-        const fallbackApy = 10; // 10% fijo si falla
+        console.warn("Failed to obtain APY from DefiLlama, using fallback:", error);
+        const fallbackApy = 10;
         setSourceApy(fallbackApy);
-        const dailyRate = fallbackApy / 100 / 365;
-        const result = amount * dailyRate * days;
-        setEstimatedReturn(Number(result.toFixed(2)));
+        setUsedFallback(true);
+        calculateReturn(fallbackApy);
       }
     };
 
-    fetchReturnAPY();
+    const calculateReturn = (apy: number) => {
+      const dailyRate = apy / 100 / 365;
+      const result = amount * dailyRate * days;
+      setEstimatedReturn(Number(result.toFixed(2)));
+    };
+
+    fetchAPY();
   }, [amount, days]);
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDays(Number(e.target.value));
   };
 
-  //components
-  const BackgroundIcon = () => {
-    return (
-      <>
-        <div className="absolute top-2 right-2 opacity-20">
-          <Calculator className="w-16 h-16" />
+  const BackgroundIcon = () => (
+    <>
+      <div className="absolute top-2 right-2 opacity-20">
+        <Calculator className="w-16 h-16" />
+      </div>
+      <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+        <div className="absolute inset-0 bg-white rounded-full transform translate-x-8 -translate-y-8">
+          <Calculator className="w-8 h-8 opacity-20" />
         </div>
-        <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-          <div className="absolute inset-0 bg-white rounded-full transform translate-x-8 -translate-y-8">
-            <Calculator className="w-8 h-8 opacity-20" />
-          </div>
-        </div>
-      </>
-    );
-  };
+      </div>
+    </>
+  );
 
   return (
     <Card className="h-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 relative overflow-hidden justify-center flex-1">
       <CardHeader className="text-center space-y-2">
-        <div className="mx-auto w-16 h-16  bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+        <div className="mx-auto w-16 h-16 bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
           <Calculator className="w-8 h-8" />
         </div>
         <BackgroundIcon />
         <CardTitle className="text-2xl font-bold">Performance Calculator</CardTitle>
       </CardHeader>
+
       <CardContent className="text-center space-y-4">
         <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+          {/* Monto */}
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <Label htmlFor="amount" className="text-sm font-medium">
-                Amount:
-              </Label>
+              <Label htmlFor="amount" className="text-sm font-medium">Amount:</Label>
               <span className="font-bold">${amount} USDC</span>
             </div>
             <Input
@@ -99,9 +122,7 @@ const PerformanceCalculator: NextPage = () => {
 
           <div className="space-y-2 mt-4">
             <div className="flex justify-between items-center">
-              <Label htmlFor="days" className="text-sm font-medium">
-                Time Period:
-              </Label>
+              <Label htmlFor="days" className="text-sm font-medium">Time Period:</Label>
               <span className="font-bold">{days} days</span>
             </div>
             <div className="px-1">
@@ -120,7 +141,8 @@ const PerformanceCalculator: NextPage = () => {
                 }}
               />
               <style jsx global>{`
-                input[type="range"]::-webkit-slider-thumb {
+                input[type="range"]::-webkit-slider-thumb,
+                input[type="range"]::-moz-range-thumb {
                   appearance: none;
                   width: 18px;
                   height: 18px;
@@ -129,32 +151,17 @@ const PerformanceCalculator: NextPage = () => {
                   cursor: pointer;
                   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
                 }
-                input[type="range"]::-moz-range-thumb {
-                  width: 18px;
-                  height: 18px;
-                  background: white;
-                  border-radius: 50%;
-                  cursor: pointer;
-                  border: none;
-                  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-                }
                 input[type="range"]:focus {
                   outline: none;
                 }
-                input[type="range"]:focus::-webkit-slider-thumb {
-                  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5);
-                }
+                input[type="range"]:focus::-webkit-slider-thumb,
                 input[type="range"]:focus::-moz-range-thumb {
                   box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5);
                 }
               `}</style>
             </div>
             <div className="flex justify-between text-xs text-white/70 px-1 mt-1">
-              <span>1d</span>
-              <span>30d</span>
-              <span>90d</span>
-              <span>180d</span>
-              <span>365d</span>
+              <span>1d</span><span>30d</span><span>90d</span><span>180d</span><span>365d</span>
             </div>
           </div>
 
@@ -164,8 +171,12 @@ const PerformanceCalculator: NextPage = () => {
             </p>
             {sourceApy !== null && (
               <p className="text-sm text-white/70">
-                APY utilizado: <span className="text-white font-medium">{sourceApy.toFixed(2)}%</span> vía Return
-                Finance
+                APY used: <span className="text-white font-medium">{sourceApy.toFixed(2)}%</span> via DefiLlama
+              </p>
+            )}
+            {usedFallback && (
+              <p className="text-xs text-yellow-300 italic">
+                * Estimation based on fixed APY due to connection error with DefiLlama.
               </p>
             )}
           </div>
