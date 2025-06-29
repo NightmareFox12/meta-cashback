@@ -45,7 +45,7 @@ const CardProgress = () => {
   });
 
   const progressData = useMemo(() => {
-    if (!currentLevel || !explorerLevel || !pioneerLevel || !legendaryLevel || !eliteLevel || !stakeAmount) return null;
+    if (!currentLevel || !explorerLevel || !pioneerLevel || !legendaryLevel || !eliteLevel || stakeAmount == undefined) return null;
 
     const levelHex = currentLevel.toString();
     let currentIndex = 0;

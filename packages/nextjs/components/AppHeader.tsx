@@ -51,7 +51,7 @@ const HeaderMenuLinks = () => {
     <div className="flex gap-2">
       <Link href="/" passHref className="flex items-center gap-2 mr-2 shrink-0">
         <div className="flex relative w-10 h-10">
-          <Image alt="MetaCashback logo" className="cursor-pointer" fill src="/favicon.png" />
+          <Image alt="MetaCashback logo" className="cursor-pointer" fill src="/favicon.png" sizes="100vw" />
         </div>
         <div className="flex flex-col">
           <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
