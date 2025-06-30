@@ -21,7 +21,7 @@ const PrivacySection: NextPage<PrivacySectionProps> = ({ setShowPrivacy }) => {
       <Button variant={"outline"} onClick={() => setShowPrivacy(false)}>
         <ArrowLeft />
       </Button>
-      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
+      <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto w-16 h-16 bg-secondary/40 rounded-full flex items-center justify-center">
             <ScrollText className="w-8 h-8 text-yellow-500" />
@@ -30,7 +30,7 @@ const PrivacySection: NextPage<PrivacySectionProps> = ({ setShowPrivacy }) => {
         </CardHeader>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
+      <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">1. Data Collection</CardTitle>
         </CardHeader>
@@ -46,7 +46,7 @@ const PrivacySection: NextPage<PrivacySectionProps> = ({ setShowPrivacy }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
+      <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">2. Data Usage</CardTitle>
         </CardHeader>
@@ -60,7 +60,7 @@ const PrivacySection: NextPage<PrivacySectionProps> = ({ setShowPrivacy }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
+      <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">3. Data Sharing and Security</CardTitle>
         </CardHeader>
@@ -72,7 +72,7 @@ const PrivacySection: NextPage<PrivacySectionProps> = ({ setShowPrivacy }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
+      <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">4. User Rights and Preferences</CardTitle>
         </CardHeader>
@@ -84,7 +84,7 @@ const PrivacySection: NextPage<PrivacySectionProps> = ({ setShowPrivacy }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white">
+      <Card className="bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">5. Policy Updates</CardTitle>
         </CardHeader>

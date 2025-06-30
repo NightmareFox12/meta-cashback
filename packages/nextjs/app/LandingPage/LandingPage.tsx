@@ -20,7 +20,6 @@ const tiers = [
     color: "from-green-400 to-emerald-500",
     bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
     borderColor: "border-green-200",
-    description: "Start your journey",
     bubbleColor: "from-green-200/20 to-emerald-300/30",
   },
   {
@@ -30,7 +29,6 @@ const tiers = [
     color: "from-blue-400 to-cyan-500",
     bgColor: "bg-gradient-to-br from-blue-50 to-cyan-50",
     borderColor: "border-blue-200",
-    description: "Cashback + perks",
     bubbleColor: "from-blue-200/20 to-cyan-300/30",
   },
   {
@@ -40,7 +38,6 @@ const tiers = [
     color: "from-orange-400 to-red-500",
     bgColor: "bg-gradient-to-br from-orange-50 to-red-50",
     borderColor: "border-orange-200",
-    description: "Exclusive bonuses",
     bubbleColor: "from-orange-200/20 to-red-300/30",
   },
   {
@@ -50,7 +47,6 @@ const tiers = [
     color: "from-purple-400 to-pink-500",
     bgColor: "bg-gradient-to-br from-purple-50 to-pink-50",
     borderColor: "border-purple-200",
-    description: "Premium advantages",
     bubbleColor: "from-purple-200/20 to-pink-300/30",
   },
 ];
@@ -63,26 +59,26 @@ const features = [
     color: "text-green-500",
     bubbleColor: "from-green-200/15 to-emerald-300/25",
   },
+ {
+  icon: RefreshCw,
+  title: "Staking & Auto-Reinvest",
+  description: "Boost cashback by staking USDC or auto-reinvesting in DeFi vaults",
+  color: "text-blue-500",
+  bubbleColor: "from-blue-200/15 to-cyan-300/25",
+},
+{
+  icon: TrendingUp,
+  title: "Real-Time DeFi Insights",
+  description: "Powered by LI.FI, MetaMask SDK, and DeFiLlama API for smart yield tracking",
+  color: "text-purple-500",
+  bubbleColor: "from-purple-200/15 to-violet-300/25",
+},
   {
-    icon: RefreshCw,
-    title: "Auto Conversion",
-    description: "Seamless conversion with LI.FI",
-    color: "text-blue-500",
-    bubbleColor: "from-blue-200/15 to-cyan-300/25",
-  },
-  {
-    icon: TrendingUp,
-    title: "DeFi Strategies",
-    description: "Reinvest in high-yield protocols",
-    color: "text-purple-500",
-    bubbleColor: "from-purple-200/15 to-violet-300/25",
-  },
-  {
-    icon: Vault,
-    title: "Savings Mode",
-    description: "Auto-deposit to yield vaults",
-    color: "text-orange-500",
-    bubbleColor: "from-orange-200/15 to-amber-300/25",
+    icon: Sparkles,
+    title: "Cashback Boosts",
+    description: "Unlock higher cashback tiers with staking and DeFi strategies",
+    color: "text-yellow-500",
+    bubbleColor: "from-yellow-200/15 to-amber-300/25",
   },
 ];
 
@@ -258,7 +254,6 @@ const LandingPage: NextPage = () => {
                         <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-white">
                           {tier.cashback}
                         </div>
-                        <p className="text-sm mb-4">{tier.description}</p>
                       </CardContent>
                     </Card>
                   );
@@ -342,7 +337,7 @@ const LandingPage: NextPage = () => {
                 ))}
               </div>
               <div className="max-w-3xl mx-auto relative z-10">
-                <h2 className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                <h2 className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text">
                   The future of cashback is in your hands
                 </h2>
                 <p className="text-xl text-base-content/50 mb-12">

@@ -3,106 +3,127 @@
 [🔙 Back to English README](../README.md)
 
 ## 🏆 Panoramica
-MetaCashback è un sistema rivoluzionario che permette agli utenti di guadagnare cashback in USDC per i loro acquisti con la MetaMask Card. Gli utenti possono aumentare la loro percentuale di cashback partecipando allo staking o bloccando fondi in protocolli DeFi.
+MetaCashback è un sistema rivoluzionario che consente agli utenti di guadagnare cashback in **USDC**, una stablecoin ampiamente adottata e supportata da asset reali, per i loro acquisti tramite la **Carta MetaMask**. Gli utenti possono aumentare la percentuale di cashback partecipando allo staking o bloccando fondi in protocolli DeFi.
 
-> 💡 **Più un utente interagisce con DeFi, maggiori sono le ricompense che riceve.**
+💡 **Più un utente interagisce con la DeFi, maggiori saranno le sue ricompense.**
+
+🔗 Attualmente, MetaCashback funziona direttamente con il **wallet MetaMask**, offrendo un’esperienza fluida e decentralizzata.  
+🔜 In futuro, è prevista l’integrazione completa con la **Carta MetaMask**, estendendo il sistema di cashback anche agli acquisti fisici effettuati con carta.
 
 ## 🚀 Flusso Utente
 
-1. **Acquisto con MetaMask Card** — L'utente paga con la carta presso qualsiasi commerciante.
-2. **Cashback Base** — Riceve un rimborso iniziale in USDC (esempio: 1%).
-3. **Aumento del Cashback tramite Staking** — Se l'utente blocca USDC in un pool DeFi, il suo cashback può salire al 2%, 3% o più, a seconda dell'importo bloccato.
-4. **Lettura del Saldo con LI.FI SDK** — Il sistema utilizza LI.FI per leggere i saldi USDC su Optimism e supportare operazioni efficienti.
-5. **Pagamento Automatico al Portafoglio** — Le ricompense accumulate vengono accreditate direttamente nel portafoglio MetaMask dell'utente.
+1. **Connessione al Wallet MetaMask** — L’utente collega il proprio wallet MetaMask all’app MetaCashback tramite MetaMask SDK e wagmi.
+
+2. **Interazione con la DeFi** — L’utente esegue operazioni idonee (come swap, staking o depositi) dal proprio wallet MetaMask.
+
+3. **Cashback Base** — Viene accreditato un cashback iniziale in USDC (es. 1%) in base all’attività registrata.
+
+4. **Aumento del Cashback tramite Staking** — Se l’utente blocca USDC in un pool DeFi, il cashback può salire al 2%, 3% o più, a seconda dell’importo e della durata del blocco.
+
+5. **Lettura del Saldo con LI.FI SDK** — Il sistema utilizza LI.FI per consultare i saldi USDC su Optimism e facilitare operazioni cross-chain.
+
+6. **Pagamento Automatico al Wallet** — Le ricompense accumulate vengono accreditate direttamente nel wallet MetaMask dell’utente.
+
+🔜 In futuro, questo flusso sarà esteso per includere acquisti fisici e digitali effettuati con la **Carta MetaMask**, integrando il cashback direttamente nei pagamenti con carta.
 
 ## 🎯 Livelli di Cashback
 
-Il cashback aumenta in base alla partecipazione dell'utente in DeFi:
+Il cashback aumenta in base al livello di partecipazione dell’utente nella DeFi:
 
-| Livello | Importo Bloccato | Cashback | Benefici |
-|---------|-----------------|----------|----------|
-| 🔰 **Esploratore** | $0 - $100 | 1% | Cashback base |
-| 🚀 **Pioniere** | $100 - $500 | 2% | Accesso a vantaggi |
-| 🔥 **Leggendario** | $500 - $1000 | 3% | Bonus esclusivi |
-| 👑 **Élite** | $1000+ | 4% | Benefici premium |
+| Livello | Importo | Cashback |
+|---------|---------|----------|
+| 🔰 **Esploratore** | $0 - $100 | 1% |
+| 🚀 **Pioniere** | $100 - $500 | 2% |
+| 🔥 **Leggendario** | $500 - $1000 | 3% |
+| 👑 **Elite** | $1000+ | 4% |
+
+🎁 **In arrivo:** Verranno aggiunte ricompense extra per ogni livello, inclusi bonus esclusivi, accesso anticipato a nuove funzionalità e vantaggi nell’ecosistema MetaCashback.
 
 ## 💰 Opzioni di Ricompensa e Rendimento
 
-Massimizza il cashback con opzioni di prelievo flessibili e strategie DeFi progettate per ottimizzare i guadagni.
+Massimizza il cashback con opzioni di prelievo flessibili e strategie DeFi progettate per ottimizzare i rendimenti.
+
+### 🔄 Opzioni di Staking e Rendimento
+
+Gli utenti possono aumentare il proprio cashback attraverso strategie di staking e reinvestimento automatico:
+
+**💸 Prelievo Diretto in USDC** — Le ricompense possono essere prelevate istantaneamente nel wallet MetaMask dell’utente.
+
+**📈 Cashback Reinvestito in Vault DeFi** — Gli utenti possono scegliere di reinvestire automaticamente il cashback in vault che generano interessi su USDC.
+
+**🛌 Generazione di Rendimento Passivo** — Il sistema sfrutta strategie DeFi a basso rischio per generare rendimenti aggiuntivi senza gestione attiva.
+
+💡 Queste opzioni saranno disponibili nel modulo di staking, permettendo agli utenti di scegliere tra liquidità immediata o crescita a lungo termine.
+
+## 🔮 Piani Futuri
+
+### 🔗 Integrazione Completa con la Carta MetaMask
+L’integrazione con la carta fisica permetterà agli utenti di ricevere cashback automaticamente durante gli acquisti presso commercianti tradizionali, colmando il divario tra Web3 e il mondo reale.
+
+### 🤝 Collaborazioni con DeFi e Organizzazioni
+Saranno stabilite partnership strategiche con protocolli DeFi, DAO e piattaforme di investimento per massimizzare i fondi destinati alle ricompense e ampliare l’ecosistema MetaCashback.
 
 ### ⏳ Bonus per Fondi Bloccati
+Gli utenti potranno aumentare le proprie ricompense bloccando fondi per periodi specifici:
 
-Gli utenti possono aumentare le loro ricompense mantenendo i loro fondi bloccati per periodi specifici:
+- **Blocco di 1 mese** → Bonus cashback aggiuntivo dello **0,5%**  
+- **Blocco di 3 mesi** → Bonus cashback aggiuntivo dell’**1%**  
+- **Blocco di 6 mesi** → Bonus cashback aggiuntivo dell’**1,5%** + accesso a **vantaggi esclusivi**
 
-- **Blocco di 1 mese** → Bonus cashback aggiuntivo dello 0.5%
-- **Blocco di 3 mesi** → Bonus cashback aggiuntivo dell'1%
-- **Blocco di 6 mesi** → Bonus cashback aggiuntivo dell'1.5% + accesso a vantaggi esclusivi
+💡 **Più lungo è l’impegno, maggiori saranno i benefici.**
 
-> 💡 **Più lungo è l'impegno, maggiori sono i benefici.**
+### 🏆 Bonus Extra per Livello
+Sarà implementato un sistema dinamico di livelli che offrirà vantaggi aggiuntivi in base alla fedeltà e all’attività dell’utente:
 
-### 🔄 Opzioni di Prelievo Cashback
+- Cashback aumentato  
+- Accesso anticipato a nuove funzionalità  
+- Partecipazione alla governance  
+- Ricompense esclusive per utenti attivi
 
-Gli utenti possono scegliere come ricevere le loro ricompense in base alle loro preferenze:
-
-- **💸 Direttamente in USDC** — Prelievo istantaneo al loro portafoglio MetaMask.
-- **🔄 Convertito in un altro token** — Scambi automatici utilizzando il LI.FI SDK tra le blockchain.
-- **📈 Reinvestito in DeFi** — Opzione di reinvestire il cashback direttamente in pool di rendimento.
-
-### 🏦 Modalità Risparmio: Rendimento Passivo
-
-Un'opzione intelligente per gli utenti che desiderano massimizzare le loro ricompense senza sforzo:
-
-- **Cashback Auto-Investito in Vault DeFi** — Alloca i rimborsi a una vault che genera interessi su USDC.
-- **Generazione di Rendimento Passivo** — Sfrutta strategie DeFi a basso rischio per ottenere rendimenti aggiuntivi senza gestione attiva.
-
-## 🛠️ Implementazione Tecnica
+## 🛠️ Integrazione Tecnica
 
 MetaCashback si integra con:
 
-**Carta MetaMask** per l'elaborazione dei pagamenti  
+- **Carta MetaMask** — (Futuro) Metodo di pagamento fisico e digitale che abiliterà il cashback presso commercianti tradizionali e online.
 
-**LI.FI SDK** per la lettura del saldo su Optimism  
+- **LI.FI SDK** — Utilizzato per consultare i saldi USDC su reti come Optimism.
 
-**DeFiLlama API** per mostrare l'APY in tempo reale: https://defillama.com/docs/api  
+- **API DeFiLlama** — Fonte affidabile per ottenere APY in tempo reale, mostrando opportunità aggiornate di staking e vault.  
+  📎 https://defillama.com/docs/api
 
-**Protocolli DeFi** per staking e generazione di rendimento
+- **Protocolli DeFi** — Infrastruttura per lo staking di USDC e la generazione di rendimento passivo, con strategie a basso rischio e alto impatto.
 
+- **MetaMask SDK + wagmi** — Toolkit che consente una connessione diretta, sicura e fluida con il wallet dell’utente. Utilizzato per:
+  - Leggere saldi ed eventi in tempo reale  
+  - Firmare transazioni  
+  - Interagire con lo smart contract di MetaCashback
+
+L’integrazione con **MetaMask SDK** e **wagmi** consente:
+
+- 📡 Ascolto degli eventi del contratto intelligente  
+- 💰 Lettura del saldo dei token dell’utente  
+- 🤝 Interazione diretta con il contratto MetaCashback
 
 ## 📋 Requisiti
 
-- **Portafoglio MetaMask**
-- **MetaMask Card**
-- **USDC per lo staking** (opzionale, ma consigliato per ricompense più elevate)
+- Wallet MetaMask  
+- Carta MetaMask (Futuro)  
+- USDC per lo staking (opzionale, ma consigliato per ottenere ricompense maggiori)
 
-## 💻 Tecnologie Utilizzate 
-MetaCashback impiega diversi strumenti e librerie chiave per garantire un'interazione fluida con la blockchain, un'esperienza utente robusta e un ambiente di sviluppo efficiente:
-
-1. **Wagmi:** Questa libreria di React Hooks per Ethereum facilita l'interazione con smart contract e wallet. Wagmi semplifica la connessione dell'applicazione alla blockchain, la lettura e scrittura di dati sui contratti e la gestione delle transazioni. Questo è fondamentale per le funzionalità di staking e il calcolo del cashback basato sull'interazione DeFi dell'utente.
-
-2. **MetaMask SDK:** Il MetaMask SDK è essenziale per consentire agli utenti di connettere i loro wallet MetaMask direttamente all'applicazione MetaCashback. Fornisce un'interfaccia sicura e familiare per l'autorizzazione delle transazioni, la gestione delle firme e l'interazione generale con la blockchain, garantendo che gli utenti possano eseguire le loro operazioni di cashback e staking in modo semplice.
-
-3. **Rainbow Kit:** A complemento di Wagmi e MetaMask SDK, Rainbow Kit offre un'interfaccia utente pre-progettata e altamente personalizzabile per la connessione del wallet. Migliora l'esperienza dell'utente fornendo un modale di connessione attraente e facile da usare, compatibile con più wallet oltre a MetaMask, il che espande l'accessibilità di MetaCashback.
-
-4. **Hardhat:** Per lo sviluppo e il deployment degli smart contract che regolano il sistema di cashback e le interazioni con i protocolli DeFi, viene utilizzato Hardhat. Questo ambiente di sviluppo flessibile consente di compilare, testare e deployare contratti intelligenti in modo efficiente, il che è cruciale per la sicurezza e l'affidabilità delle regole di business di MetaCashback.
-
-5. **Next.js:** L'interfaccia utente di MetaCashback è costruita con Next.js, un framework di React.js che facilita lo sviluppo di applicazioni web ad alte prestazioni. Next.js offre funzionalità come il rendering lato server (SSR) e la generazione di siti statici (SSG), contribuendo a un caricamento rapido, una migliore ottimizzazione per i motori di ricerca (SEO) e un'esperienza utente fluida e reattiva.
-
-Queste tecnologie, insieme, formano la base tecnica di MetaCashback, consentendo la creazione di un sistema decentralizzato, sicuro e facile da usare per massimizzare le ricompense di cashback nell'ecosistema DeFi.
-
-## 🔗 Collegamenti
+## 🔗 Link
 
 https://meta-cashback.vercel.app/
 
 ## 📄 Licenza
 
-Distribuito sotto la **Licenza MIT**.
+Distribuito sotto licenza **MIT**.
 
 ## 👥 Contributi
 
-I contributi sono benvenuti! Non esitare a inviare una Pull Request.
+I contributi sono benvenuti! Sentiti libero di inviare una Pull Request.
 
-1. **Forka** il progetto
-2. **Crea il tuo ramo di funzionalità** (`git checkout -b feature/amazing-feature`)
-3. **Effettua il commit** delle tue modifiche (`git commit -m 'Add some amazing feature'`)
-4. **Effettua il push** sul ramo (`git push origin feature/amazing-feature`)
-5. **Apri una Pull Request`
+1. Fai un fork del progetto  
+2. Crea il tuo branch (`git checkout -b feature/amazing-feature`)  
+3. Conferma le modifiche (`git commit -m 'Add some amazing feature'`)  
+4. Fai il push del branch (`git push origin feature/amazing-feature`)  
+5. Apri una Pull Request
