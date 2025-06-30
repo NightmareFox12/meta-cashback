@@ -21,18 +21,18 @@ const faqItems = [
     icon: <CreditCard className="h-6 w-6 text-orange-500" />,
     question: "What is MetaCashback?",
     answer:
-      "MetaCashback is a rewards system that allows users to receive cashback in USDC for purchases made with the MetaMask Card. Additionally, users can increase their cashback percentage through staking or locking funds in DeFi protocols.",
+      "MetaCashback is a decentralized rewards system that allows users to earn cashback in USDC by interacting with DeFi protocols. It currently works with the MetaMask wallet. In the future, it will also support the MetaMask Card for physical and digital purchases.",
   },
   {
     icon: <Users className="h-6 w-6 text-orange-500" />,
-    question: "How can I participate in the program?",
+    question: "How do I participate?",
     answer: (
       <div className="space-y-2">
-        <p>To participate, you must meet the following requirements:</p>
+        <p>To start using MetaCashback, you need:</p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>Possess a valid MetaMask Card.</li>
-          <li>Have an active MetaMask wallet to receive USDC.</li>
-          <li>Comply with applicable local regulations in your jurisdiction.</li>
+          <li>An active MetaMask wallet</li>
+          <li>USDC tokens to interact with DeFi protocols</li>
+          <li>Optional: Lock funds to boost your cashback rate</li>
         </ul>
       </div>
     ),
@@ -42,65 +42,94 @@ const faqItems = [
     question: "How does cashback work?",
     answer: (
       <div className="space-y-2">
-        <p>The cashback percentage users receive depends on their level of participation in DeFi:</p>
+        <p>Your cashback rate depends on your DeFi activity level:</p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>Explorer: 1% cashback</li>
-          <li>Pioneer: 2% cashback + exclusive benefits</li>
-          <li>Legendary: 3% cashback + special bonuses</li>
-          <li>Elite: 4% cashback + premium advantages</li>
+          <li>Explorer: 1%</li>
+          <li>Pioneer: 2%</li>
+          <li>Legendary: 3%</li>
+          <li>Elite: 4%</li>
         </ul>
-        <p>Accumulated cashback is automatically transferred to the user&apos;s MetaMask wallet.</p>
+        <p>Rewards are automatically sent to your MetaMask wallet in USDC.</p>
       </div>
     ),
   },
   {
     icon: <TrendingUp className="h-6 w-6 text-orange-500" />,
-    question: "How can I increase my cashback percentage?",
+    question: "How can I increase my cashback?",
     answer: (
       <div className="space-y-2">
-        <p>Users can boost their cashback by locking funds in MetaCashback:</p>
+        <p>You can boost your cashback by locking USDC for a fixed period:</p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>1 month: +0.5% cashback</li>
-          <li>3 months: +1% cashback</li>
-          <li>6 months: +1.5% cashback + exclusive benefits</li>
+          <li>1 month: +0.5% bonus</li>
+          <li>3 months: +1% bonus</li>
+          <li>6 months: +1.5% bonus + exclusive perks</li>
         </ul>
+        <p>This feature is available through the staking module.</p>
       </div>
     ),
   },
   {
     icon: <Wallet className="h-6 w-6 text-orange-500" />,
-    question: "What options do I have to withdraw or use my cashback?",
+    question: "How can I use or withdraw my cashback?",
     answer: (
       <div className="space-y-2">
-        <p>Users can choose from the following options:</p>
+        <p>You can choose from the following options:</p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>USDC Withdrawal: Direct transfer to their MetaMask wallet.</li>
-          <li>Token Conversion: Using LI.FI SDK for automatic cross-chain swaps.</li>
-          <li>Reinvestment in DeFi: Direct allocation to yield pools.</li>
-          <li>Savings Mode: Option to deposit cashback into a DeFi vault to generate passive interest.</li>
+          <li>💸 Direct USDC withdrawal to your MetaMask wallet</li>
+          <li>📈 Auto-reinvest into DeFi vaults for passive yield</li>
+        </ul>
+        <p>Token conversion via LI.FI SDK and cross-chain swaps will be available in future updates.</p>
+      </div>
+    ),
+  },
+  {
+    icon: <ChevronDown className="h-6 w-6 text-orange-500" />,
+    question: "What technologies power MetaCashback?",
+    answer: (
+      <div className="space-y-2">
+        <p>MetaCashback is built using:</p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>MetaMask SDK + wagmi for wallet connection and contract interaction</li>
+          <li>LI.FI SDK for balance reading on Optimism</li>
+          <li>DeFiLlama API for real-time APY data</li>
+          <li>Hardhat for smart contract development</li>
+          <li>Next.js for the frontend interface</li>
         </ul>
       </div>
     ),
   },
   {
     icon: <AlertTriangle className="h-6 w-6 text-orange-500" />,
-    question: "Are there any risks in using MetaCashback?",
+    question: "Are there any risks?",
     answer:
-      "MetaCashback is not responsible for losses resulting from DeFi risks or market fluctuations. Users should manage their funds responsibly and comply with applicable tax regulations.",
+      "Yes. MetaCashback interacts with third-party DeFi protocols. Users should be aware of smart contract risks, market volatility, and comply with local tax regulations. MetaCashback does not guarantee returns or cover losses.",
   },
   {
     icon: <LogOut className="h-6 w-6 text-orange-500" />,
-    question: "Can I cancel my participation in the program?",
+    question: "Can I stop using MetaCashback?",
     answer:
-      "Yes, you can withdraw your funds and stop using MetaCashback at any time. However, funds locked for specific periods must fulfill their lock duration before being released.",
+      "Yes. You can stop using the platform at any time. However, if you’ve locked funds for a specific duration, you must wait until the lock period ends to withdraw them.",
   },
   {
     icon: <LifeBuoy className="h-6 w-6 text-orange-500" />,
-    question: "How can I contact the support team?",
+    question: "How can I contact support?",
     answer:
-      "For inquiries or assistance, users can reach the MetaCashback support team through official channels available on the platform.",
+      "You can reach the MetaCashback support team through the official channels listed on the website. For technical issues, please open a GitHub issue or use the contact form.",
+  },
+  {
+    icon: <ChevronDown className="h-6 w-6 text-orange-500" />,
+    question: "Will MetaCashback support the MetaMask Card?",
+    answer:
+      "Yes. Full integration with the MetaMask Card is planned. This will allow users to earn cashback on physical and digital purchases made with the card.",
+  },
+  {
+    icon: <ChevronDown className="h-6 w-6 text-orange-500" />,
+    question: "Will there be governance features?",
+    answer:
+      "Yes. A governance system is planned for future releases, allowing users to vote on protocol upgrades, reward structures, and new integrations.",
   },
 ];
+
 
 type FAQSectionProps = {
   setShowFaq: Dispatch<SetStateAction<boolean>>;
@@ -126,7 +155,7 @@ const FAQSection: NextPage<FAQSectionProps> = ({ setShowFaq }) => {
       </Button>
       <h2 className="text-3xl font-bold text-center mb-2">Frequently Asked Questions</h2>
       <p className="text-center mb-8">Everything you need to know about MetaCashback</p>
-      <div className="w-full bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white rounded-xl shadow-lg p-6">
+      <div className="w-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 text-white rounded-xl shadow-lg p-6">
         {faqItems.map((item, index) => (
           <div
             key={index}
