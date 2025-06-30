@@ -23,6 +23,7 @@ contract MetaCashback is AccessControl {
 
     //states
     mapping(address => uint256) public totalStake;
+    mapping(address => uint256) public totalSpent;
     uint256 public rewardRate = 10;
     uint256 public minStakingAmount = 1 * 10 ** 6;
 
@@ -32,6 +33,19 @@ contract MetaCashback is AccessControl {
     //constructor
     constructor() {
         _grantRole(ADMIN_ROLE, msg.sender);
+    }
+
+    //internals
+    function _getCashBackPercentage(uint256 _amount) internal pure returns (uint256) {
+        if (_amount <= 100 * (10 ** 6)) {
+            return 1; // 1%
+        } else if (_amount <= 500 * (10 ** 6)) {
+            return 2; // 2%
+        } else if (_amount <= 1000 * (10 ** 6)) {
+            return 3; // 3%
+        } else {
+            return 4; // 4%
+        }
     }
 
     //Views
@@ -75,14 +89,31 @@ contract MetaCashback is AccessControl {
         emit Staking(user, _amount, block.timestamp);
     }
 
-    function withdrawStake() public {
+    function withdrawStake(uint256 _totalSpend) public {
         address user = msg.sender;
-
         require(totalStake[user] > 0, "No tokens available for withdrawal");
 
-        uint256 totalAmount = totalStake[user];
+        uint256 amountToWithdraw = totalStake[user];
+        uint256 previouslyRewardedSpend = totalSpent[user];
 
+        require(
+            _totalSpend >= previouslyRewardedSpend,
+            "New total spend cannot be less than previously recorded spend"
+        );
+
+        uint256 newSpendForCashback = _totalSpend - previouslyRewardedSpend;
+        uint256 cashbackPercentage = _getCashBackPercentage(amountToWithdraw);
+
+        uint256 cashbackAmount = 0;
+        if (cashbackPercentage > 0 && newSpendForCashback > 0) {
+            cashbackAmount = (newSpendForCashback * cashbackPercentage) / 100;
+        }
+
+        uint256 totalAmountToSend = amountToWithdraw + cashbackAmount;
+
+        totalSpent[user] = _totalSpend;
         delete totalStake[user];
-        require(USDCToken.transfer(user, totalAmount), "Token transfer failed");
+
+        require(USDCToken.transfer(user, totalAmountToSend), "Total token transfer failed");
     }
 }
