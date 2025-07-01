@@ -118,6 +118,10 @@ https://meta-cashback.vercel.app/
 
 Distribuito sotto licenza **MIT**.
 
+## 📄 Smart Contract Distribuito e Verificato sulla rete Optimist
+
+https://optimistic.etherscan.io/address/0x565cca22f267e08d6d278066d3ca9018433769e1
+
 ## 👥 Contributi
 
 I contributi sono benvenuti! Sentiti libero di inviare una Pull Request.

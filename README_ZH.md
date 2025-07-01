@@ -114,6 +114,10 @@ MetaCashback 集成了以下组件：
 
 https://meta-cashback.vercel.app/
 
+## 📄 智能合约已在 Optimist 网络上部署并验证
+
+https://optimistic.etherscan.io/address/0x565cca22f267e08d6d278066d3ca9018433769e1
+
 ## 📄 许可证
 
 本项目采用 **MIT 开源许可证**。
