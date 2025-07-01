@@ -15,6 +15,8 @@ MetaCashback is a revolutionary system that allows users to earn cashback in **U
 🔗 Currently, MetaCashback operates directly with the **MetaMask wallet**, enabling a seamless and decentralized experience.  
 🔜 In the future, it is designed to fully integrate with the **MetaMask Card**, extending the cashback system to physical purchases made with the card.
 
+**Note: Currently available on the Optimist network. Support for other chains like Arbitrum and Ethereum will be added soon.**
+
 ## 🚀 User Flow
 
 1. **Connect MetaMask Wallet** — The user connects their MetaMask wallet to the MetaCashback app using MetaMask SDK and wagmi.

@@ -9,6 +9,7 @@ MetaCashback es un sistema revolucionario que permite a los usuarios ganar cashb
 
 🔗 Actualmente, MetaCashback funciona directamente con la **wallet MetaMask**, permitiendo una experiencia fluida y descentralizada.  🔜 En el futuro, está diseñado para integrarse completamente con la **Tarjeta MetaMask Card**, lo que permitirá extender el sistema de cashback al mundo físico mediante compras con tarjeta.
 
+**Nota: Actualmente disponible en la red de Optimist. Próximamente se integrarán otras cadenas como Arbitrum, Ethereum, entre otras.**
 
 ## 🚀 Flujo de Usuario
 
