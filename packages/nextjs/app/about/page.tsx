@@ -21,7 +21,12 @@ import {
     Repeat,
     PiggyBank,
     Sparkles,
+    ShieldCheck,
+    Link,
     Zap,
+    Settings,
+    Banknote,
+    Bed,
 } from "lucide-react"
 
 export default function Component() {
@@ -129,32 +134,32 @@ export default function Component() {
                         {[
                             {
                                 icon: CreditCard,
-                                title: "Purchase with MetaMask Card",
-                                desc: "Pay with the card at any merchant",
+                                title: "MetaMask Card",
+                                desc: "Use the card at online or physical merchants (coming soon)",
                                 iconColor: "text-indigo-400",
                             },
                             {
                                 icon: DollarSign,
-                                title: "Base Cashback",
-                                desc: "Receive initial refund in USDC (1%)",
+                                title: "Earn Base Cashback",
+                                desc: "Get 1% back in USDC for every eligible purchase",
                                 iconColor: "text-green-500",
                             },
                             {
                                 icon: TrendingUp,
-                                title: "Cashback Increase",
-                                desc: "Lock USDC in DeFi pools for higher rates",
+                                title: "Boost via DeFi Staking",
+                                desc: "Lock USDC to earn up to +1.5% extra cashback",
                                 iconColor: "text-purple-500",
                             },
                             {
                                 icon: RefreshCw,
-                                title: "Automatic Conversion",
-                                desc: "LI.FI SDK moves rewards across chains",
+                                title: "USDC Balance Reading",
+                                desc: "LI.FI SDK reads wallet balances on Optimism and other chains",
                                 iconColor: "text-blue-500",
                             },
                             {
                                 icon: Wallet,
-                                title: "Automated Payment",
-                                desc: "Rewards credited to MetaMask wallet",
+                                title: "Direct Wallet Deposit",
+                                desc: "Rewards are sent automatically to your MetaMask wallet",
                                 iconColor: "text-yellow-500",
                             },
                         ].map((step, index) => (
@@ -227,7 +232,6 @@ export default function Component() {
                                 level: "Pioneer",
                                 range: "$100 - $500",
                                 cashback: "2%",
-                                extra: "access to perks",
                                 color: "bg-gradient-to-r from-green-400 to-green-600",
                                 iconColor: "text-green-900",
                             },
@@ -236,7 +240,6 @@ export default function Component() {
                                 level: "Legendary",
                                 range: "$500 - $1000",
                                 cashback: "3%",
-                                extra: "exclusive bonuses",
                                 color: "bg-gradient-to-r from-orange-400 to-yellow-600",
                                 iconColor: "text-orange-900",
                             },
@@ -245,7 +248,6 @@ export default function Component() {
                                 level: "Elite",
                                 range: "$1000+",
                                 cashback: "4%",
-                                extra: "premium benefits",
                                 color: "from-purple-500 to-purple-600",
                                 iconColor: "text-purple-900",
                             },
@@ -266,7 +268,6 @@ export default function Component() {
                                     <p className="bg-primary/20 border-primary/30 mb-2 px-2 py-1 rounded-full text-sm font-bold">
                                         {tier.cashback} cashback
                                     </p>
-                                    {tier.extra && <p className="text-xs">+ {tier.extra}</p>}
                                 </div>
                             </div>
                         ))}
@@ -281,7 +282,7 @@ export default function Component() {
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                 <Clock className="w-5 h-5 text-red-600" />
                             </div>
-                            <CardTitle className="text-lg">Lock Bonuses</CardTitle>
+                            <CardTitle className="text-lg">Future Plans</CardTitle>
                         </div>
                     </CardHeader>
 
@@ -304,37 +305,51 @@ export default function Component() {
                     </div>
 
                     <CardContent className="space-y-4">
+
                         {[
-                            { period: "1-month", bonus: "+0.5%" },
-                            { period: "3-month", bonus: "+1.0%" },
-                            { period: "6-month", bonus: "+1.5%", extra: "exclusive perks" },
-                        ].map((lock, index) => (
+                            {
+                                title: "MetaMask Card Integration",
+                                desc: "Cashback for real-world purchases with the physical card.",
+                                icon: "🔗",
+                            },
+                            {
+                                title: "DeFi Partnerships",
+                                desc: "Alliances with protocols and DAOs to boost rewards.",
+                                icon: "🤝",
+                            },
+                            {
+                                title: "Time-Locked Rewards",
+                                desc: "Lock USDC for 1–6 months to earn up to +1.5% cashback.",
+                                icon: "⏳",
+                            },
+                            {
+                                title: "Tier Bonuses",
+                                desc: "Extra perks based on loyalty and activity.",
+                                icon: "🏆",
+                            },
+                        ].map((item, index) => (
                             <div
                                 key={index}
                                 className="bg-secondary/10 rounded-lg p-3 border border-primary/10 hover:bg-secondary/20 transition-colors duration-300 hover:scale-102"
                             >
-                                <div className="flex justify-between items-center">
-                                    <span className="font-medium">{lock.period} lock</span>
-                                    <span className="bg-primary/20 border-primary/30 px-2 py-1 rounded-full text-sm font-bold">
-                                        {lock.bonus}
-                                    </span>
-                                </div>
-                                {lock.extra && <p className="text-xs mt-1">+ {lock.extra}</p>}
+                                <p className="font-medium">
+                                    {item.icon} {item.title}
+                                </p>
+                                <p className="text-sm mt-1">{item.desc}</p>
                             </div>
                         ))}
-                        <div className="bg-secondary/5 rounded-lg p-3 border border-primary/10 mt-4 hover:bg-secondary/10 transition-colors duration-300">
-                            <p className="text-sm text-center italic">💡 The longer the commitment, the greater the benefits</p>
-                        </div>
                     </CardContent>
+
+
                 </Card>
 
                 <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 group">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <RefreshCw className="w-5 h-5 text-blue-800 group-hover:rotate-180 transition-transform duration-500" />
+                                <Settings className="w-5 h-5 text-blue-800 group-hover:rotate-180 transition-transform duration-500" />
                             </div>
-                            <CardTitle className="text-lg">Withdrawal Options</CardTitle>
+                            <CardTitle className="text-lg">Technical Implementation</CardTitle>
                         </div>
                     </CardHeader>
 
@@ -359,40 +374,53 @@ export default function Component() {
                     <CardContent className="space-y-4">
                         {[
                             {
-                                icon: DollarSign,
-                                title: "Direct USDC",
-                                desc: "Instant withdrawal to MetaMask",
-                                iconColor: "text-green-500",
+                                icon: CreditCard,
+                                title: "MetaMask Card",
+                                desc: "(Future) Physical & digital card for cashback at online and offline merchants",
+                                iconColor: "text-blue-500",
                             },
                             {
                                 icon: Repeat,
-                                title: "Wallet Balance",
-                                desc: "Read USDC with LI.FI SDK (Optimism)",
+                                title: "LI.FI SDK",
+                                desc: "Reads USDC balances on Optimism and other supported chains",
                                 iconColor: "text-yellow-500",
                             },
                             {
                                 icon: TrendingUp,
-                                title: "Yield Insights",
-                                desc: "Real-time APY via Return.Finance",
+                                title: "DeFiLlama API",
+                                desc: "Fetches real-time APY data for staking and vaults",
                                 iconColor: "text-purple-500",
                             },
-                        ].map((option, index) => (
+                            {
+                                icon: ShieldCheck,
+                                title: "DeFi Protocols",
+                                desc: "Infrastructure for USDC staking with low-risk, high-yield strategies",
+                                iconColor: "text-green-600",
+                            },
+                            {
+                                icon: Link,
+                                title: "MetaMask SDK + wagmi",
+                                desc: "Wallet connection, balance reading, transaction signing, and contract interaction",
+                                iconColor: "text-orange-500",
+                            },
+                        ].map((tech, index) => (
                             <div
                                 key={index}
                                 className="bg-secondary/10 rounded-lg p-3 border border-primary/10 hover:bg-primary/5 transition-all duration-300 hover:scale-102 group/item"
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="w-8 h-8 bg-primary/15 rounded-full flex items-center justify-center group-hover/item:rotate-12 transition-transform duration-300">
-                                        <option.icon className={`w-4 h-4 ${option.iconColor}`} />
+                                        <tech.icon className={`w-4 h-4 ${tech.iconColor}`} />
                                     </div>
                                     <div>
-                                        <h4 className="font-medium text-sm">{option.title}</h4>
-                                        <p className="text-xs">{option.desc}</p>
+                                        <h4 className="font-medium text-sm">{tech.title}</h4>
+                                        <p className="text-xs">{tech.desc}</p>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </CardContent>
+
                 </Card>
 
                 <Card className="bg-gradient-to-br from-blue-600 via-indigo-500 to-cyan-300 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 group">
@@ -425,22 +453,39 @@ export default function Component() {
                     </div>
 
                     <CardContent className="space-y-4">
-                        <div className="bg-secondary/10 rounded-lg p-4 border border-primary/10 hover:bg-secondary/20 transition-all duration-300 hover:scale-102 group/item">
-                            <div className="flex items-center gap-2 mb-2">
-                                <Building2 className="w-4 h-4 text-green-500 group-hover/item:rotate-12 transition-transform duration-300" />
-                                <span className="font-medium text-sm">Auto-Invested DeFi Vaults</span>
+                        {[
+                            {
+                                icon: Wallet,
+                                color: "text-blue-600",
+                                title: "Direct USDC Withdrawal",
+                                desc: "Instantly claim rewards to your MetaMask wallet.",
+                            },
+                            {
+                                icon: Banknote,
+                                color: "text-green-500",
+                                title: "Auto-Reinvest in DeFi Vaults",
+                                desc: "Automatically allocate cashback to interest-generating vaults.",
+                            },
+                            {
+                                icon: Bed,
+                                color: "text-yellow-500",
+                                title: "Passive Yield Generation",
+                                desc: "Earn extra returns with low-risk DeFi strategies, no active management needed.",
+                            },
+                        ].map((option, index) => (
+                            <div
+                                key={index}
+                                className="bg-secondary/10 rounded-lg p-4 border border-primary/10 hover:bg-secondary/20 transition-all duration-300 hover:scale-102 group/item"
+                            >
+                                <div className="flex items-center gap-2 mb-2">
+                                    <option.icon className={`w-4 h-4 ${option.color} group-hover/item:rotate-12 transition-transform duration-300`} />
+                                    <span className="font-medium text-sm">{option.title}</span>
+                                </div>
+                                <p className="text-xs">{option.desc}</p>
                             </div>
-                            <p className="text-xs">Allocates cashback to vaults that generate interest on USDC</p>
-                        </div>
-
-                        <div className="bg-secondary/10 rounded-lg p-4 border border-primary/10 hover:bg-secondary/20 transition-all duration-300 hover:scale-102 group/item">
-                            <div className="flex items-center gap-2 mb-2">
-                                <Star className="w-4 h-4 text-yellow-400 group-hover/item:rotate-12 transition-transform duration-300" />
-                                <span className="font-medium text-sm">Passive Yield Generation</span>
-                            </div>
-                            <p className="text-xs">Low-risk DeFi strategies for extra returns without active management</p>
-                        </div>
+                        ))}
                     </CardContent>
+
                 </Card>
             </div>
 
