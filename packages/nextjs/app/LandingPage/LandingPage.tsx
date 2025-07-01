@@ -251,7 +251,7 @@ const LandingPage: NextPage = () => {
                           <Icon className="w-8 h-8 text-white" />
                         </div>
                         <h3 className="text-2xl font-bold">{tier.name}</h3>
-                        <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-white">
+                        <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text">
                           {tier.cashback}
                         </div>
                       </CardContent>
