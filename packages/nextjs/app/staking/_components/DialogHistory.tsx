@@ -2,7 +2,14 @@ import { ExternalLink } from "lucide-react";
 import { NextPage } from "next";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
-import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "~~/components/shad/ui/dialog";
+
+// UI Components
+import {
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "~~/components/shad/ui/dialog";
 import { ScrollArea } from "~~/components/shad/ui/scroll-area";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
 import {
@@ -14,12 +21,13 @@ import {
   TableHeader,
   TableRow,
 } from "~~/components/shad/ui/table";
+
+// Hooks
 import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth/useScaffoldEventHistory";
 
 const DialogHistory: NextPage = () => {
   const { address } = useAccount();
 
-  //smart contract
   const { data: events, isLoading } = useScaffoldEventHistory({
     contractName: "MetaCashback",
     eventName: "Staking",
@@ -31,12 +39,23 @@ const DialogHistory: NextPage = () => {
     receiptData: true,
   });
 
+  const formatDate = (timestamp?: bigint) => {
+    if (!timestamp) return "N/A";
+    const date = new Date(Number(timestamp) * 1000);
+    return new Intl.DateTimeFormat("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+    }).format(date);
+  };
+
   return (
     <DialogContent className="bg-secondary">
       <DialogHeader>
         <DialogTitle>Staking History</DialogTitle>
-        <DialogDescription></DialogDescription>
+        <DialogDescription>Track your recent staking activity on-chain.</DialogDescription>
       </DialogHeader>
+
       <ScrollArea className="h-[400px]">
         <Table>
           <TableCaption>A list of your recent stakings.</TableCaption>
@@ -48,33 +67,30 @@ const DialogHistory: NextPage = () => {
               <TableHead>More Info</TableHead>
             </TableRow>
           </TableHeader>
+
           <TableBody>
-            {events === undefined || isLoading ? (
+            {isLoading || !events ? (
               <TableRow>
-                <Skeleton className="w-full h-52" />
+                <TableCell colSpan={4}>
+                  <Skeleton className="w-full h-52" />
+                </TableCell>
               </TableRow>
             ) : (
-              events.map((x, y) => (
-                <TableRow key={y}>
+              events.map((event, index) => (
+                <TableRow key={index}>
+                  <TableCell>{formatDate(event?.args?.timeStamp)}</TableCell>
+                  <TableCell className="text-green-600 font-medium">Success</TableCell>
                   <TableCell>
-                    {x?.args?.timeStamp
-                      ? new Date(parseFloat(x.args.timeStamp.toString()) * 1000).toLocaleDateString("en-US", {
-                          day: "2-digit",
-                          month: "2-digit",
-                          year: "2-digit",
-                        })
-                      : "N/A"}
+                    {formatUnits(event?.args?.amount ?? 0n, 6)} <span className="text-muted-foreground">USDC</span>
                   </TableCell>
-                  <TableCell>Success</TableCell>
-                  <TableCell>{formatUnits(x?.args.amount ?? 0n, 6)} USDC</TableCell>
                   <TableCell>
                     <a
-                      href={`https://optimistic.etherscan.io/tx/${x?.transactionHash}`}
+                      href={`https://optimistic.etherscan.io/tx/${event?.transactionHash}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-2 text-blue-600 hover:underline"
                     >
-                      <ExternalLink className="w-5 h-5" /> See
+                      <ExternalLink className="w-5 h-5" /> View
                     </a>
                   </TableCell>
                 </TableRow>
