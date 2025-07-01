@@ -23,7 +23,6 @@ const CardProgress = () => {
     functionName: "getLevel",
     account: address,
   });
-
   const { data: explorerLevel } = useScaffoldReadContract({
     contractName: "MetaCashback",
     functionName: "EXPLORER_LEVEL",
@@ -91,18 +90,18 @@ const CardProgress = () => {
   );
 
   return (
-    <Card className=" w-full h-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 relative overflow-hidden justify-center">
+    <Card className="w-full h-full bg-gradient-to-br from-blue-700 via-indigo-500 to-cyan-300 relative overflow-hidden justify-center gap-3">
       <CardHeader>
-        <div className="mx-auto w-16 h-12 bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+        <div className="mx-auto w-16 h-16 bg-blue-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
           <TrendingUp className="w-8 h-8" />
         </div>
         <BackgroundIcon />
         <CardTitle className="text-2xl font-bold text-center">Progress of Level</CardTitle>
       </CardHeader>
-      <CardContent className="text-center">
+      <CardContent className="text-center px-4 mb-2">
         {progressData ? (
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl flex flex-col gap-2 p-1 border border-white/20">
-            <p className="text-lg font-medium mb-2">
+            <p className="text-lg font-medium">
               {progressData.nextName !== "Maxed Out"
                 ? `Next Level: ${progressData.nextName}`
                 : "You've reached the highest level 🎉"}

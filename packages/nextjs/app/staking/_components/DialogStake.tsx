@@ -8,7 +8,7 @@ import { Button } from "~~/components/shad/ui/button";
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "~~/components/shad/ui/dialog";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth/useScaffoldReadContract";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWriteContract";
-import { aproveAmount, revokeAmount } from "~~/lib/lifi";
+import { aproveAmount } from "~~/lib/lifi";
 
 type DialogStakeProps = {
   address: string;
@@ -85,19 +85,6 @@ const DialogStake: NextPage<DialogStakeProps> = ({
           <Button onClick={handleTransfer} disabled={loadingTransaction || isLoading}>
             Transfer
           </Button>
-        )}
-
-        {allowance ? (
-          <Button
-            variant={"destructive"}
-            onClick={async () => {
-              await revokeAmount(wagmiClient!, contractAddress);
-            }}
-          >
-            DELETE BUTTON
-          </Button>
-        ) : (
-          ""
         )}
       </div>
     </DialogContent>

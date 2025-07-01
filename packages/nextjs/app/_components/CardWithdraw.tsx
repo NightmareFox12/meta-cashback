@@ -5,7 +5,7 @@ import { useAccount } from "wagmi";
 import { Button } from "~~/components/shad/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/shad/ui/card";
 import { Skeleton } from "~~/components/shad/ui/skeleton";
-import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { useScaffoldEventHistory, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 const CardWithdraw = () => {
   const { address } = useAccount();
@@ -17,13 +17,36 @@ const CardWithdraw = () => {
     args: [address],
   });
 
+  const { data: events, isLoading: isLoadingEvents } = useScaffoldEventHistory({
+    contractName: "USDC",
+    eventName: "Transfer",
+    fromBlock: 137860913n,
+    watch: true,
+    filters: { from: address },
+    blockData: false,
+    transactionData: true,
+    receiptData: true,
+  });
+
   const { writeContractAsync: writeMetaCashBackAsync } = useScaffoldWriteContract({ contractName: "MetaCashback" });
 
   //functions
   const handleWithdraw = async () => {
     try {
+      if (events === undefined) return;
+
+      let totalTransfer = 0n;
+
+      if (events.length > 0) {
+        const values = events.map(x => x.args.value ?? 0n);
+        totalTransfer = values.reduce((previous, current) => {
+          return previous + current;
+        });
+      }
+
       await writeMetaCashBackAsync({
         functionName: "withdrawStake",
+        args: [totalTransfer],
         account: address,
       });
     } catch (err) {
@@ -61,7 +84,11 @@ const CardWithdraw = () => {
           Total Stake: {isLoading ? <Skeleton className="w-8 h-4" /> : <>{formatUnits(totalStake ?? 0n, 6)} USDC</>}
           {/* <p className="text-lg font-semibold">cashback</p> */}
         </CardContent>
-        <Button className="bg-green-300 hover:bg-green-400" onClick={handleWithdraw} disabled={totalStake === undefined || totalStake <= 0n}>
+        <Button
+          className="bg-green-300 hover:bg-green-400"
+          onClick={handleWithdraw}
+          disabled={totalStake === undefined || totalStake <= 0n || isLoadingEvents || events === undefined}
+        >
           Withdraw
         </Button>
       </Card>

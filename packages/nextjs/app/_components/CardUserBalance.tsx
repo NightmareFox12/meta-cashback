@@ -11,31 +11,11 @@ import { formatNumber } from "~~/utils/formatNumber";
 const CardUserBalance: NextPage = () => {
   const { address } = useAccount();
 
-  //states
-  // const [withdrawLoading, setWithdrawLoading] = useState<boolean>(false);
-
-  //smart contract
-  // const { writeContractAsync: writeMetaCashbackAsync } = useScaffoldWriteContract({ contractName: "MetaCashback" });
-
   const { data: userBalance } = useScaffoldReadContract({
     contractName: "USDC",
     functionName: "balanceOf",
     args: [address],
   });
-
-  //functions
-  // const handleWithdraw = async () => {
-  //   try {
-  //     setWithdrawLoading(true);
-  //     await writeMetaCashbackAsync({
-  //       functionName: "withdrawStake",
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   } finally {
-  //     setWithdrawLoading(false);
-  //   }
-  // };
 
   //components
   const BackgroundIcon = () => {
@@ -79,31 +59,6 @@ const CardUserBalance: NextPage = () => {
           </div>
         </CardContent>
       )}
-      {/* <CardFooter className="pt-0">
-        <div className="w-full bg-white/20 backdrop-blur-sm rounded-xl p-2 border border-white/20">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center">
-                <TrendingUp className="w-4 h-4 text-green-400" />
-              </div>
-              <span className="font-medium">Total earnings</span>
-            </div>
-            <span className="font-bold">15 USDC</span>
-          </div>
-        </div>
-      </CardFooter>
-      <div className="px-6 mx-auto">
-        <Button className="bg-warning hover:bg-warning/80" onClick={handleWithdraw} disabled={withdrawLoading}>
-          {!withdrawLoading ? (
-            "Withdraw earnings"
-          ) : (
-            <>
-              <Loader className="animate-spin" />
-              Withdrawing...
-            </>
-          )}
-        </Button>
-      </div> */}
     </Card>
   );
 };
